@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuấn</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="profile-card">
+      <div class="header">
+        <div class="info-section">
+          <h1>Nguyễn Ngọc Tuấn Anh</h1>
+          <p>Học sinh lớp 12C1 — THPT Kim Xuyên</p>
+          <div class="tags">
+            <span class="tag-item">Học sinh lớp 12</span>
+            <span class="tag-item">Yêu thích Tin học</span>
+            <span class="tag-item">Đam mê lập trình & AI</span>
+          </div>
+        </div>
+        <div class="avatar-section">
+          <img
+            src="https://scontent.fhan5-3.fna.fbcdn.net/v/t39.30808-6/518188783_1239519047901491_3450979829006198756_n.png?stp=dst-png_s960x960&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=cLH12yHgsjkQ7kNvwGGu-A-&_nc_oc=AdnUGvl75uA1pNCbUia_csBbL9q12e8_FG6HjjXFvMHafelGYxrqa6xeHfawRuuWDfSK5gfFtNIIU5OCm__4tSzB&_nc_zt=23&_nc_ht=scontent.fhan5-3.fna&_nc_gid=-ppu4rCLnNtEigMHQvG81g&oh=00_AfX2kkLLarWuNWAGAsncJKB_fVdL9n0xa6tbyY852nwS7Q&oe=68A95B6C"
+            alt="Avatar"
+            class="avatar-img"
+          />
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="left-col">
+          <div class="about-me">
+            <h3>Đam mê AI & lập trình 💻</h3>
+            <p>
+              Ai muốn có web giới thiệu profile thì ib mình qua fb nha, giá là
+              25k. Nhận đưa lên web luôn, chỉ cần copy link là được.
+            </p>
+            <a href="#" class="btn-connect">Kết nối</a>
+          </div>
+          <div class="school-info">
+            <div class="info-item">
+              <span>Trường</span>
+              <strong>THPT Kim Xuyên</strong>
+            </div>
+            <div class="info-item">
+              <span>Lớp</span>
+              <strong>12C1</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <h3>Kết nối với tôi</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.facebook.com/doc.co.54379">
+                <i class="bx bxl-facebook social-icon"></i>
+                Facebook
+              </a>
+            </li>
+
+            <li>
+              <a href="https://github.com/Tanh209">
+                <i class="bx bxl-github social-icon"></i>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/@AnhTuan-f2z">
+                <i class="bx bxl-youtube social-icon"></i>
+                YouTube
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@tuananh116208">
+                <i class="bx bxl-tiktok social-icon"></i>
+                TikTok
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2025 by Tuấn Anh. All rights reserved.</p>
+      </div>
+    </div>
+
+    <div class="music-player">
+      <audio id="audio-player" controls loop>
+        <source src="love.mp3" type="audio/mpeg" />
+        Trình duyệt của bạn không hỗ trợ thẻ audio.
+      </audio>
+    </div>
+
+    <script>
+      // Lấy thẻ audio
+      const audio = document.getElementById("audio-player");
+
+      // Tự động phát nhạc khi trang web được tải
+      document.addEventListener("DOMContentLoaded", () => {
+        audio.play().catch((error) => {
+          console.log("Tự động phát nhạc đã bị trình duyệt chặn:", error);
+        });
+      });
+
+      // Đoạn code cho hiệu ứng nghiêng của thẻ profile
+      document.addEventListener("mousemove", function (e) {
+        const card = document.querySelector(".profile-card");
+        if (!card) return;
+
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const mouseX = e.clientX;
+
+        const maxTilt = 5; // Mức nghiêng tối đa (độ)
+        const tiltFactor = (mouseX - cardCenter) / (cardRect.width / 2);
+        const tiltY = maxTilt * tiltFactor;
+
+        card.style.transform = `perspective(1000px) rotateY(${tiltY}deg)`;
+      });
+    </script>
+  </body>
+</html>
