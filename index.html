@@ -1,128 +1,4046 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tuấn</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
+    <title>TAPL - Phòng Luyện Đề</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+        svg: { fontCache: "global" },
+      };
+    </script>
+    <style>
+      :root {
+        --red: #c62828;
+        --red2: #e53935;
+        --rl: #ffebee;
+        --bg: #f5f5f5;
+        --card: #fff;
+        --txt: #1a1a2e;
+        --gray: #888;
+        --grn: #27ae60;
+        --org: #f57c00;
+        --blu: #1976d2;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: var(--bg);
+        color: var(--txt);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .marquee-bar {
+        background: var(--red);
+        color: #fff;
+        padding: 6px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        z-index: 101;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .marquee-bar .marquee-content {
+        display: inline-block;
+        animation: marquee 30s linear infinite;
+        padding-left: 100%;
+      }
+      .marquee-bar:hover .marquee-content {
+        animation-play-state: paused;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .marquee-bar.empty {
+        display: none;
+      }
+
+      .auth-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .auth-modal.show {
+        display: flex;
+      }
+      .auth-box {
+        background: #fff;
+        border-radius: 20px;
+        padding: clamp(20px, 5vw, 36px);
+        width: min(440px, 100%);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+      .auth-close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #999;
+      }
+      .auth-hd {
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .auth-hd .lb {
+        font-size: clamp(28px, 5vw, 36px);
+        font-weight: 900;
+        color: var(--red);
+      }
+      .auth-hd p {
+        color: var(--gray);
+        font-size: 13px;
+      }
+      .atabs {
+        display: flex;
+        background: #f5f5f5;
+        border-radius: 10px;
+        padding: 3px;
+        margin-bottom: 16px;
+      }
+      .atab {
+        flex: 1;
+        padding: 8px;
+        text-align: center;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        color: #888;
+      }
+      .atab.on {
+        background: var(--red);
+        color: #fff;
+      }
+      .af {
+        display: none;
+      }
+      .af.on {
+        display: block;
+      }
+      .fg {
+        margin-bottom: 12px;
+      }
+      .fg label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: #444;
+        margin-bottom: 3px;
+      }
+      .fg .req {
+        color: var(--red);
+      }
+      .fi {
+        width: 100%;
+        padding: 10px 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        -webkit-appearance: none;
+      }
+      .fi:focus {
+        border-color: var(--red);
+      }
+      .fi-sel {
+        width: 100%;
+        padding: 10px 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        background: #fff;
+      }
+      .abtn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #b71c1c, var(--red2));
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 4px;
+      }
+      .asw {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #888;
+      }
+      .asw a {
+        color: var(--red);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .aerr {
+        color: var(--red);
+        font-size: 12px;
+        margin-top: 4px;
+        display: none;
+      }
+      .aok {
+        color: var(--grn);
+        font-size: 12px;
+        margin-top: 4px;
+        display: none;
+        background: #e8f5e9;
+        padding: 8px;
+        border-radius: 6px;
+        text-align: center;
+      }
+      .pend-msg {
+        background: #fff3e0;
+        padding: 14px;
+        border-radius: 10px;
+        text-align: center;
+        color: var(--org);
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .locked-msg {
+        background: var(--rl);
+        padding: 14px;
+        border-radius: 10px;
+        text-align: center;
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      .hdr {
+        background: #fff;
+        border-bottom: 2px solid var(--red);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .hdr-in {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 8px clamp(12px, 3vw, 20px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      .hdr-logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .hdr-logo .lb {
+        background: var(--red);
+        color: #fff;
+        font-weight: 900;
+        font-size: clamp(14px, 3vw, 16px);
+        padding: 5px 10px;
+        border-radius: 6px;
+        letter-spacing: 1px;
+      }
+      .hdr-nav {
+        display: flex;
+        gap: 2px;
+        flex-wrap: wrap;
+      }
+      .hdr-nav button {
+        padding: 6px 10px;
+        border: none;
+        background: none;
+        font-size: clamp(14px, 3vw, 18px);
+        cursor: pointer;
+        border-radius: 6px;
+        color: #666;
+        position: relative;
+      }
+      .hdr-nav button:hover {
+        background: #f5f5f5;
+      }
+      .hdr-nav button.on {
+        color: var(--red);
+        background: var(--rl);
+      }
+      .hdr-nav button .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: var(--red);
+        color: #fff;
+        font-size: 8px;
+        font-weight: 700;
+        padding: 1px 3px;
+        border-radius: 6px;
+      }
+      .hdr-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .hdr-user {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        position: relative;
+      }
+      .hdr-user .un {
+        font-weight: 600;
+        font-size: clamp(11px, 2vw, 13px);
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .hdr-user .ua {
+        width: 32px;
+        height: 32px;
+        background: var(--rl);
+        border: 2px solid var(--red);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 12px;
+        color: var(--red);
+        flex-shrink: 0;
+      }
+      .login-btn {
+        padding: 6px 14px;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .umenu {
+        position: absolute;
+        top: 42px;
+        right: 0;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 6px;
+        min-width: 160px;
+        display: none;
+        z-index: 50;
+      }
+      .umenu.show {
+        display: block;
+      }
+      .umenu a,
+      .umenu button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        width: 100%;
+        border: none;
+        background: none;
+        cursor: pointer;
+        text-align: left;
+        color: var(--txt);
+      }
+      .umenu a:hover,
+      .umenu button:hover {
+        background: #f5f5f5;
+      }
+      .umenu .div {
+        height: 1px;
+        background: #eee;
+        margin: 3px 0;
+      }
+      .umenu button.dg {
+        color: var(--red);
+      }
+
+      .layout {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        min-height: calc(100vh - 80px);
+      }
+      .sb {
+        width: clamp(180px, 18vw, 220px);
+        background: var(--rl);
+        padding: 12px 8px;
+        border-right: 1px solid #fcc;
+        flex-shrink: 0;
+        position: sticky;
+        top: 80px;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+      .sb-sec {
+        margin-bottom: 14px;
+      }
+      .sb-sec h4 {
+        font-size: 9px;
+        color: var(--gray);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+        padding: 0 8px;
+      }
+      .sbi {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        font-size: clamp(11px, 2vw, 13px);
+        font-weight: 500;
+        cursor: pointer;
+        color: #555;
+        margin-bottom: 1px;
+      }
+      .sbi:hover {
+        background: rgba(198, 40, 40, 0.08);
+      }
+      .sbi.on {
+        background: var(--red);
+        color: #fff;
+        font-weight: 700;
+      }
+      .sbi .ic {
+        font-size: 14px;
+        width: 18px;
+        text-align: center;
+      }
+
+      .mn {
+        flex: 1;
+        padding: clamp(12px, 3vw, 20px);
+        overflow-x: hidden;
+        min-width: 0;
+      }
+      .pg {
+        display: none;
+      }
+      .pg.on {
+        display: block;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .bp {
+        background: var(--red);
+        color: #fff;
+      }
+      .bp:hover {
+        box-shadow: 0 3px 12px rgba(198, 40, 40, 0.3);
+      }
+      .bo {
+        background: #fff;
+        color: var(--red);
+        border: 2px solid var(--red);
+      }
+      .bs {
+        background: var(--grn);
+        color: #fff;
+      }
+      .bd {
+        background: var(--red2);
+        color: #fff;
+      }
+      .bg2 {
+        background: #f5f5f5;
+        color: #555;
+      }
+      .bsm {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+      .blg {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(14px, 3vw, 20px);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 14px;
+      }
+
+      .hero {
+        background: linear-gradient(135deg, var(--red), #d32f2f);
+        color: #fff;
+        border-radius: clamp(12px, 3vw, 20px);
+        padding: clamp(24px, 5vw, 48px) clamp(20px, 4vw, 40px);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero h1 {
+        font-size: clamp(20px, 5vw, 32px);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .hero p {
+        font-size: clamp(12px, 2.5vw, 15px);
+        opacity: 0.9;
+        max-width: 500px;
+        line-height: 1.5;
+      }
+      .hero .hbtn {
+        margin-top: 16px;
+        padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 32px);
+        background: #fff;
+        color: var(--red);
+        border: none;
+        border-radius: 12px;
+        font-size: clamp(13px, 2.5vw, 16px);
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .ngrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+        gap: 14px;
+      }
+      .ncard {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .ncard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+      .ncard .nimg {
+        width: 100%;
+        height: clamp(100px, 20vw, 180px);
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        color: #ddd;
+        overflow: hidden;
+      }
+      .ncard .nimg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .ncard .nbody {
+        padding: 12px;
+      }
+      .ncard .nbody h3 {
+        font-size: clamp(13px, 2.5vw, 15px);
+        margin-bottom: 3px;
+        line-height: 1.4;
+      }
+      .ncard .nbody p {
+        font-size: 12px;
+        color: var(--gray);
+        line-height: 1.4;
+      }
+      .ncard .nbody .dt {
+        font-size: 10px;
+        color: #bbb;
+        margin-top: 4px;
+      }
+
+      .honor {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(14px, 3vw, 20px);
+        margin-bottom: 14px;
+      }
+      .honor h2 {
+        font-size: clamp(15px, 3vw, 18px);
+        margin-bottom: 12px;
+      }
+      .hlist {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .hitem {
+        text-align: center;
+        flex-shrink: 0;
+        width: clamp(70px, 15vw, 100px);
+      }
+      .hitem .hav {
+        width: clamp(40px, 10vw, 56px);
+        height: clamp(40px, 10vw, 56px);
+        border-radius: 50%;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: clamp(14px, 3vw, 18px);
+        margin: 0 auto 4px;
+      }
+      .hitem .hn {
+        font-size: clamp(9px, 2vw, 11px);
+        font-weight: 700;
+      }
+      .hitem .hs {
+        font-size: 10px;
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: 14px;
+      }
+      .ccard {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(14px, 3vw, 20px);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      }
+      .ci {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 0;
+        font-size: 13px;
+        color: #555;
+      }
+      .ci .cic {
+        font-size: 16px;
+        width: 20px;
+        text-align: center;
+      }
+      .social {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .slink {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .timetable {
+        overflow-x: auto;
+      }
+      .timetable table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px;
+      }
+      .timetable th {
+        background: var(--red);
+        color: #fff;
+        padding: 10px 8px;
+        font-size: 12px;
+        text-align: center;
+        border: 1px solid #b71c1c;
+        white-space: nowrap;
+      }
+      .timetable td {
+        border: 1px solid #eee;
+        padding: 8px;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: top;
+        min-height: 40px;
+        background: #fff;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .timetable td:hover {
+        background: var(--rl);
+      }
+      .timetable td .slot {
+        background: var(--rl);
+        border-radius: 6px;
+        padding: 4px 6px;
+        margin: 2px 0;
+        font-size: 11px;
+        border-left: 3px solid var(--red);
+      }
+      .timetable td .slot-exam {
+        border-left-color: var(--org);
+        background: #fff3e0;
+      }
+      .timetable .time-col {
+        background: #f8f9fa;
+        font-weight: 700;
+        color: var(--gray);
+        font-size: 11px;
+        white-space: nowrap;
+        width: 80px;
+      }
+      .add-slot-btn {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 10px;
+        color: var(--blu);
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .img-upload-area {
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 8px;
+        transition: 0.3s;
+      }
+      .img-upload-area:hover {
+        border-color: var(--red);
+        background: var(--rl);
+      }
+      .img-upload-area.has {
+        border-color: var(--grn);
+        background: #f0fff4;
+      }
+      .img-upload-area img {
+        max-width: 100%;
+        max-height: 150px;
+        border-radius: 8px;
+        margin-top: 6px;
+      }
+
+      /* === QUESTION IMAGES UPLOAD === */
+      .q-img-upload {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #eee;
+      }
+      .q-img-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .q-img-item {
+        position: relative;
+        background: #fff;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      .q-img-item img {
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .q-img-item .name {
+        font-size: 10px;
+        color: #555;
+        margin-top: 4px;
+        font-family: monospace;
+        word-break: break-all;
+      }
+      .q-img-item .copy-btn {
+        background: var(--blu);
+        color: #fff;
+        border: none;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 9px;
+        cursor: pointer;
+        margin-top: 4px;
+        width: 100%;
+      }
+      .q-img-item .del-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 20px;
+        height: 20px;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 10px;
+      }
+
+      /* === IMAGE IN QUESTION (display) === */
+      .q-image {
+        max-width: 100%;
+        max-height: 300px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        display: block;
+      }
+      .q-image-wrapper {
+        text-align: center;
+        margin: 8px 0;
+      }
+
+      .prof-hd {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+        gap: 0;
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: 14px;
+        border: 1px solid #eee;
+      }
+      .prof-hd > div {
+        padding: clamp(12px, 3vw, 20px);
+        border-right: 1px solid #eee;
+      }
+      .prof-hd > div:last-child {
+        border: none;
+      }
+      .pu {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .pu .pav {
+        width: clamp(36px, 8vw, 48px);
+        height: clamp(36px, 8vw, 48px);
+        border-radius: 50%;
+        border: 2px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--gray);
+      }
+      .psv {
+        font-size: clamp(24px, 5vw, 32px);
+        font-weight: 800;
+      }
+      .psl {
+        font-size: 12px;
+        color: var(--gray);
+      }
+      .prv {
+        font-size: clamp(14px, 3vw, 18px);
+        font-weight: 800;
+        color: var(--red);
+      }
+
+      .hmcard {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(14px, 3vw, 20px);
+        margin-bottom: 14px;
+      }
+      .hmgrid {
+        display: flex;
+        gap: clamp(2px, 0.5vw, 3px);
+        flex-wrap: wrap;
+        margin: 10px 0;
+      }
+      .hmm {
+        text-align: center;
+      }
+      .hmml {
+        font-size: clamp(7px, 1.5vw, 9px);
+        color: var(--gray);
+        margin-bottom: 2px;
+      }
+      .hmcells {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+      }
+      .hmc {
+        width: clamp(8px, 2vw, 12px);
+        height: clamp(8px, 2vw, 12px);
+        border-radius: 2px;
+        background: #fce4ec;
+      }
+      .hmc.l1 {
+        background: #ffcdd2;
+      }
+      .hmc.l2 {
+        background: #ef9a9a;
+      }
+      .hmc.l3 {
+        background: #e57373;
+      }
+      .hmc.l4 {
+        background: #c62828;
+      }
+
+      .prof-bot {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: 14px;
+      }
+      .ehi {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      .ehi:last-child {
+        border: none;
+      }
+      .ehi-sc {
+        font-size: 18px;
+        font-weight: 800;
+        text-align: right;
+      }
+      .ehi-sc span {
+        display: block;
+        font-size: 10px;
+        color: var(--gray);
+        font-weight: 400;
+      }
+
+      .egrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+        gap: 14px;
+      }
+      .ecard {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(12px, 3vw, 16px);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+        transition: 0.3s;
+        position: relative;
+      }
+      .ecard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+      .ecard h3 {
+        font-size: clamp(14px, 2.5vw, 15px);
+        margin-bottom: 5px;
+        font-weight: 700;
+      }
+      .emeta {
+        display: flex;
+        gap: clamp(8px, 2vw, 12px);
+        padding: 8px 0;
+        border-top: 1px solid #f5f5f5;
+        border-bottom: 1px solid #f5f5f5;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+      .em {
+        text-align: center;
+      }
+      .em .eml {
+        font-size: 8px;
+        color: #aaa;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .em .emv {
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .est {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 10px;
+      }
+      .eacts {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .eacts .btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 0;
+      }
+
+      .efs {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+      }
+      .efs.show {
+        display: flex;
+      }
+      .efs-hdr {
+        background: #fff;
+        border-bottom: 2px solid var(--red);
+        padding: 8px clamp(12px, 3vw, 20px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .efs-hdr h2 {
+        font-size: clamp(13px, 3vw, 16px);
+      }
+      .efs-tmr {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--rl);
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 2px solid var(--red);
+      }
+      .efs-tmr .tv {
+        font-size: clamp(18px, 4vw, 22px);
+        font-weight: 800;
+        color: var(--red);
+        font-family: "Courier New", monospace;
+      }
+      .efs-tmr .tv.warn {
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .efs-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: clamp(10px, 2vw, 16px);
+        display: flex;
+        gap: 14px;
+      }
+      .efs-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .efs-side {
+        width: clamp(180px, 20vw, 220px);
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        height: fit-content;
+      }
+      .efs-warn {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(198, 40, 40, 0.95);
+        z-index: 1001;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+      }
+      .efs-warn.show {
+        display: flex;
+      }
+      .efs-warn .ewi {
+        font-size: clamp(48px, 12vw, 80px);
+        margin-bottom: 12px;
+      }
+      .efs-warn h2 {
+        font-size: clamp(20px, 5vw, 28px);
+      }
+      .efs-warn-soft {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(245, 124, 0, 0.95);
+        z-index: 1001;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+      }
+      .efs-warn-soft.show {
+        display: flex;
+      }
+
+      .ptbar {
+        display: flex;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      }
+      .ptab {
+        flex: 1;
+        padding: clamp(8px, 2vw, 10px);
+        text-align: center;
+        font-weight: 700;
+        font-size: clamp(10px, 2vw, 12px);
+        cursor: pointer;
+        color: #999;
+        border-bottom: 3px solid transparent;
+      }
+      .ptab.on {
+        color: var(--red);
+        border-bottom-color: var(--red);
+        background: var(--rl);
+      }
+      .esec {
+        display: none;
+      }
+      .esec.on {
+        display: block;
+      }
+      .qc {
+        background: #fff;
+        border-radius: 12px;
+        padding: clamp(10px, 2vw, 14px);
+        margin-bottom: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        border-left: 3px solid var(--red);
+      }
+      .qc.done {
+        border-left-color: var(--grn);
+      }
+      .qc-nm {
+        background: var(--red);
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 10px;
+      }
+      .qc.done .qc-nm {
+        background: var(--grn);
+      }
+      .chs {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .cho {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: clamp(6px, 1.5vw, 8px) 10px;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: clamp(11px, 2vw, 12px);
+      }
+      .cho:hover {
+        border-color: var(--red);
+        background: #fef8f8;
+      }
+      .cho.sel {
+        border-color: var(--red);
+        background: var(--rl);
+      }
+      .cho-d {
+        width: 14px;
+        height: 14px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .cho.sel .cho-d {
+        border-color: var(--red);
+        background: var(--red);
+      }
+
+      /* === ANSWER INPUT (image only) === */
+      .ans-content {
+        margin-left: 8px;
+        margin-top: 4px;
+      }
+      .ans-camera-btns {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin: 4px 0;
+      }
+      .ans-cam-btn {
+        flex: 1;
+        min-width: 140px;
+        padding: 12px 8px;
+        border: 2px dashed #d0d0d0;
+        border-radius: 8px;
+        background: #fafafa;
+        cursor: pointer;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: #555;
+        transition: 0.2s;
+      }
+      .ans-cam-btn:hover {
+        border-color: var(--blu);
+        background: #f0f7ff;
+        color: var(--blu);
+      }
+      .ans-cam-btn.cam {
+        color: var(--grn);
+        border-color: #c8e6c9;
+      }
+      .ans-cam-btn.cam:hover {
+        border-color: var(--grn);
+        background: #f0fff4;
+      }
+
+      .eupv {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 6px 0 4px 8px;
+      }
+      .euth {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 2px solid var(--grn);
+      }
+      .euth img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        display: block;
+        cursor: pointer;
+      }
+      .euth .edl {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .img-count-badge {
+        display: inline-block;
+        background: var(--grn);
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 10px;
+        font-weight: 700;
+        margin-left: 6px;
+      }
+
+      .spnl {
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 8px;
+      }
+      .spnl h4 {
+        font-size: 11px;
+        margin-bottom: 6px;
+        padding-bottom: 3px;
+        border-bottom: 2px solid #f5f5f5;
+      }
+      .qng {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
+      }
+      .qnb {
+        aspect-ratio: 1;
+        border: 2px solid #e0e0e0;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 10px;
+        cursor: pointer;
+        color: #555;
+        background: #fff;
+      }
+      .qnb.done {
+        background: var(--grn);
+        color: #fff;
+        border-color: var(--grn);
+      }
+      .prb {
+        width: 100%;
+        height: 4px;
+        background: #f0f0f0;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 3px;
+      }
+      .prf {
+        height: 100%;
+        background: linear-gradient(90deg, var(--red), var(--grn));
+        border-radius: 2px;
+        transition: width 0.4s;
+      }
+
+      .scard {
+        background: #fff;
+        border-radius: 14px;
+        padding: clamp(12px, 3vw, 18px);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 10px;
+        border: 1px solid #f0f0f0;
+      }
+      .sav2 {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--red2), #b71c1c);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .esec2 {
+        margin-bottom: 8px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .simgs {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .simg {
+        width: clamp(64px, 14vw, 100px);
+        height: clamp(64px, 14vw, 100px);
+        object-fit: cover;
+        border-radius: 6px;
+        border: 2px solid #eee;
+        cursor: pointer;
+      }
+      .grow2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px;
+        background: #f0f0f0;
+        border-radius: 8px;
+        flex-wrap: wrap;
+      }
+      .ginp2 {
+        width: 50px;
+        padding: 5px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        outline: none;
+      }
+      .fbb2 {
+        flex: 1;
+        min-width: 120px;
+        padding: 5px 8px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 11px;
+        outline: none;
+      }
+
+      .astats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .astat {
+        background: #fff;
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .astat .asi {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .astat .asv {
+        font-size: clamp(18px, 4vw, 24px);
+        font-weight: 800;
+      }
+      .apcard {
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 6px;
+        border: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .apav {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--rl);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--red);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .tbl {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .tbl th {
+        background: #f8f9fa;
+        padding: 7px 8px;
+        text-align: left;
+        font-size: 10px;
+        color: var(--gray);
+        text-transform: uppercase;
+        font-weight: 700;
+        border-bottom: 2px solid #eee;
+      }
+      .tbl td {
+        padding: 7px 8px;
+        border-bottom: 1px solid #f5f5f5;
+        font-size: 12px;
+        vertical-align: middle;
+      }
+
+      .rhero {
+        background: #fff;
+        border-radius: 18px;
+        padding: clamp(20px, 4vw, 32px);
+        text-align: center;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 14px;
+      }
+      .sring {
+        width: clamp(100px, 20vw, 130px);
+        height: clamp(100px, 20vw, 130px);
+        border-radius: 50%;
+        margin: 0 auto 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .sring::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 5px solid #f0f0f0;
+      }
+      .sring .nm {
+        font-size: clamp(24px, 6vw, 32px);
+        font-weight: 800;
+      }
+      .sring .of {
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .rg2 {
+        color: var(--grn);
+      }
+      .rg2::before {
+        border-color: var(--grn);
+      }
+      .ro2 {
+        color: var(--org);
+      }
+      .ro2::before {
+        border-color: var(--org);
+      }
+      .rr2 {
+        color: var(--red);
+      }
+      .rr2::before {
+        border-color: var(--red);
+      }
+      .srow {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .stb {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+      }
+      .stb .sv {
+        font-size: clamp(14px, 3vw, 18px);
+        font-weight: 800;
+      }
+
+      .fdrop {
+        border: 3px dashed #d0d0d0;
+        border-radius: 14px;
+        padding: clamp(20px, 5vw, 40px);
+        text-align: center;
+        cursor: pointer;
+        background: #fafafa;
+      }
+      .fdrop:hover {
+        border-color: var(--red);
+        background: var(--rl);
+      }
+      .fdrop.has {
+        border-color: var(--grn);
+        background: #f0fff4;
+      }
+      .pprev {
+        background: #f8f9fa;
+        border: 2px solid #e8e8e8;
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      .pq {
+        padding: 8px;
+        background: #fff;
+        border-radius: 6px;
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+      .pq img {
+        max-width: 100%;
+        max-height: 150px;
+        border-radius: 4px;
+        margin: 4px 0;
+      }
+
+      .ne {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: 14px;
+      }
+      .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        gap: 14px;
+      }
+      .dev-list {
+        margin-top: 8px;
+      }
+      .dev-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        margin-bottom: 4px;
+        font-size: 11px;
+      }
+
+      .help-box {
+        background: #fff8e1;
+        border-left: 4px solid #f9a825;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 14px;
+        font-size: 12px;
+      }
+      .help-box summary {
+        font-weight: 700;
+        color: #f57f17;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .help-box pre {
+        background: #fff;
+        padding: 8px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 11px;
+        border: 1px solid #ffe082;
+        margin: 6px 0;
+      }
+      .help-box code {
+        background: #fff;
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 11px;
+      }
+
+      .ov {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9000;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .ov.show {
+        display: flex;
+      }
+      .mdl {
+        background: #fff;
+        border-radius: 18px;
+        padding: clamp(20px, 4vw, 28px);
+        max-width: 420px;
+        width: 100%;
+        text-align: center;
+        animation: pop 0.25s;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.85);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .mdl .mi {
+        font-size: clamp(32px, 8vw, 44px);
+        margin-bottom: 8px;
+      }
+      .mdl h3 {
+        font-size: clamp(14px, 3vw, 16px);
+        margin-bottom: 4px;
+      }
+      .mdl p {
+        color: var(--gray);
+        line-height: 1.5;
+        margin-bottom: 12px;
+        font-size: 12px;
+        white-space: pre-line;
+      }
+      .macts {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .slot-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 250;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .slot-modal.show {
+        display: flex;
+      }
+      .slot-box {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        width: min(400px, 95%);
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .iv {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 9500;
+        align-items: center;
+        justify-content: center;
+      }
+      .iv.show {
+        display: flex;
+      }
+      .iv img {
+        max-width: 92%;
+        max-height: 92%;
+        border-radius: 6px;
+      }
+      .iv-c {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        color: #fff;
+        font-size: 26px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      .tsts {
+        position: fixed;
+        top: 56px;
+        right: 12px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .tst {
+        padding: 7px 14px;
+        border-radius: 8px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 12px;
+        min-width: min(220px, 80vw);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+        animation: slr 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      @keyframes slr {
+        from {
+          transform: translateX(110%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      .tok {
+        background: var(--grn);
+      }
+      .ter {
+        background: var(--red);
+      }
+      .tin {
+        background: var(--blu);
+      }
+      .twn {
+        background: var(--org);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        padding: 4px;
+        color: #666;
+      }
+      .sb-ov {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 99;
+      }
+      .sb-ov.show {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .sb {
+          position: fixed;
+          left: -240px;
+          top: 80px;
+          z-index: 100;
+          width: 220px;
+          transition: left 0.3s;
+          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .sb.open {
+          left: 0;
+        }
+        .hamburger {
+          display: block;
+        }
+        .efs-body {
+          flex-direction: column;
+        }
+        .efs-side {
+          width: 100%;
+          position: static;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="profile-card">
-      <div class="header">
-        <div class="info-section">
-          <h1>Nguyễn Ngọc Tuấn Anh</h1>
-          <p>Học sinh lớp 12C1 — THPT Kim Xuyên</p>
-          <div class="tags">
-            <span class="tag-item">Học sinh lớp 12</span>
-            <span class="tag-item">Yêu thích Tin học</span>
-            <span class="tag-item">Đam mê lập trình & AI</span>
+    <div class="tsts" id="tsts"></div>
+    <div class="iv" id="imgV" onclick="clsV()">
+      <button class="iv-c">✕</button><img id="vImg" />
+    </div>
+
+    <div class="marquee-bar" id="marqueeBar">
+      <div class="marquee-content" id="marqueeText"></div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+      <div class="auth-box">
+        <button class="auth-close" onclick="closeAuth()">✕</button>
+        <div class="auth-hd">
+          <div class="lb">TAPL</div>
+          <p>Phòng Luyện Đề</p>
+        </div>
+        <div class="atabs">
+          <div class="atab on" onclick="swAuth('login')">Đăng nhập</div>
+          <div class="atab" onclick="swAuth('reg')">Đăng ký</div>
+        </div>
+        <div class="af on" id="fLogin">
+          <div class="fg">
+            <label>Email <span class="req">*</span></label
+            ><input
+              class="fi"
+              id="lE"
+              type="email"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="fg">
+            <label>Mật khẩu <span class="req">*</span></label
+            ><input class="fi" id="lP" type="password" placeholder="••••••" />
+          </div>
+          <div class="aerr" id="lErr"></div>
+          <div class="aok" id="lOk"></div>
+          <button class="abtn" onclick="doLogin()">🔑 Đăng nhập</button>
+          <div class="asw">
+            Chưa có TK? <a onclick="swAuth('reg')">Đăng ký</a>
           </div>
         </div>
-        <div class="avatar-section">
-          <img
-            src="https://scontent.fhan5-3.fna.fbcdn.net/v/t39.30808-6/518188783_1239519047901491_3450979829006198756_n.png?stp=dst-png_s960x960&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=cLH12yHgsjkQ7kNvwGGu-A-&_nc_oc=AdnUGvl75uA1pNCbUia_csBbL9q12e8_FG6HjjXFvMHafelGYxrqa6xeHfawRuuWDfSK5gfFtNIIU5OCm__4tSzB&_nc_zt=23&_nc_ht=scontent.fhan5-3.fna&_nc_gid=-ppu4rCLnNtEigMHQvG81g&oh=00_AfX2kkLLarWuNWAGAsncJKB_fVdL9n0xa6tbyY852nwS7Q&oe=68A95B6C"
-            alt="Avatar"
-            class="avatar-img"
-          />
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="left-col">
-          <div class="about-me">
-            <h3>Đam mê AI & lập trình 💻</h3>
-            <p>
-              Ai muốn có web giới thiệu profile thì ib mình qua fb nha, giá là
-              25k. Nhận đưa lên web luôn, chỉ cần copy link là được.
-            </p>
-            <a href="#" class="btn-connect">Kết nối</a>
+        <div class="af" id="fReg">
+          <div class="fg">
+            <label>Họ tên <span class="req">*</span></label
+            ><input class="fi" id="rN" placeholder="Nguyễn Văn A" />
           </div>
-          <div class="school-info">
-            <div class="info-item">
-              <span>Trường</span>
-              <strong>THPT Kim Xuyên</strong>
-            </div>
-            <div class="info-item">
-              <span>Lớp</span>
-              <strong>12C1</strong>
-            </div>
+          <div class="fg">
+            <label>Email <span class="req">*</span></label
+            ><input
+              class="fi"
+              id="rE"
+              type="email"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="fg">
+            <label>Mật khẩu <span class="req">*</span></label
+            ><input
+              class="fi"
+              id="rP"
+              type="password"
+              placeholder="Tối thiểu 6 ký tự"
+            />
+          </div>
+          <div class="fg">
+            <label>Vai trò</label
+            ><select class="fi-sel" id="rR">
+              <option value="student">🎓 Học sinh</option>
+              <option value="teacher">👨‍🏫 Giáo viên</option>
+            </select>
+          </div>
+          <div class="aerr" id="rErr"></div>
+          <button class="abtn" onclick="doReg()">📝 Đăng ký</button>
+          <div class="asw">
+            Đã có TK? <a onclick="swAuth('login')">Đăng nhập</a>
           </div>
         </div>
-
-        <div class="right-col">
-          <h3>Kết nối với tôi</h3>
-          <ul class="social-links">
-            <li>
-              <a href="https://www.facebook.com/doc.co.54379">
-                <i class="bx bxl-facebook social-icon"></i>
-                Facebook
-              </a>
-            </li>
-
-            <li>
-              <a href="https://github.com/Tanh209">
-                <i class="bx bxl-github social-icon"></i>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/@AnhTuan-f2z">
-                <i class="bx bxl-youtube social-icon"></i>
-                YouTube
-              </a>
-            </li>
-            <li>
-              <a href="https://www.tiktok.com/@tuananh116208">
-                <i class="bx bxl-tiktok social-icon"></i>
-                TikTok
-              </a>
-            </li>
-          </ul>
+        <div class="af" id="fPend">
+          <div class="pend-msg">
+            ⏳ Chờ duyệt
+            <p>Liên hệ GV/Admin.</p>
+          </div>
+          <button
+            class="abtn"
+            style="margin-top: 8px"
+            onclick="swAuth('login')"
+          >
+            ← Quay lại
+          </button>
         </div>
-      </div>
-
-      <div class="footer">
-        <p>&copy; 2025 by Tuấn Anh. All rights reserved.</p>
+        <div class="af" id="fLocked">
+          <div class="locked-msg">
+            🔒 Tài khoản bị khóa
+            <p>Quá 2 thiết bị. Liên hệ Admin.</p>
+          </div>
+          <button
+            class="abtn"
+            style="margin-top: 8px"
+            onclick="swAuth('login')"
+          >
+            ← Quay lại
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="music-player">
-      <audio id="audio-player" controls loop>
-        <source src="love.mp3" type="audio/mpeg" />
-        Trình duyệt của bạn không hỗ trợ thẻ audio.
-      </audio>
+    <header class="hdr">
+      <div class="hdr-in">
+        <div style="display: flex; align-items: center; gap: 6px">
+          <button class="hamburger" onclick="toggleSB()">☰</button>
+          <div class="hdr-logo" onclick="nav('home')">
+            <div class="lb">TAPL</div>
+          </div>
+        </div>
+        <div class="hdr-nav" id="hNav"></div>
+        <div class="hdr-right" id="hRight"></div>
+      </div>
+    </header>
+
+    <div class="sb-ov" id="sbOv" onclick="toggleSB()"></div>
+
+    <div class="layout">
+      <aside class="sb" id="sb"></aside>
+      <main class="mn" id="mn">
+        <div class="pg on" id="pgHome"></div>
+        <div class="pg" id="pgExams"></div>
+        <div class="pg" id="pgProfile"></div>
+        <div class="pg" id="pgCreate"></div>
+        <div class="pg" id="pgGrade"></div>
+        <div class="pg" id="pgStudents"></div>
+        <div class="pg" id="pgNews"></div>
+        <div class="pg" id="pgAdmin"></div>
+        <div class="pg" id="pgApprovals"></div>
+        <div class="pg" id="pgNewsEditor"></div>
+        <div class="pg" id="pgLb"></div>
+        <div class="pg" id="pgResult"></div>
+        <div class="pg" id="pgSettings"></div>
+        <div class="pg" id="pgSchedule"></div>
+      </main>
+    </div>
+
+    <div class="efs" id="efs">
+      <div class="efs-hdr">
+        <h2 id="efsTt"></h2>
+        <div
+          style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"
+        >
+          <span id="efsInf" style="font-size: 10px; color: var(--gray)"></span>
+          <div
+            id="efsWarnCount"
+            style="font-size: 10px; color: var(--org); font-weight: 700"
+          ></div>
+          <div class="efs-tmr">
+            <span>⏱️</span><span class="tv" id="efsTm">000:00</span>
+          </div>
+          <button class="btn bp bsm" onclick="shSubCfm()">📤 Nộp bài</button>
+        </div>
+      </div>
+      <div class="efs-body">
+        <div class="efs-main">
+          <div class="ptbar">
+            <div class="ptab on" id="ptM" onclick="swES('m')">📝 TN</div>
+            <div class="ptab" id="ptE" onclick="swES('e')">✍️ TL</div>
+          </div>
+          <div class="esec on" id="secM"><div id="mcqC"></div></div>
+          <div class="esec" id="secE"><div id="essC"></div></div>
+        </div>
+        <div class="efs-side">
+          <div class="spnl">
+            <h4>📋 Câu hỏi</h4>
+            <div class="qng" id="qNv"></div>
+          </div>
+          <div class="spnl">
+            <div class="prb">
+              <div class="prf" id="pgF" style="width: 0%"></div>
+            </div>
+            <div style="font-size: 9px; color: var(--gray)" id="pgT">0/12</div>
+          </div>
+          <div class="spnl">
+            <button
+              class="btn bp"
+              style="width: 100%; justify-content: center"
+              onclick="shSubCfm()"
+            >
+              📤 NỘP BÀI
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="efs-warn" id="efsWn">
+      <div class="ewi">🚨</div>
+      <h2>BÀI THI ĐÃ NỘP!</h2>
+      <p>Vi phạm 3 lần thoát fullscreen → tự nộp.</p>
+      <button
+        class="btn blg"
+        style="background: #fff; color: var(--red); margin-top: 16px"
+        onclick="afterAutoSub()"
+      >
+        Đã hiểu
+      </button>
+    </div>
+    <div class="efs-warn-soft" id="efsWnSoft">
+      <div style="font-size: 60px; margin-bottom: 12px">⚠️</div>
+      <h2 id="efsWnSoftTitle">CẢNH BÁO!</h2>
+      <p id="efsWnSoftMsg">Bạn đã thoát fullscreen. Vui lòng quay lại.</p>
+      <button
+        class="btn blg"
+        style="background: #fff; color: var(--org); margin-top: 16px"
+        onclick="reEnterFS()"
+      >
+        ↩️ Quay lại thi
+      </button>
+    </div>
+
+    <div class="slot-modal" id="slotModal">
+      <div class="slot-box">
+        <h3 style="margin-bottom: 12px">📅 Thêm lịch</h3>
+        <div class="fg">
+          <label>Tiêu đề</label
+          ><input class="fi" id="slotTitle" placeholder="VD: Toán 9A" />
+        </div>
+        <div class="fg">
+          <label>Loại</label
+          ><select class="fi-sel" id="slotType">
+            <option value="learn">📚 Học</option>
+            <option value="exam">📝 Thi</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Ghi chú</label
+          ><input class="fi" id="slotNote" placeholder="Phòng 201..." />
+        </div>
+        <input type="hidden" id="slotDay" /><input
+          type="hidden"
+          id="slotTime"
+        />
+        <div style="display: flex; gap: 6px; margin-top: 10px">
+          <button class="btn bg2" onclick="clsSlotM()">Hủy</button>
+          <button class="btn bp" onclick="addSlot()">💾 Lưu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov" id="ovSub">
+      <div class="mdl">
+        <div class="mi">📋</div>
+        <h3>Xác nhận nộp bài?</h3>
+        <p id="subMsg"></p>
+        <div class="macts">
+          <button class="btn bg2" onclick="cancelSub()">
+            ↩️ Tiếp tục làm bài
+          </button>
+          <button class="btn bp" onclick="doSubExam()">📤 Nộp bài</button>
+        </div>
+      </div>
+    </div>
+    <div class="ov" id="ovTime">
+      <div class="mdl">
+        <div class="mi">⏰</div>
+        <h3>Hết giờ!</h3>
+        <p>Tự động nộp bài.</p>
+        <div class="macts">
+          <button class="btn bp" onclick="doSubExam()">OK, nộp ngay</button>
+        </div>
+      </div>
+    </div>
+    <div class="ov" id="ovReset">
+      <div class="mdl">
+        <div class="mi">🗑️</div>
+        <h3>Xác nhận RESET</h3>
+        <p>Nhập "XOAHETDULIEU" để xác nhận xóa toàn bộ dữ liệu.</p>
+        <div class="fg" style="text-align: left; margin: 8px 0">
+          <input
+            class="fi"
+            id="resetConfirmInput"
+            placeholder='Nhập "XOAHETDULIEU"'
+          />
+        </div>
+        <div class="macts">
+          <button class="btn bg2" onclick="clsOv('ovReset')">Hủy</button>
+          <button class="btn bd" onclick="doReset()">🗑️ Xóa hết</button>
+        </div>
+      </div>
     </div>
 
     <script>
-      // Lấy thẻ audio
-      const audio = document.getElementById("audio-player");
+      const SK = "tapl_v6";
+      const SK_SESSION = "tapl_session";
+      const ADMIN_EMAIL = "admin@tapl.com";
+      const ADMIN_PASS = "admin2024";
+      const MAX_DEVICES = 2;
+      const MCQ_POINT = 0.25;
+      const MAX_MCQ = 12;
+      const MAX_ESSAY = 6;
+      const MAX_FS_WARNINGS = 3;
+      const MAX_IMG_SIZE = 5 * 1024 * 1024;
+      const MAX_NEWS_IMG_SIZE = 2 * 1024 * 1024;
+      const MAX_Q_IMG_SIZE = 3 * 1024 * 1024; // Ảnh câu hỏi max 3MB
 
-      // Tự động phát nhạc khi trang web được tải
-      document.addEventListener("DOMContentLoaded", () => {
-        audio.play().catch((error) => {
-          console.log("Tự động phát nhạc đã bị trình duyệt chặn:", error);
+      let DID = localStorage.getItem("tapl_did");
+      if (!DID) {
+        DID = "d_" + Math.random().toString(36).substr(2, 9) + "_" + Date.now();
+        localStorage.setItem("tapl_did", DID);
+      }
+
+      let DB = {
+        users: [],
+        exams: [],
+        subs: [],
+        news: [],
+        contact: {
+          email: "admin@tapl.com",
+          phone: "0123 456 789",
+          address: "Hà Nội, Việt Nam",
+          facebook: "#",
+        },
+        marquee:
+          "🎯 Chào mừng đến với TAPL - Phòng Luyện Đề Thi | Đăng ký ngay để bắt đầu luyện thi!",
+        schedule: {},
+      };
+      let ME = null,
+        EX = null,
+        fsWarnings = 0;
+      let isSubmittingModal = false;
+
+      function save() {
+        try {
+          localStorage.setItem(SK, JSON.stringify(DB));
+        } catch (e) {
+          if (e.name === "QuotaExceededError") toast("⚠️ Bộ nhớ đầy!", "er");
+        }
+      }
+      function saveSession() {
+        if (ME)
+          localStorage.setItem(
+            SK_SESSION,
+            JSON.stringify({ uid: ME.id, did: DID }),
+          );
+        else localStorage.removeItem(SK_SESSION);
+      }
+      function load() {
+        try {
+          const d = localStorage.getItem(SK);
+          if (d) {
+            const p = JSON.parse(d);
+            Object.assign(DB, p);
+            if (!DB.contact)
+              DB.contact = {
+                email: "admin@tapl.com",
+                phone: "0123 456 789",
+                address: "Hà Nội",
+                facebook: "#",
+              };
+            if (!DB.marquee) DB.marquee = "";
+            if (!DB.schedule) DB.schedule = {};
+          }
+        } catch (e) {}
+        if (!DB.users.find((u) => u.email === ADMIN_EMAIL)) {
+          DB.users.push({
+            id: 1,
+            name: "Admin",
+            email: ADMIN_EMAIL,
+            password: ADMIN_PASS,
+            role: "admin",
+            status: "approved",
+            devices: [],
+            locked: false,
+            createdAt: new Date().toISOString(),
+          });
+          save();
+        }
+      }
+      function restoreSession() {
+        try {
+          const sess = localStorage.getItem(SK_SESSION);
+          if (!sess) return;
+          const { uid, did } = JSON.parse(sess);
+          if (did !== DID) return;
+          const u = DB.users.find((x) => x.id === uid);
+          if (!u || u.locked || u.status !== "approved") {
+            localStorage.removeItem(SK_SESSION);
+            return;
+          }
+          ME = u;
+        } catch (e) {
+          localStorage.removeItem(SK_SESSION);
+        }
+      }
+
+      load();
+      restoreSession();
+      updMarquee();
+
+      function updMarquee() {
+        const el = document.getElementById("marqueeBar"),
+          txt = document.getElementById("marqueeText");
+        if (DB.marquee && DB.marquee.trim()) {
+          el.classList.remove("empty");
+          txt.textContent = DB.marquee;
+        } else el.classList.add("empty");
+      }
+
+      function isValidDate(val) {
+        return (
+          val &&
+          typeof val === "string" &&
+          val.trim() !== "" &&
+          !isNaN(new Date(val).getTime())
+        );
+      }
+      function getUserInitial(name) {
+        if (!name) return "?";
+        const parts = name.trim().split(" ");
+        return parts[parts.length - 1][0] || "?";
+      }
+      function getUserNameFromDB(uid) {
+        const u = DB.users.find((x) => x.id === uid);
+        return u ? u.name : null;
+      }
+      function renderMath(target) {
+        setTimeout(() => {
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetPromise(target ? [target] : undefined).catch((e) =>
+              console.warn("MathJax error:", e),
+            );
+          }
+        }, 100);
+      }
+
+      // === Thay thế [IMG: tên] bằng <img> trong câu hỏi ===
+      function renderQuestionContent(text, examImages) {
+        if (!text) return "";
+        if (!examImages || Object.keys(examImages).length === 0) return text;
+
+        // Match [IMG: tên_file] hoặc [IMG:tên_file]
+        return text.replace(/\[IMG\s*:\s*([^\]]+)\]/gi, (match, imgName) => {
+          const name = imgName.trim();
+          if (examImages[name]) {
+            return `<div class="q-image-wrapper"><img src="${examImages[name]}" class="q-image" onclick="opV('${examImages[name]}')" alt="${name}"></div>`;
+          }
+          return `<span style="color:var(--red);font-style:italic">[Thiếu ảnh: ${name}]</span>`;
         });
+      }
+
+      function showAuth() {
+        document.getElementById("authModal").classList.add("show");
+        swAuth("login");
+      }
+      function closeAuth() {
+        document.getElementById("authModal").classList.remove("show");
+      }
+      function swAuth(t) {
+        document
+          .querySelectorAll(".atab")
+          .forEach((e, i) =>
+            e.classList.toggle("on", t === ["login", "reg"][i]),
+          );
+        ["fLogin", "fReg", "fPend", "fLocked"].forEach((id) =>
+          document.getElementById(id).classList.remove("on"),
+        );
+        document
+          .getElementById(
+            {
+              login: "fLogin",
+              reg: "fReg",
+              pending: "fPend",
+              locked: "fLocked",
+            }[t] || "fLogin",
+          )
+          .classList.add("on");
+      }
+      function doLogin() {
+        const email = document.getElementById("lE").value.trim(),
+          pass = document.getElementById("lP").value;
+        if (!email || !pass) {
+          shErr("lErr", "Nhập đầy đủ!");
+          return;
+        }
+        const u = DB.users.find(
+          (x) => x.email === email && x.password === pass,
+        );
+        if (!u) {
+          shErr("lErr", "Sai email/MK!");
+          return;
+        }
+        if (u.status === "pending") {
+          swAuth("pending");
+          return;
+        }
+        if (u.locked) {
+          swAuth("locked");
+          return;
+        }
+        if (!u.devices) u.devices = [];
+        if (!u.devices.includes(DID)) {
+          if (u.devices.length >= MAX_DEVICES && u.role !== "admin") {
+            u.locked = true;
+            save();
+            swAuth("locked");
+            return;
+          }
+          u.devices.push(DID);
+          save();
+        }
+        ME = u;
+        saveSession();
+        closeAuth();
+        updUI();
+        nav("home");
+        toast("Xin chào " + ME.name + "!", "in");
+      }
+      function doReg() {
+        const n = document.getElementById("rN").value.trim(),
+          e = document.getElementById("rE").value.trim(),
+          p = document.getElementById("rP").value,
+          r = document.getElementById("rR").value;
+        if (!n || !e || !p) {
+          shErr("rErr", "Nhập đầy đủ!");
+          return;
+        }
+        if (!e.includes("@")) {
+          shErr("rErr", "Email sai!");
+          return;
+        }
+        if (p.length < 6) {
+          shErr("rErr", "MK >= 6!");
+          return;
+        }
+        if (DB.users.find((x) => x.email === e)) {
+          shErr("rErr", "Email đã tồn tại!");
+          return;
+        }
+        DB.users.push({
+          id: Date.now(),
+          name: n,
+          email: e,
+          password: p,
+          role: r,
+          status: "pending",
+          devices: [],
+          locked: false,
+          createdAt: new Date().toISOString(),
+        });
+        save();
+        swAuth("login");
+        document.getElementById("lE").value = e;
+        const ok = document.getElementById("lOk");
+        ok.textContent = "✅ Đăng ký OK! Chờ duyệt.";
+        ok.style.display = "block";
+        setTimeout(() => (ok.style.display = "none"), 6000);
+      }
+      function doLogout() {
+        if (ME) {
+          const u = DB.users.find((x) => x.id === ME.id);
+          if (u?.devices) {
+            u.devices = u.devices.filter((d) => d !== DID);
+            save();
+          }
+        }
+        ME = null;
+        EX = null;
+        saveSession();
+        updUI();
+        nav("home");
+        toast("Đã đăng xuất!", "in");
+      }
+      function shErr(id, m) {
+        const e = document.getElementById(id);
+        e.textContent = m;
+        e.style.display = "block";
+        setTimeout(() => (e.style.display = "none"), 4000);
+      }
+
+      function updUI() {
+        const isL = !!ME,
+          isT = isL && (ME.role === "teacher" || ME.role === "admin"),
+          isA = isL && ME.role === "admin";
+        let nh =
+          '<button class="on" onclick="nav(\'home\')" id="hn_home">🏠</button>';
+        nh += '<button onclick="reqAuth(\'exams\')" id="hn_exams">📋</button>';
+        nh +=
+          '<button onclick="reqAuth(\'schedule\')" id="hn_schedule">📅</button>';
+        nh += '<button onclick="reqAuth(\'lb\')" id="hn_lb">🏆</button>';
+        if (isT)
+          nh +=
+            '<button onclick="nav(\'create\')" id="hn_create">➕</button><button onclick="nav(\'grade\')" id="hn_grade">📝</button>';
+        if (isA) {
+          const pc = DB.users.filter((u) => u.status === "pending").length;
+          nh += `<button onclick="nav('approvals')" id="hn_approvals">✅${pc ? `<span class="badge">${pc}</span>` : ""}</button>`;
+        }
+        document.getElementById("hNav").innerHTML = nh;
+        if (isL) {
+          document.getElementById("hRight").innerHTML =
+            `<div class="hdr-user" onclick="toggleUM()"><span class="un">${ME.name}</span><div class="ua">${getUserInitial(ME.name)}</div><div class="umenu" id="um"><a onclick="nav('profile')">👤 Hồ sơ</a>${isA ? "<a onclick=\"nav('settings')\">⚙️ Cài đặt</a>" : ""}<div class="div"></div><button class="dg" onclick="doLogout()">🚪 Đăng xuất</button></div></div>`;
+        } else {
+          document.getElementById("hRight").innerHTML =
+            '<button class="login-btn" onclick="showAuth()">🔑 Đăng nhập</button>';
+        }
+        let sb =
+          '<div class="sb-sec"><div class="sbi on" onclick="nav(\'home\')"><span class="ic">🏠</span>Trang chủ</div><div class="sbi" onclick="reqAuth(\'exams\')"><span class="ic">📋</span>Phòng luyện</div><div class="sbi" onclick="nav(\'news\')"><span class="ic">📰</span>Tin tức</div><div class="sbi" onclick="reqAuth(\'schedule\')"><span class="ic">📅</span>Lịch học</div><div class="sbi" onclick="reqAuth(\'lb\')"><span class="ic">🏆</span>BXH</div></div>';
+        if (isT)
+          sb +=
+            '<div class="sb-sec"><h4>Giáo viên</h4><div class="sbi" onclick="nav(\'create\')"><span class="ic">➕</span>Tạo đề</div><div class="sbi" onclick="nav(\'grade\')"><span class="ic">📝</span>Chấm bài</div><div class="sbi" onclick="nav(\'students\')"><span class="ic">👥</span>Học sinh</div></div>';
+        if (isA)
+          sb +=
+            '<div class="sb-sec"><h4>Admin</h4><div class="sbi" onclick="nav(\'admin\')"><span class="ic">🛡️</span>Quản trị</div><div class="sbi" onclick="nav(\'approvals\')"><span class="ic">✅</span>Duyệt TK</div><div class="sbi" onclick="nav(\'newsEditor\')"><span class="ic">📰</span>QL tin</div><div class="sbi" onclick="nav(\'settings\')"><span class="ic">⚙️</span>Cài đặt</div></div>';
+        sb += `<div class="sb-sec"><h4>Liên kết</h4><div class="sbi" onclick="window.open(DB.contact.facebook||'#')"><span class="ic">📘</span>Facebook</div></div>`;
+        document.getElementById("sb").innerHTML = sb;
+      }
+      function reqAuth(pg) {
+        if (!ME) {
+          showAuth();
+          return;
+        }
+        nav(pg);
+      }
+      function toggleUM() {
+        document.getElementById("um")?.classList.toggle("show");
+      }
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".hdr-user"))
+          document.getElementById("um")?.classList.remove("show");
       });
+      function toggleSB() {
+        document.getElementById("sb").classList.toggle("open");
+        document.getElementById("sbOv").classList.toggle("show");
+      }
 
-      // Đoạn code cho hiệu ứng nghiêng của thẻ profile
-      document.addEventListener("mousemove", function (e) {
-        const card = document.querySelector(".profile-card");
-        if (!card) return;
+      function nav(pg) {
+        const prot = [
+          "exams",
+          "profile",
+          "create",
+          "grade",
+          "students",
+          "admin",
+          "approvals",
+          "newsEditor",
+          "settings",
+          "lb",
+          "schedule",
+        ];
+        if (prot.includes(pg) && !ME) {
+          showAuth();
+          return;
+        }
+        if (
+          ["create", "grade", "students"].includes(pg) &&
+          ME?.role === "student"
+        ) {
+          toast("Không quyền!", "er");
+          return;
+        }
+        if (
+          ["admin", "approvals", "newsEditor", "settings"].includes(pg) &&
+          ME?.role !== "admin"
+        ) {
+          toast("Admin only!", "er");
+          return;
+        }
+        document
+          .querySelectorAll(".pg")
+          .forEach((p) => p.classList.remove("on"));
+        document
+          .querySelectorAll(".sbi")
+          .forEach((s) => s.classList.remove("on"));
+        document
+          .querySelectorAll(".hdr-nav button")
+          .forEach((b) => b.classList.remove("on"));
+        const map = {
+          home: "pgHome",
+          exams: "pgExams",
+          profile: "pgProfile",
+          create: "pgCreate",
+          grade: "pgGrade",
+          students: "pgStudents",
+          news: "pgNews",
+          admin: "pgAdmin",
+          approvals: "pgApprovals",
+          newsEditor: "pgNewsEditor",
+          lb: "pgLb",
+          result: "pgResult",
+          settings: "pgSettings",
+          schedule: "pgSchedule",
+        };
+        if (map[pg]) document.getElementById(map[pg]).classList.add("on");
+        const hn = document.getElementById("hn_" + pg);
+        if (hn) hn.classList.add("on");
+        document.getElementById("sb").classList.remove("open");
+        document.getElementById("sbOv").classList.remove("show");
+        const fns = {
+          home: rHome,
+          exams: rExams,
+          profile: rProfile,
+          create: rCreate,
+          grade: rGrade,
+          students: rStudents,
+          news: rNews,
+          admin: rAdmin,
+          approvals: rApprovals,
+          newsEditor: rNewsEd,
+          lb: rLb,
+          settings: rSettings,
+          schedule: rSchedule,
+        };
+        if (fns[pg]) fns[pg]();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        renderMath();
+      }
 
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.left + cardRect.width / 2;
-        const mouseX = e.clientX;
+      function rHome() {
+        const tops = getTopStu(5);
+        const c = DB.contact;
+        let h = `<div class="hero"><h1>🎯 TAPL - Phòng Luyện Đề</h1><p>Luyện đề thi trực tuyến, giám sát toàn màn hình, chấm điểm bởi giáo viên.</p>${ME ? '<button class="hbtn" onclick="nav(\'exams\')">📋 Vào luyện</button>' : '<button class="hbtn" onclick="showAuth()">🔑 Đăng nhập</button>'}</div>`;
+        if (tops.length)
+          h += `<div class="honor"><h2>🏆 Vinh danh</h2><div class="hlist">${tops.map((s, i) => `<div class="hitem"><div class="hav" style="background:${["linear-gradient(135deg,#f9a825,#ff8f00)", "linear-gradient(135deg,#bdbdbd,#9e9e9e)", "linear-gradient(135deg,#8d6e63,#6d4c41)", "var(--red)", "var(--red)"][i]}">${["🥇", "🥈", "🥉", "⭐", "⭐"][i]}</div><div class="hn">${s.name}</div><div class="hs">${s.avg.toFixed(1)}đ</div></div>`).join("")}</div></div>`;
+        h += '<h2 style="margin-bottom:10px">📰 Tin tức</h2>';
+        h += DB.news.length
+          ? `<div class="ngrid">${DB.news
+              .slice(0, 6)
+              .map(
+                (n) =>
+                  `<div class="ncard"><div class="nimg">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nbody"><h3>${n.title}</h3><p>${(n.content || "").substring(0, 80)}...</p><div class="dt">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`,
+              )
+              .join("")}</div>`
+          : '<div class="card" style="text-align:center;padding:30px;color:var(--gray)"><h3>Chưa có tin</h3></div>';
+        h += `<h2 style="margin:16px 0 10px">📞 Liên hệ</h2><div class="contact-grid"><div class="ccard"><h3>Thông tin</h3><div class="ci"><span class="cic">📧</span>${c.email}</div><div class="ci"><span class="cic">📱</span>${c.phone}</div><div class="ci"><span class="cic">📍</span>${c.address}</div></div><div class="ccard"><h3>Mạng xã hội</h3><div class="social"><div class="slink" style="background:#1877f2" onclick="window.open('${c.facebook || "#"}')">f</div></div></div></div>`;
+        document.getElementById("pgHome").innerHTML = h;
+      }
 
-        const maxTilt = 5; // Mức nghiêng tối đa (độ)
-        const tiltFactor = (mouseX - cardCenter) / (cardRect.width / 2);
-        const tiltY = maxTilt * tiltFactor;
+      function rSchedule() {
+        const days = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+        const times = [
+          "07:00-08:30",
+          "08:45-10:15",
+          "10:30-12:00",
+          "13:30-15:00",
+          "15:15-16:45",
+          "19:00-20:30",
+        ];
+        const canEdit = ME && (ME.role === "teacher" || ME.role === "admin");
+        let h = '<h1 style="margin-bottom:12px">📅 Lịch học / Lịch thi</h1>';
+        h +=
+          '<div class="card"><div class="timetable"><table><thead><tr><th style="width:80px">Giờ</th>';
+        days.forEach((d) => (h += `<th>${d}</th>`));
+        h += "</tr></thead><tbody>";
+        times.forEach((t) => {
+          h += `<tr><td class="time-col">${t}</td>`;
+          days.forEach((d) => {
+            const key = `${d}_${t}`,
+              slots = DB.schedule[key] || [];
+            h += `<td>`;
+            slots.forEach((s, i) => {
+              h += `<div class="slot ${s.type === "exam" ? "slot-exam" : ""}">${s.title}${canEdit ? ` <span style="cursor:pointer;font-size:9px;color:var(--red)" onclick="rmSlot('${key}',${i})">✕</span>` : ""}</div>`;
+            });
+            if (canEdit)
+              h += `<div class="add-slot-btn" onclick="openSlotM('${d}','${t}')">+ Thêm</div>`;
+            h += `</td>`;
+          });
+          h += "</tr>";
+        });
+        h += "</tbody></table></div></div>";
+        document.getElementById("pgSchedule").innerHTML = h;
+      }
+      function openSlotM(day, time) {
+        document.getElementById("slotDay").value = day;
+        document.getElementById("slotTime").value = time;
+        document.getElementById("slotTitle").value = "";
+        document.getElementById("slotNote").value = "";
+        document.getElementById("slotModal").classList.add("show");
+      }
+      function clsSlotM() {
+        document.getElementById("slotModal").classList.remove("show");
+      }
+      function addSlot() {
+        const day = document.getElementById("slotDay").value,
+          time = document.getElementById("slotTime").value,
+          title = document.getElementById("slotTitle").value.trim(),
+          type = document.getElementById("slotType").value;
+        if (!title) {
+          toast("Nhập tiêu đề!", "er");
+          return;
+        }
+        const key = `${day}_${time}`;
+        if (!DB.schedule[key]) DB.schedule[key] = [];
+        DB.schedule[key].push({
+          title,
+          type,
+          note: document.getElementById("slotNote").value,
+        });
+        save();
+        clsSlotM();
+        rSchedule();
+        toast("Đã thêm!", "ok");
+      }
+      function rmSlot(key, idx) {
+        if (DB.schedule[key]) {
+          DB.schedule[key].splice(idx, 1);
+          if (!DB.schedule[key].length) delete DB.schedule[key];
+          save();
+          rSchedule();
+          toast("Đã xóa!", "ok");
+        }
+      }
 
-        card.style.transform = `perspective(1000px) rotateY(${tiltY}deg)`;
-      });
+      let newsImgData = null;
+      function rNewsEd() {
+        let h = `<h1 style="margin-bottom:12px">📰 Quản lý tin</h1><div class="ne"><div class="card"><h3>➕ Thêm tin</h3>
+      <div class="fg"><label>Tiêu đề *</label><input class="fi" id="nTt" placeholder="Tiêu đề"></div>
+      <div class="fg"><label>Nội dung</label><textarea class="fi" id="nCt" rows="3" style="font-family:inherit;resize:vertical" placeholder="Nội dung..."></textarea></div>
+      <div class="fg"><label>Ảnh (tùy chọn, max 2MB)</label>
+          <div class="img-upload-area" id="newsImgArea" onclick="document.getElementById('newsImgInput').click()">📷 Nhấn để tải ảnh</div>
+          <input type="file" id="newsImgInput" class="hidden" accept="image/*" onchange="onNewsImg(event)">
+      </div>
+      <div class="fg"><label>Emoji</label><input class="fi" id="nEm" value="📢" style="width:50px"></div>
+      <button class="btn bp" onclick="addN()">📤 Đăng</button></div>
+      <div class="card"><h3>📋 Đã đăng (${DB.news.length})</h3>${DB.news.map((n) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f5f5f5"><div style="display:flex;align-items:center;gap:8px">${n.image ? `<img src="${n.image}" style="width:40px;height:40px;border-radius:6px;object-fit:cover">` : `<span style="font-size:20px">${n.emoji || "📄"}</span>`}<div><b>${n.title}</b><div style="font-size:9px;color:var(--gray)">${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div><button class="btn bd bsm" onclick="delN(${n.id})">🗑️</button></div>`).join("") || '<p style="color:var(--gray);font-size:12px">Chưa có</p>'}</div></div>`;
+        document.getElementById("pgNewsEditor").innerHTML = h;
+        newsImgData = null;
+      }
+      function onNewsImg(e) {
+        const f = e.target.files[0];
+        if (!f) return;
+        if (f.size > MAX_NEWS_IMG_SIZE) {
+          toast("Ảnh max 2MB!", "er");
+          return;
+        }
+        const r = new FileReader();
+        r.onload = (ev) => {
+          newsImgData = ev.target.result;
+          const area = document.getElementById("newsImgArea");
+          area.classList.add("has");
+          area.innerHTML = `📷 Đã chọn ảnh<img src="${newsImgData}">`;
+        };
+        r.readAsDataURL(f);
+      }
+      function addN() {
+        const t = document.getElementById("nTt").value.trim(),
+          c = document.getElementById("nCt").value,
+          em = document.getElementById("nEm").value;
+        if (!t) {
+          toast("Nhập tiêu đề!", "er");
+          return;
+        }
+        DB.news.unshift({
+          id: Date.now(),
+          title: t,
+          content: c,
+          emoji: em,
+          image: newsImgData || null,
+          createdAt: new Date().toISOString(),
+          by: ME.id,
+        });
+        save();
+        rNewsEd();
+        toast("Đã đăng!", "ok");
+      }
+      function delN(id) {
+        DB.news = DB.news.filter((n) => n.id !== id);
+        save();
+        rNewsEd();
+        toast("Đã xóa", "ok");
+      }
+
+      function rSettings() {
+        if (ME?.role !== "admin") return;
+        const c = DB.contact;
+        const lockedUsers = DB.users.filter((u) => u.locked);
+        let lockedHTML = lockedUsers.length
+          ? lockedUsers
+              .map(
+                (u) =>
+                  `<div class="apcard"><div style="display:flex;align-items:center;gap:6px"><div class="apav">${getUserInitial(u.name)}</div><div><b>${u.name}</b><div style="font-size:10px;color:var(--red)">🔒 Khóa | ${(u.devices || []).length} TB</div></div></div><div style="display:flex;gap:3px;flex-wrap:wrap"><button class="btn bs bsm" onclick="unlockU(${u.id})">🔓 Mở khóa</button><button class="btn bo bsm" onclick="clearDevices(${u.id})">📱 Xóa TB</button></div></div>`,
+              )
+              .join("")
+          : '<p style="color:var(--gray);font-size:12px">Không có</p>';
+        const allUsersWithDevices = DB.users.filter(
+          (u) => u.id !== 1 && (u.devices || []).length > 0,
+        );
+        let devicesHTML = allUsersWithDevices.length
+          ? allUsersWithDevices
+              .map(
+                (u) =>
+                  `<div class="apcard"><div style="display:flex;align-items:center;gap:6px"><div class="apav">${getUserInitial(u.name)}</div><div><b>${u.name}</b><div style="font-size:10px;color:var(--gray)">${u.email} | ${(u.devices || []).length}/${MAX_DEVICES} TB</div></div></div><button class="btn bo bsm" onclick="clearDevices(${u.id})">📱 Reset</button></div>`,
+              )
+              .join("")
+          : '<p style="color:var(--gray);font-size:12px">Chưa có</p>';
+
+        document.getElementById("pgSettings").innerHTML =
+          `<h1 style="margin-bottom:12px">⚙️ Cài đặt</h1><div class="settings-grid">
+        <div class="card"><h2>📢 Thông báo chạy</h2><div class="fg"><label>Nội dung</label><textarea class="fi" id="setMarquee" rows="2" style="font-family:inherit;resize:vertical">${DB.marquee || ""}</textarea></div><button class="btn bp" onclick="saveMarquee()">💾 Lưu</button></div>
+        <div class="card"><h2>📞 Liên hệ</h2>
+          <div class="fg"><label>Email</label><input class="fi" id="setEmail" value="${c.email}"></div>
+          <div class="fg"><label>Điện thoại</label><input class="fi" id="setPhone" value="${c.phone}"></div>
+          <div class="fg"><label>Địa chỉ</label><input class="fi" id="setAddr" value="${c.address}"></div>
+          <div class="fg"><label>Facebook</label><input class="fi" id="setFb" value="${c.facebook || ""}"></div>
+          <button class="btn bp" onclick="saveContact()">💾 Lưu</button>
+        </div>
+        <div class="card"><h2>🔒 TK bị khóa (${lockedUsers.length})</h2>${lockedHTML}</div>
+        <div class="card"><h2>📱 Quản lý thiết bị</h2><div style="font-size:11px;color:var(--gray);margin-bottom:8px">Max: ${MAX_DEVICES} TB/tài khoản</div>${devicesHTML}</div>
+      </div>`;
+      }
+      function saveMarquee() {
+        DB.marquee = document.getElementById("setMarquee").value;
+        save();
+        updMarquee();
+        toast("Đã lưu!", "ok");
+      }
+      function saveContact() {
+        DB.contact.email = document.getElementById("setEmail").value;
+        DB.contact.phone = document.getElementById("setPhone").value;
+        DB.contact.address = document.getElementById("setAddr").value;
+        DB.contact.facebook = document.getElementById("setFb").value;
+        save();
+        toast("Đã lưu!", "ok");
+        updUI();
+      }
+      function unlockU(id) {
+        const u = DB.users.find((x) => x.id === id);
+        if (u) {
+          u.locked = false;
+          u.devices = [];
+          save();
+          rSettings();
+          toast("🔓 Đã mở khóa", "ok");
+        }
+      }
+      function clearDevices(id) {
+        const u = DB.users.find((x) => x.id === id);
+        if (u) {
+          u.devices = [];
+          u.locked = false;
+          save();
+          rSettings();
+          toast("📱 Reset TB", "ok");
+        }
+      }
+
+      function rProfile() {
+        if (!ME) return;
+        const ms = DB.subs.filter((s) => s.uid === ME.id),
+          gr = ms.filter((s) => s.st === "graded"),
+          wk = ms.filter(
+            (s) => (new Date() - new Date(s.at)) / 864e5 <= 7,
+          ).length;
+        let rt = "HỌC SINH";
+        if (ME.role === "teacher") rt = "GIÁO VIÊN";
+        if (ME.role === "admin") rt = "ADMIN";
+        const y = new Date().getFullYear();
+        let h = `<div class="prof-hd"><div class="pu"><div class="pav">👤</div><div><div style="font-size:11px;color:var(--gray)">Xin chào,</div><div style="font-size:clamp(13px,3vw,16px);font-weight:700">${ME.name}</div><div style="font-size:11px;color:var(--gray)">${ME.email}</div></div></div><div><div class="psv">${ms.length}</div><div class="psl">Tổng lượt làm</div></div><div><div class="psv">${wk}</div><div class="psl">Trong tuần</div></div><div><div style="font-size:12px;color:var(--gray)">Vai trò</div><div class="prv">${rt}</div></div></div>`;
+        h += `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3 style="font-size:14px">📱 Thiết bị</h3><p style="font-size:11px;color:var(--gray)">${(ME.devices || []).length}/${MAX_DEVICES}</p></div><div style="font-size:10px;color:var(--gray)">${DID.substring(0, 12)}...</div></div></div>`;
+        h += `<div class="hmcard"><h2 style="font-size:16px">Thống kê (${y})</h2><div class="hmgrid">${Array.from(
+          { length: 12 },
+          (_, m) => {
+            const cnt = ms.filter((s) => {
+              const d = new Date(s.at);
+              return d.getMonth() === m && d.getFullYear() === y;
+            }).length;
+            return `<div class="hmm"><div class="hmml">T${m + 1}</div><div class="hmcells">${Array.from({ length: 5 }, (_, i) => `<div class="hmc ${i < cnt ? (cnt > 4 ? "l4" : cnt > 3 ? "l3" : cnt > 2 ? "l2" : "l1") : ""}"></div>`).join("")}</div></div>`;
+          },
+        ).join("")}</div></div>`;
+        h += `<div class="prof-bot"><div class="card"><h2 style="font-size:14px">Bài gần đây</h2>${
+          ms
+            .slice(-5)
+            .reverse()
+            .map((s) => {
+              const ex = DB.exams.find((e) => e.id === s.eid);
+              return `<div class="ehi"><div><h4 style="font-size:13px">${ex ? ex.title : "?"}</h4><p style="font-size:11px;color:var(--gray)">${new Date(s.at).toLocaleString("vi-VN")}</p></div><div class="ehi-sc" style="color:${s.ts !== null ? (s.ts >= 7 ? "var(--grn)" : "var(--red)") : "var(--org)"}">${s.ts !== null ? s.ts.toFixed(1) : "?"}<span>điểm</span></div></div>`;
+            })
+            .join("") ||
+          '<p style="color:var(--gray);font-size:12px">Chưa có</p>'
+        }</div><div class="card"><h2 style="font-size:14px">Thống kê</h2><div class="ci"><span class="cic">📊</span>Tổng: ${ms.length}</div><div class="ci"><span class="cic">✅</span>Đã chấm: ${gr.length}</div><div class="ci"><span class="cic">📈</span>TB: ${gr.length ? (gr.reduce((a, s) => a + (s.ts || 0), 0) / gr.length).toFixed(2) : 0}đ</div></div></div>`;
+        document.getElementById("pgProfile").innerHTML = h;
+      }
+
+      function rExams() {
+        if (!ME || ME.status !== "approved") {
+          document.getElementById("pgExams").innerHTML =
+            '<div class="card" style="text-align:center;padding:30px"><h2>🔒 Chưa duyệt</h2></div>';
+          return;
+        }
+        const now = new Date();
+        const isT = ME.role === "teacher" || ME.role === "admin";
+        let exs = DB.exams.map((ex) => {
+          let ts = "open";
+          if (isValidDate(ex.openAt) && now < new Date(ex.openAt))
+            ts = "scheduled";
+          if (isValidDate(ex.closeAt) && now > new Date(ex.closeAt))
+            ts = "closed";
+          return { ...ex, ts };
+        });
+        let h = '<h1 style="margin-bottom:12px">📋 Phòng Luyện</h1>';
+        if (!exs.length)
+          h +=
+            '<div class="card" style="text-align:center;padding:30px;color:var(--gray)"><h3>Chưa có đề</h3></div>';
+        else {
+          h += `<div class="egrid">${exs
+            .map((ex) => {
+              const sub = DB.subs.find(
+                (s) => s.eid === ex.id && s.uid === ME.id,
+              );
+              let bdg = "";
+              if (sub?.st === "graded")
+                bdg =
+                  '<div class="est" style="background:#e8f5e9;color:var(--grn)">✅ Đã chấm</div>';
+              else if (sub)
+                bdg =
+                  '<div class="est" style="background:#fff3e0;color:var(--org)">⏳ Chờ chấm</div>';
+              else if (ex.ts === "scheduled")
+                bdg =
+                  '<div class="est" style="background:#fff3e0;color:var(--org)">🕐 Sắp mở</div>';
+              else if (ex.ts === "closed")
+                bdg =
+                  '<div class="est" style="background:#f5f5f5;color:#999">🔒 Đã đóng</div>';
+              else
+                bdg =
+                  '<div class="est" style="background:#e8f5e9;color:var(--grn)">🟢 Mở</div>';
+              let timeInfo = "";
+              if (isValidDate(ex.openAt))
+                timeInfo += `<div style="font-size:10px;color:${ex.ts === "scheduled" ? "var(--org)" : "var(--gray)"};margin-bottom:2px">📅 Mở: ${new Date(ex.openAt).toLocaleString("vi-VN")}</div>`;
+              if (isValidDate(ex.closeAt))
+                timeInfo += `<div style="font-size:10px;color:${ex.ts === "closed" ? "var(--red)" : "var(--gray)"};margin-bottom:2px">🔚 Đóng: ${new Date(ex.closeAt).toLocaleString("vi-VN")}</div>`;
+              if (!isValidDate(ex.openAt) && !isValidDate(ex.closeAt))
+                timeInfo =
+                  '<div style="font-size:10px;color:var(--grn);margin-bottom:2px">♾️ Mở vĩnh viễn</div>';
+              const canStart = !sub && ex.ts === "open" && !isT;
+              let actionBtn =
+                sub?.st === "graded"
+                  ? `<button class="btn bo bsm" onclick="vwRes(${ex.id})">👁️ KQ</button>`
+                  : '<button class="btn bo bsm" disabled>👁️ Chưa chấm</button>';
+              let mainBtn = "";
+              if (isT)
+                mainBtn = `<button class="btn bd bsm" onclick="delExam(${ex.id})">🗑️ Xóa</button>`;
+              else if (canStart)
+                mainBtn = `<button class="btn bp bsm" onclick="startEFS(${ex.id})">▶️ Bắt đầu</button>`;
+              else if (sub)
+                mainBtn =
+                  '<button class="btn bg2 bsm" disabled>✔ Đã nộp</button>';
+              else if (ex.ts === "scheduled")
+                mainBtn =
+                  '<button class="btn bg2 bsm" disabled>🕐 Chưa mở</button>';
+              else if (ex.ts === "closed")
+                mainBtn =
+                  '<button class="btn bg2 bsm" disabled>🔒 Hết</button>';
+              else mainBtn = '<button class="btn bg2 bsm" disabled>—</button>';
+              const imgCount = ex.images ? Object.keys(ex.images).length : 0;
+              return `<div class="ecard">${bdg}<h3>${ex.title}</h3><div style="display:flex;gap:3px;margin-bottom:6px"><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;background:#fff8e1;color:#f9a825">${ex.type || "Toán"}</span>${imgCount ? `<span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;background:#e3f2fd;color:#1976d2">🖼️ ${imgCount}</span>` : ""}</div>${timeInfo}<div class="emeta"><div class="em"><div class="eml">Phút</div><div class="emv">${ex.dur}'</div></div><div class="em"><div class="eml">TN</div><div class="emv">3đ</div></div><div class="em"><div class="eml">TL</div><div class="emv">${ex.ePts || 7}đ</div></div></div><div class="eacts">${actionBtn}${mainBtn}</div></div>`;
+            })
+            .join("")}</div>`;
+        }
+        document.getElementById("pgExams").innerHTML = h;
+      }
+      function delExam(id) {
+        if (!confirm("Xóa đề?")) return;
+        DB.exams = DB.exams.filter((e) => e.id !== id);
+        DB.subs = DB.subs.filter((s) => s.eid !== id);
+        save();
+        rExams();
+        toast("Xóa OK", "ok");
+      }
+
+      // === CREATE EXAM with IMAGES ===
+      let parsedQs = [],
+        parsedAnswers = {},
+        examImages = {};
+
+      function rCreate() {
+        let h = `<h1 style="margin-bottom:12px">➕ Tạo đề</h1>
+
+      <details class="help-box" open>
+        <summary>📖 Hướng dẫn format file .txt (Click để ẩn/hiện)</summary>
+        <div style="margin-top:10px;line-height:1.6">
+          <p><b>1. Format câu hỏi cơ bản:</b></p>
+          <pre>Câu 1: Nội dung câu hỏi
+A. Đáp án A
+B. Đáp án B
+C. Đáp án C
+D. Đáp án D</pre>
+
+          <p><b>2. 🆕 Thêm HÌNH MINH HỌA vào câu hỏi:</b></p>
+          <p>Dùng cú pháp <code>[IMG: tên_ảnh]</code> trong nội dung câu hỏi:</p>
+          <pre>Câu 5: Cho hình vẽ sau: [IMG: hinh1]
+Tính diện tích tam giác ABC.
+A. 12 cm²
+B. 24 cm²
+C. 6 cm²
+D. 18 cm²
+
+Câu 17: Cho đường tròn như sau:
+[IMG: hinhtron]
+a) Chứng minh AB vuông góc CD</pre>
+          <p>👉 Sau đó <b>upload các ảnh tương ứng</b> ở phần "Hình minh họa" bên dưới với <b>cùng tên</b>.</p>
+
+          <p><b>3. Định nghĩa đáp án (chọn 1 trong 3 cách):</b></p>
+          <pre>ĐÁP ÁN: 1B 2C 3A 4B 5C 6C 7A 8A 9B 10D 11B 12C</pre>
+
+          <p><b>4. Công thức toán (LaTeX):</b></p>
+          <p>Inline: <code>$x^2 + y^2$</code> | Phân số: <code>$\\frac{a}{b}$</code> | Căn: <code>$\\sqrt{x}$</code></p>
+        </div>
+      </details>
+
+      <div class="card"><h2>📋 Thông tin</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:10px">
+        <div class="fg"><label>Tên *</label><input class="fi" id="cTt"></div>
+        <div class="fg"><label>Loại *</label><input class="fi" id="cTy" value="Toán 9"></div>
+        <div class="fg"><label>Phút *</label><input class="fi" id="cDr" type="number" value="120"></div>
+        <div class="fg"><label>Điểm TL</label><input class="fi" id="cEp" type="number" value="7" step="0.5"></div>
+        <div class="fg"><label>Mở</label><input class="fi" id="cOp" type="datetime-local"></div>
+        <div class="fg"><label>Đóng</label><input class="fi" id="cCl" type="datetime-local"></div>
+      </div></div>
+
+      <div class="card"><h2>📄 Upload đề (.txt UTF-8)</h2>
+        <div class="fdrop" id="fdr" onclick="document.getElementById('fIn').click()">
+          <div style="font-size:48px;margin-bottom:6px">📄</div>
+          <h4>Nhấn hoặc kéo file vào đây</h4>
+          <p style="font-size:11px;color:var(--gray)">Chỉ chấp nhận .txt (UTF-8)</p>
+        </div>
+        <input type="file" id="fIn" class="hidden" accept=".txt" onchange="onFile(event)">
+        <div id="ppv"></div>
+      </div>
+
+      <div class="card">
+        <h2>🖼️ Hình minh họa cho câu hỏi</h2>
+        <div style="font-size:11px;color:var(--gray);margin-bottom:8px">
+          Upload ảnh và đặt tên (vd: <b>hinh1</b>, <b>hinhtron</b>). Trong file .txt dùng <code>[IMG: hinh1]</code> để chèn ảnh.
+        </div>
+        <div class="ans-camera-btns">
+          <div class="ans-cam-btn" onclick="document.getElementById('qImgInput').click()">
+            🖼️ Chọn nhiều ảnh<br><span style="font-size:9px;font-weight:400">(Có thể chọn nhiều cùng lúc)</span>
+          </div>
+        </div>
+        <input type="file" id="qImgInput" class="hidden" multiple accept="image/*" onchange="onQImgUpload(event)">
+        <div id="qImgList" class="q-img-list"></div>
+      </div>
+
+      <div class="card"><h2>🔑 Đáp án TN</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:6px">
+        ${Array.from({ length: MAX_MCQ }, (_, i) => `<div style="text-align:center"><div style="font-size:10px;font-weight:700;color:var(--red)">C${i + 1}</div><select class="fi" id="an${i + 1}" style="padding:5px;font-size:12px"><option value="">--</option><option>A</option><option>B</option><option>C</option><option>D</option></select></div>`).join("")}
+        </div>
+      </div>
+
+      <div style="display:flex;gap:6px;justify-content:flex-end">
+        <button class="btn bg2 blg" onclick="nav('exams')">Hủy</button>
+        <button class="btn bp blg" onclick="pubExam()">📤 Xuất bản</button>
+      </div>`;
+        document.getElementById("pgCreate").innerHTML = h;
+        const dr = document.getElementById("fdr");
+        dr.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dr.style.borderColor = "var(--red)";
+        });
+        dr.addEventListener("dragleave", () => (dr.style.borderColor = ""));
+        dr.addEventListener("drop", (e) => {
+          e.preventDefault();
+          dr.style.borderColor = "";
+          if (e.dataTransfer.files[0]) parseF(e.dataTransfer.files[0]);
+        });
+        parsedQs = [];
+        parsedAnswers = {};
+        examImages = {};
+      }
+
+      // === Upload ảnh câu hỏi ===
+      function onQImgUpload(e) {
+        const files = Array.from(e.target.files);
+        let processedCount = 0;
+        let errorCount = 0;
+
+        files.forEach((f) => {
+          if (f.size > MAX_Q_IMG_SIZE) {
+            toast(`${f.name}: Max 3MB!`, "er");
+            errorCount++;
+            return;
+          }
+
+          // Đặt tên: bỏ extension, thay khoảng trắng = _
+          let name = f.name
+            .replace(/\.[^.]+$/, "")
+            .replace(/\s+/g, "_")
+            .toLowerCase();
+          // Nếu trùng, thêm số
+          let finalName = name,
+            n = 1;
+          while (examImages[finalName]) {
+            finalName = `${name}_${n}`;
+            n++;
+          }
+
+          const r = new FileReader();
+          r.onload = (ev) => {
+            examImages[finalName] = ev.target.result;
+            processedCount++;
+            rQImgList();
+            if (processedCount + errorCount === files.length) {
+              toast(`✅ Đã thêm ${processedCount} ảnh!`, "ok");
+            }
+          };
+          r.readAsDataURL(f);
+        });
+
+        e.target.value = "";
+      }
+
+      function rQImgList() {
+        const el = document.getElementById("qImgList");
+        if (!el) return;
+        const names = Object.keys(examImages);
+        if (!names.length) {
+          el.innerHTML =
+            '<p style="color:var(--gray);font-size:11px;text-align:center;padding:20px">Chưa có ảnh</p>';
+          return;
+        }
+        el.innerHTML = names
+          .map(
+            (name) => `
+        <div class="q-img-item">
+          <button class="del-btn" onclick="rmQImg('${name}')">✕</button>
+          <img src="${examImages[name]}" onclick="opV('${examImages[name]}')">
+          <div class="name">${name}</div>
+          <button class="copy-btn" onclick="copyImgTag('${name}')">📋 Copy [IMG: ${name}]</button>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function rmQImg(name) {
+        delete examImages[name];
+        rQImgList();
+        toast("Đã xóa ảnh", "ok");
+      }
+
+      function copyImgTag(name) {
+        const txt = `[IMG: ${name}]`;
+        navigator.clipboard
+          .writeText(txt)
+          .then(() => {
+            toast(`Đã copy: ${txt}`, "ok");
+          })
+          .catch(() => {
+            // Fallback
+            const ta = document.createElement("textarea");
+            ta.value = txt;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+              toast(`Đã copy: ${txt}`, "ok");
+            } catch (e) {}
+            document.body.removeChild(ta);
+          });
+      }
+
+      function onFile(e) {
+        if (e.target.files[0]) parseF(e.target.files[0]);
+      }
+
+      function parseF(f) {
+        const r = new FileReader();
+        r.onload = (e) => {
+          const result = parseTxt(e.target.result);
+          parsedQs = result.questions;
+          parsedAnswers = result.answers;
+
+          document.getElementById("fdr").classList.add("has");
+          document.getElementById("fdr").innerHTML =
+            `<div style="font-size:48px">✅</div><h4>${f.name}</h4><p>${parsedQs.length} câu (${parsedQs.filter((q) => q.type === "mcq").length} TN + ${parsedQs.filter((q) => q.type === "essay").length} TL)</p>`;
+
+          if (parsedQs.length) {
+            const ansCount = Object.keys(parsedAnswers).length;
+            const ansInfo =
+              ansCount > 0
+                ? `<div style="background:#e8f5e9;padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;border-left:4px solid var(--grn)"><b>✅ Tìm thấy ${ansCount} đáp án trong file!</b> Đã auto-fill bên dưới.</div>`
+                : `<div style="background:#fff3e0;padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;border-left:4px solid var(--org)"><b>⚠️ Không tìm thấy đáp án trong file.</b> Vui lòng chọn thủ công.</div>`;
+
+            // Tìm các [IMG: xxx] trong câu hỏi
+            const requiredImages = new Set();
+            parsedQs.forEach((q) => {
+              const matches = q.text.matchAll(/\[IMG\s*:\s*([^\]]+)\]/gi);
+              for (const m of matches) requiredImages.add(m[1].trim());
+              q.subs?.forEach((s) => {
+                const sm = s.t.matchAll(/\[IMG\s*:\s*([^\]]+)\]/gi);
+                for (const m of sm) requiredImages.add(m[1].trim());
+              });
+            });
+
+            let imgInfo = "";
+            if (requiredImages.size > 0) {
+              const missing = [...requiredImages].filter((n) => !examImages[n]);
+              const found = [...requiredImages].filter((n) => examImages[n]);
+              imgInfo = `<div style="background:${missing.length ? "#fff3e0" : "#e8f5e9"};padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;border-left:4px solid ${missing.length ? "var(--org)" : "var(--grn)"}">
+              <b>${missing.length ? "⚠️" : "✅"} Ảnh cần thiết: ${requiredImages.size}</b><br>
+              ${found.length ? `<span style="color:var(--grn)">✓ Đã có: ${found.join(", ")}</span><br>` : ""}
+              ${missing.length ? `<span style="color:var(--red)">✗ Thiếu: ${missing.join(", ")}</span> - Hãy upload ở mục "Hình minh họa"` : ""}
+            </div>`;
+            }
+
+            document.getElementById("ppv").innerHTML =
+              ansInfo +
+              imgInfo +
+              `<div class="pprev">${parsedQs
+                .map((q) => {
+                  let optsHTML = "";
+                  if (q.type === "mcq") {
+                    optsHTML =
+                      '<div style="margin-left:14px;font-size:11px;margin-top:4px">' +
+                      q.opts
+                        .map((o) => {
+                          const isCorrect = parsedAnswers[q.id] === o.l;
+                          return `<div style="${isCorrect ? "color:var(--grn);font-weight:700" : ""}">${isCorrect ? "✓ " : ""}${o.l}. ${o.t}</div>`;
+                        })
+                        .join("") +
+                      "</div>";
+                  } else {
+                    optsHTML =
+                      '<div style="margin-left:14px;font-size:11px;color:var(--blu);margin-top:4px">' +
+                      q.subs
+                        .map(
+                          (s) =>
+                            `<div><b>${s.l})</b> ${renderQuestionContent(s.t, examImages)}</div>`,
+                        )
+                        .join("") +
+                      "</div>";
+                  }
+                  return `<div class="pq"><b style="color:var(--red)">C${q.id}</b> <span style="font-size:10px;color:var(--gray);background:#eee;padding:1px 5px;border-radius:4px">${q.type === "mcq" ? "TN" : "TL"}</span> ${renderQuestionContent(q.text, examImages)}${optsHTML}</div>`;
+                })
+                .join("")}</div>`;
+
+            for (let i = 1; i <= MAX_MCQ; i++) {
+              if (parsedAnswers[i]) {
+                const sel = document.getElementById(`an${i}`);
+                if (sel) {
+                  sel.value = parsedAnswers[i];
+                  sel.style.background = "#e8f5e9";
+                  sel.style.borderColor = "var(--grn)";
+                }
+              }
+            }
+
+            renderMath(document.getElementById("ppv"));
+          }
+
+          const ansCnt = Object.keys(parsedAnswers).length;
+          toast(
+            `${parsedQs.length} câu${ansCnt ? ` + ${ansCnt} đáp án` : ""}`,
+            "ok",
+          );
+        };
+        r.readAsText(f, "UTF-8");
+      }
+
+      function parseTxt(txt) {
+        let answerKey = {};
+        const ansLine1 = txt.match(/ĐÁP\s*ÁN\s*[:：]?\s*([1-9A-D\s,;\.=)]+)/i);
+        if (ansLine1) {
+          const matches = ansLine1[1].matchAll(/(\d+)\s*[\.\)=:]?\s*([A-D])/gi);
+          for (const m of matches)
+            answerKey[parseInt(m[1])] = m[2].toUpperCase();
+        }
+        const ansBlock = txt.match(/\[DAPAN\]([\s\S]*?)(?:\[|$)/i);
+        if (ansBlock) {
+          const matches = ansBlock[1].matchAll(/(\d+)\s*[=\.\):]\s*([A-D])/gi);
+          for (const m of matches)
+            answerKey[parseInt(m[1])] = m[2].toUpperCase();
+        }
+
+        let cleanTxt = txt
+          .replace(/ĐÁP\s*ÁN\s*[:：]?\s*[1-9A-D\s,;\.=)]+/i, "")
+          .replace(/\[DAPAN\][\s\S]*?(?=\[|$)/i, "");
+
+        const ls = cleanTxt
+          .split("\n")
+          .map((l) => l.trim())
+          .filter((l) => l);
+        const qs = [];
+        let cur = null;
+
+        ls.forEach((l) => {
+          // Bỏ qua dòng chỉ chứa [IMG:...] và để thêm vào text
+          const m = l.match(/^(?:Câu|Bài)?\s*(\d+)\s*[\.\:)]\s*(.*)$/i);
+          if (m && parseInt(m[1]) <= 18 && parseInt(m[1]) >= 1) {
+            if (cur) qs.push(cur);
+            const qid = parseInt(m[1]);
+            let qText = m[2].trim();
+            const inlineAns = qText.match(
+              /[\[\(]\s*Đáp\s*án\s*[:：]?\s*([A-D])\s*[\]\)]/i,
+            );
+            if (inlineAns) {
+              answerKey[qid] = inlineAns[1].toUpperCase();
+              qText = qText.replace(inlineAns[0], "").trim();
+            }
+            cur = {
+              id: qid,
+              text: qText || `Câu ${qid}`,
+              opts: [],
+              subs: [],
+              type: qid <= MAX_MCQ ? "mcq" : "essay",
+            };
+          } else if (cur) {
+            const om = l.match(/^([A-D])\s*[\.\:)]\s*(.+)/i);
+            if (om && cur.type === "mcq") {
+              let optText = om[2].trim();
+              if (optText.match(/\[đúng\]|\[correct\]|\*\*/i)) {
+                answerKey[cur.id] = om[1].toUpperCase();
+                optText = optText
+                  .replace(/\[đúng\]|\[correct\]|\*\*/gi, "")
+                  .trim();
+              }
+              cur.opts.push({ l: om[1].toUpperCase(), t: optText });
+            } else if (l.match(/^[a-eA-E][\.\):]/)) {
+              cur.subs.push({
+                l: l[0].toLowerCase(),
+                t: l.substring(2).trim(),
+              });
+            } else {
+              cur.text += " " + l;
+            }
+          }
+        });
+        if (cur) qs.push(cur);
+
+        const mcqs = qs.filter((q) => q.type === "mcq").slice(0, MAX_MCQ);
+        const esss = qs.filter((q) => q.type === "essay").slice(0, MAX_ESSAY);
+        mcqs.forEach((q) => {
+          while (q.opts.length < 4)
+            q.opts.push({ l: ["A", "B", "C", "D"][q.opts.length], t: "..." });
+        });
+        esss.forEach((q) => {
+          if (!q.subs.length) q.subs.push({ l: "a", t: "" });
+        });
+
+        return { questions: [...mcqs, ...esss], answers: answerKey };
+      }
+
+      function pubExam() {
+        const tt = document.getElementById("cTt").value.trim(),
+          ty = document.getElementById("cTy").value.trim(),
+          dr = parseInt(document.getElementById("cDr").value),
+          ep = parseFloat(document.getElementById("cEp").value) || 7;
+        if (!tt || !ty || !dr) {
+          toast("Nhập đầy đủ!", "er");
+          return;
+        }
+        const ans = {};
+        for (let i = 1; i <= MAX_MCQ; i++)
+          ans[i] = document.getElementById(`an${i}`).value || "A";
+        let mcqs = parsedQs.filter((q) => q.type === "mcq").slice(0, MAX_MCQ);
+        let esqs = parsedQs
+          .filter((q) => q.type === "essay")
+          .slice(0, MAX_ESSAY);
+        while (mcqs.length < MAX_MCQ)
+          mcqs.push({
+            id: mcqs.length + 1,
+            text: `Câu ${mcqs.length + 1}`,
+            opts: [
+              { l: "A", t: "A" },
+              { l: "B", t: "B" },
+              { l: "C", t: "C" },
+              { l: "D", t: "D" },
+            ],
+            type: "mcq",
+          });
+        while (esqs.length < MAX_ESSAY)
+          esqs.push({
+            id: MAX_MCQ + esqs.length + 1,
+            text: `Câu TL ${esqs.length + 1}`,
+            subs: [{ l: "a", t: "" }],
+            type: "essay",
+          });
+        mcqs.forEach((q, i) => (q.cor = ans[i + 1]));
+        [1.5, 1, 1.5, 1, 1.5, 0.5].forEach((p, i) => {
+          if (esqs[i]) esqs[i].pts = p;
+        });
+        const openVal = document.getElementById("cOp").value,
+          closeVal = document.getElementById("cCl").value;
+        DB.exams.push({
+          id: Date.now(),
+          title: tt,
+          type: ty,
+          dur: dr,
+          ePts: ep,
+          mqs: mcqs,
+          eqs: esqs,
+          images: { ...examImages }, // Lưu ảnh kèm đề
+          openAt: openVal && openVal.trim() ? openVal : null,
+          closeAt: closeVal && closeVal.trim() ? closeVal : null,
+          date: new Date().toLocaleDateString("vi-VN"),
+          by: ME.id,
+        });
+        save();
+        parsedQs = [];
+        parsedAnswers = {};
+        examImages = {};
+        toast(`Đã xuất bản với ${Object.keys(examImages).length} ảnh!`, "ok");
+        nav("exams");
+      }
+
+      // === EXAM FULLSCREEN ===
+      function createSubmission(isAuto) {
+        const ex = EX.exam;
+        let mc = 0;
+        ex.mqs.forEach((q) => {
+          if (EX.ans[q.id] === q.cor) mc++;
+        });
+        const ed = {};
+        Object.keys(EX.eUp).forEach((k) => {
+          if (EX.eUp[k].length) ed[k] = [...EX.eUp[k]];
+        });
+        return {
+          id: Date.now(),
+          eid: ex.id,
+          uid: ME.id,
+          uname: ME.name,
+          uinit: getUserInitial(ME.name),
+          ans: { ...EX.ans },
+          ed,
+          mc,
+          ms: mc * MCQ_POINT,
+          es: {},
+          ets: null,
+          efb: "",
+          ts: null,
+          st: "submitted",
+          at: new Date().toISOString(),
+          tu: ex.dur * 60 - Math.max(EX.tl, 0),
+          auto: isAuto,
+          fsWarnings: fsWarnings,
+        };
+      }
+
+      function startEFS(eid) {
+        const ex = DB.exams.find((e) => e.id === eid);
+        if (!ex) return;
+        fsWarnings = 0;
+        isSubmittingModal = false;
+        EX = {
+          exam: ex,
+          ans: {},
+          eUp: {},
+          tl: ex.dur * 60,
+          tmr: null,
+          done: false,
+        };
+        ex.eqs.forEach((q, qi) => {
+          q.subs.forEach((_, si) => {
+            EX.eUp[`${qi}_${si}`] = [];
+          });
+          EX.eUp[`${qi}_w`] = [];
+        });
+        document.getElementById("efsTt").textContent = ex.title;
+        document.getElementById("efsInf").textContent = ex.type;
+        document.getElementById("efsWarnCount").textContent = "";
+        rMCQ();
+        rEss();
+        rQNav();
+        updProg();
+        swES("m");
+        document.getElementById("efs").classList.add("show");
+        const el = document.getElementById("efs");
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        startTmr();
+        document.addEventListener("fullscreenchange", onFSC);
+        document.addEventListener("webkitfullscreenchange", onFSC);
+        toast("Bắt đầu làm bài!", "in");
+        renderMath();
+      }
+
+      function onFSC() {
+        if (isSubmittingModal) return;
+        if (!EX || EX.done) return;
+
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          fsWarnings++;
+          document.getElementById("efsWarnCount").textContent =
+            `⚠️ ${fsWarnings}/${MAX_FS_WARNINGS}`;
+          if (fsWarnings >= MAX_FS_WARNINGS) {
+            EX.done = true;
+            autoSub();
+          } else {
+            document.getElementById("efsWnSoftTitle").textContent =
+              `CẢNH BÁO ${fsWarnings}/${MAX_FS_WARNINGS}!`;
+            document.getElementById("efsWnSoftMsg").textContent =
+              `Đã thoát fullscreen ${fsWarnings} lần.\nCòn ${MAX_FS_WARNINGS - fsWarnings} lần nữa sẽ tự nộp!`;
+            document.getElementById("efsWnSoft").classList.add("show");
+          }
+        }
+      }
+
+      function reEnterFS() {
+        document.getElementById("efsWnSoft").classList.remove("show");
+        const el = document.getElementById("efs");
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      }
+
+      function autoSub() {
+        stopTmr();
+        DB.subs.push(createSubmission(true));
+        save();
+        document.getElementById("efsWn").classList.add("show");
+      }
+
+      function afterAutoSub() {
+        document.getElementById("efsWn").classList.remove("show");
+        document.getElementById("efsWnSoft").classList.remove("show");
+        document.getElementById("efs").classList.remove("show");
+        document.removeEventListener("fullscreenchange", onFSC);
+        document.removeEventListener("webkitfullscreenchange", onFSC);
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen)
+            document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen)
+            document.webkitExitFullscreen();
+        }
+        EX = null;
+        fsWarnings = 0;
+        isSubmittingModal = false;
+        nav("exams");
+        toast("Đã nộp tự động", "wn");
+      }
+
+      function rMCQ() {
+        const examImgs = EX.exam.images || {};
+        document.getElementById("mcqC").innerHTML = EX.exam.mqs
+          .map(
+            (q) =>
+              `<div class="qc" id="eq${q.id}">
+          <div class="qc-hd" style="display:flex;justify-content:space-between;margin-bottom:5px">
+            <span class="qc-nm">C${q.id}</span>
+            <span style="font-size:10px;color:var(--gray)">${MCQ_POINT}đ</span>
+          </div>
+          <div class="q-text" style="font-size:13px;line-height:1.8;margin-bottom:6px">${renderQuestionContent(q.text, examImgs)}</div>
+          <div class="chs">${q.opts
+            .map(
+              (o) =>
+                `<div class="cho" id="ec_${q.id}_${o.l}" onclick="pk(${q.id},'${o.l}')">
+              <div class="cho-d"></div>
+              <span class="cho-l"><b>${o.l}.</b></span>
+              <span class="opt-text">${o.t}</span>
+            </div>`,
+            )
+            .join("")}</div>
+        </div>`,
+          )
+          .join("");
+        renderMath(document.getElementById("mcqC"));
+      }
+
+      // === ESS: CHỈ ẢNH, KHÔNG TEXT ===
+      function rEss() {
+        const examImgs = EX.exam.images || {};
+        document.getElementById("essC").innerHTML = EX.exam.eqs
+          .map((q, qi) => {
+            let h = "";
+            q.subs.forEach((s, si) => {
+              const k = `${qi}_${si}`;
+              const imgCount = EX.eUp[k]?.length || 0;
+              h += `<div style="font-weight:700;color:var(--blu);font-size:12px;margin:8px 0 4px 8px">
+                  Ý <b>${s.l})</b> <span class="sub-text">${renderQuestionContent(s.t, examImgs)}</span>
+                  ${imgCount > 0 ? `<span class="img-count-badge">📷 ${imgCount} ảnh</span>` : ""}
+                </div>
+                <div class="ans-content">
+                  <div class="ans-camera-btns">
+                    <div class="ans-cam-btn cam" onclick="document.getElementById('cam_${k}').click()">
+                      📸 Chụp ảnh<br><span style="font-size:9px;font-weight:400">(camera điện thoại)</span>
+                    </div>
+                    <div class="ans-cam-btn" onclick="document.getElementById('fil_${k}').click()">
+                      🖼️ Chọn ảnh<br><span style="font-size:9px;font-weight:400">(từ thư viện - chọn nhiều)</span>
+                    </div>
+                  </div>
+                  <input type="file" id="cam_${k}" class="hidden" accept="image/*" capture="environment" onchange="onEF('${k}',event)">
+                  <input type="file" id="fil_${k}" class="hidden" multiple accept="image/*" onchange="onEF('${k}',event)">
+                  <div class="eupv" id="epv_${k}"></div>
+                </div>`;
+            });
+
+            const wk = `${qi}_w`;
+            const wImgCount = EX.eUp[wk]?.length || 0;
+            h += `<div style="font-weight:700;color:var(--red);font-size:12px;margin:12px 0 4px 8px;border-top:1px dashed #eee;padding-top:8px">
+                📝 Lời giải cả câu (tổng hợp)
+                ${wImgCount > 0 ? `<span class="img-count-badge">📷 ${wImgCount} ảnh</span>` : ""}
+              </div>
+              <div class="ans-content">
+                <div class="ans-camera-btns">
+                  <div class="ans-cam-btn cam" onclick="document.getElementById('cam_${wk}').click()">
+                    📸 Chụp ảnh<br><span style="font-size:9px;font-weight:400">(camera)</span>
+                  </div>
+                  <div class="ans-cam-btn" onclick="document.getElementById('fil_${wk}').click()">
+                    🖼️ Chọn ảnh<br><span style="font-size:9px;font-weight:400">(thư viện)</span>
+                  </div>
+                </div>
+                <input type="file" id="cam_${wk}" class="hidden" accept="image/*" capture="environment" onchange="onEF('${wk}',event)">
+                <input type="file" id="fil_${wk}" class="hidden" multiple accept="image/*" onchange="onEF('${wk}',event)">
+                <div class="eupv" id="epv_${wk}"></div>
+              </div>`;
+
+            return `<div class="qc" style="border-left-color:var(--blu)">
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+            <span class="qc-nm" style="background:var(--blu)">C${qi + 1} (${q.pts || 1}đ)</span>
+          </div>
+          <div class="q-text" style="font-size:13px;line-height:1.8;margin-bottom:8px">${renderQuestionContent(q.text, examImgs)}</div>
+          ${h}
+        </div>`;
+          })
+          .join("");
+        renderMath(document.getElementById("essC"));
+        // Render preview ảnh đã có (nếu đổi tab quay lại)
+        Object.keys(EX.eUp).forEach((k) => {
+          if (EX.eUp[k].length) rEPv(k);
+        });
+      }
+
+      function pk(qid, l) {
+        EX.exam.mqs
+          .find((q) => q.id === qid)
+          .opts.forEach((o) =>
+            document.getElementById(`ec_${qid}_${o.l}`).classList.remove("sel"),
+          );
+        document.getElementById(`ec_${qid}_${l}`).classList.add("sel");
+        EX.ans[qid] = l;
+        document.getElementById(`eq${qid}`).classList.add("done");
+        rQNav();
+        updProg();
+      }
+
+      function onEF(k, e) {
+        const files = Array.from(e.target.files);
+        let loaded = 0;
+        files.forEach((f) => {
+          if (f.size > MAX_IMG_SIZE) {
+            toast(`${f.name}: Max 5MB!`, "er");
+            return;
+          }
+          const r = new FileReader();
+          r.onload = (ev) => {
+            EX.eUp[k].push(ev.target.result);
+            loaded++;
+            rEPv(k);
+            if (loaded === files.length) {
+              rEss(); // Re-render để cập nhật badge
+            }
+          };
+          r.readAsDataURL(f);
+        });
+        e.target.value = "";
+      }
+
+      function rEPv(k) {
+        const pv = document.getElementById(`epv_${k}`);
+        if (pv)
+          pv.innerHTML = EX.eUp[k]
+            .map(
+              (u, i) =>
+                `<div class="euth"><img src="${u}" onclick="opV('${u}')"><button class="edl" onclick="rmEF('${k}',${i})">✕</button></div>`,
+            )
+            .join("");
+      }
+
+      function rmEF(k, i) {
+        EX.eUp[k].splice(i, 1);
+        rEPv(k);
+        rEss(); // Cập nhật badge
+      }
+
+      function rQNav() {
+        document.getElementById("qNv").innerHTML = EX.exam.mqs
+          .map(
+            (q) =>
+              `<div class="qnb ${EX.ans[q.id] ? "done" : ""}" onclick="swES('m');document.getElementById('eq'+${q.id}).scrollIntoView({behavior:'smooth',block:'center'})">${q.id}</div>`,
+          )
+          .join("");
+      }
+
+      function updProg() {
+        const d = Object.keys(EX.ans).length;
+        document.getElementById("pgF").style.width = (d / MAX_MCQ) * 100 + "%";
+        document.getElementById("pgT").textContent = d + "/" + MAX_MCQ;
+      }
+
+      function swES(s) {
+        document.getElementById("ptM").classList.toggle("on", s === "m");
+        document.getElementById("ptE").classList.toggle("on", s === "e");
+        document.getElementById("secM").classList.toggle("on", s === "m");
+        document.getElementById("secE").classList.toggle("on", s === "e");
+        if (s === "e") renderMath(document.getElementById("essC"));
+      }
+
+      function startTmr() {
+        stopTmr();
+        EX.tmr = setInterval(() => {
+          EX.tl--;
+          const t = Math.max(EX.tl, 0),
+            m = Math.floor(t / 60),
+            s = t % 60;
+          document.getElementById("efsTm").textContent =
+            `${String(m).padStart(3, "0")}:${String(s).padStart(2, "0")}`;
+          if (EX.tl <= 60)
+            document.getElementById("efsTm").classList.add("warn");
+          if (EX.tl <= 0) {
+            stopTmr();
+            isSubmittingModal = true;
+            if (document.fullscreenElement) {
+              if (document.exitFullscreen)
+                document.exitFullscreen().catch(() => {});
+            }
+            setTimeout(() => shOv("ovTime"), 200);
+          }
+        }, 1000);
+      }
+
+      function stopTmr() {
+        if (EX?.tmr) {
+          clearInterval(EX.tmr);
+          EX.tmr = null;
+        }
+      }
+
+      function shSubCfm() {
+        if (!EX || EX.done) return;
+
+        const d = Object.keys(EX.ans).length;
+        const eImgs = Object.values(EX.eUp).filter(
+          (arr) => arr.length > 0,
+        ).length;
+        const totalImgs = Object.values(EX.eUp).reduce(
+          (sum, arr) => sum + arr.length,
+          0,
+        );
+
+        isSubmittingModal = true;
+
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen)
+            document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen)
+            document.webkitExitFullscreen();
+        }
+
+        document.getElementById("subMsg").textContent =
+          `📝 Trắc nghiệm: ${d}/${MAX_MCQ} câu\n📷 Tự luận: ${totalImgs} ảnh (${eImgs} phần có ảnh)\n\nBạn có chắc muốn nộp bài?`;
+
+        setTimeout(() => shOv("ovSub"), 300);
+      }
+
+      function cancelSub() {
+        clsOv("ovSub");
+        setTimeout(() => {
+          const el = document.getElementById("efs");
+          if (el && el.classList.contains("show") && EX && !EX.done) {
+            if (el.requestFullscreen) {
+              el.requestFullscreen()
+                .then(() => {
+                  isSubmittingModal = false;
+                })
+                .catch(() => {
+                  isSubmittingModal = false;
+                });
+            } else if (el.webkitRequestFullscreen) {
+              el.webkitRequestFullscreen();
+              setTimeout(() => (isSubmittingModal = false), 500);
+            } else {
+              isSubmittingModal = false;
+            }
+          } else {
+            isSubmittingModal = false;
+          }
+        }, 200);
+      }
+
+      function doSubExam() {
+        if (!EX || EX.done) {
+          clsOv("ovSub");
+          clsOv("ovTime");
+          return;
+        }
+        clsOv("ovSub");
+        clsOv("ovTime");
+        stopTmr();
+        EX.done = true;
+        isSubmittingModal = true;
+        DB.subs.push(createSubmission(false));
+        save();
+        document.removeEventListener("fullscreenchange", onFSC);
+        document.removeEventListener("webkitfullscreenchange", onFSC);
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen)
+            document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen)
+            document.webkitExitFullscreen();
+        }
+        document.getElementById("efs").classList.remove("show");
+        EX = null;
+        fsWarnings = 0;
+        isSubmittingModal = false;
+        toast("✅ Nộp bài thành công! Chờ chấm điểm", "ok");
+        nav("exams");
+      }
+
+      // === GRADE (Chỉ hiển thị ảnh, không text) ===
+      function rGrade() {
+        const ss = DB.subs;
+        let h = '<h1 style="margin-bottom:12px">📝 Chấm bài</h1>';
+        if (!ss.length) {
+          h +=
+            '<div class="card" style="text-align:center;padding:30px;color:var(--gray)"><h3>Chưa có</h3></div>';
+          document.getElementById("pgGrade").innerHTML = h;
+          return;
+        }
+        h += ss
+          .map((sub) => {
+            const ex = DB.exams.find((e) => e.id === sub.eid);
+            if (!ex) return "";
+            const currentName = getUserNameFromDB(sub.uid) || sub.uname;
+            const currentInit = getUserInitial(currentName);
+            const examImgs = ex.images || {};
+            let esH = "";
+            ex.eqs.forEach((q, qi) => {
+              let content = "";
+              q.subs.forEach((s, si) => {
+                const k = `${qi}_${si}`;
+                if (sub.ed?.[k]?.length) {
+                  content += `<div style="margin-bottom:6px"><span style="font-size:11px;color:var(--blu);font-weight:700">Ý ${s.l}:</span><div class="simgs">${sub.ed[k].map((img) => `<img src="${img}" class="simg" onclick="opV('${img}')">`).join("")}</div></div>`;
+                }
+              });
+              const wk = `${qi}_w`;
+              if (sub.ed?.[wk]?.length) {
+                content += `<div><span style="font-size:11px;color:var(--red);font-weight:700">Cả câu:</span><div class="simgs">${sub.ed[wk].map((img) => `<img src="${img}" class="simg" onclick="opV('${img}')">`).join("")}</div></div>`;
+              }
+
+              if (!content)
+                content =
+                  '<p style="color:#999;font-size:10px;font-style:italic">Không có ảnh bài làm</p>';
+
+              esH += `<div class="esec2">
+            <h5 style="font-size:12px;color:var(--blu);margin-bottom:6px">📝 C${qi + 1} (${q.pts || 1}đ): ${renderQuestionContent(q.text, examImgs)}</h5>
+            ${content}
+            ${sub.st === "submitted" ? `<div style="display:flex;align-items:center;gap:4px;margin-top:6px"><label style="font-size:10px;font-weight:700">Điểm:</label><input type="number" class="ginp2" id="gs_${sub.id}_${qi}" min="0" max="${q.pts || 1}" step="0.25" placeholder="0"><span style="font-size:10px;color:#888">/${q.pts || 1}</span></div>` : `<div style="font-size:10px;color:var(--grn);font-weight:600;margin-top:4px">✅ ${sub.es[qi] || 0}/${q.pts || 1}đ</div>`}
+          </div>`;
+            });
+            return `<div class="scard"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px"><div style="display:flex;align-items:center;gap:6px"><div class="sav2">${currentInit}</div><div><div style="font-weight:700;font-size:12px">${currentName}</div><div style="font-size:10px;color:#999">📅 ${new Date(sub.at).toLocaleString("vi-VN")} | ${ex.title} | TN:${sub.ms.toFixed(2)}/3${sub.auto ? ` | 🚨 Tự nộp (${sub.fsWarnings || 0} vi phạm)` : ""}</div></div></div><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;${sub.st === "graded" ? "background:#c8e6c9;color:#2e7d32" : "background:#fff3e0;color:#ef6c00"}">${sub.st === "graded" ? "✅" : "⏳"}</span></div>${esH}${sub.st === "submitted" ? `<div class="grow2"><label style="font-weight:700;font-size:11px">Nhận xét:</label><input type="text" class="fbb2" id="gfb_${sub.id}" placeholder="(tùy chọn)"><button class="btn bs bsm" onclick="doGr(${sub.id})">✅ Chấm</button></div>` : `<div class="grow2"><span style="color:var(--grn);font-weight:600;font-size:11px">✅ Tổng: ${sub.ts?.toFixed(2) || "?"}/${3 + (ex.ePts || 7)}đ</span>${sub.efb ? `<span style="font-size:10px;color:var(--gray)">💬 ${sub.efb}</span>` : ""}</div>`}</div>`;
+          })
+          .join("");
+        document.getElementById("pgGrade").innerHTML = h;
+        renderMath(document.getElementById("pgGrade"));
+      }
+
+      function doGr(sid) {
+        const sub = DB.subs.find((s) => s.id === sid),
+          ex = DB.exams.find((e) => e.id === sub.eid);
+        if (!sub || !ex) return;
+        let te = 0;
+        for (const [qi, q] of ex.eqs.entries()) {
+          const el = document.getElementById(`gs_${sid}_${qi}`),
+            v = parseFloat(el?.value || 0);
+          if (isNaN(v) || v < 0 || v > (q.pts || 1)) {
+            toast(`C${qi + 1}: 0-${q.pts || 1}!`, "er");
+            return;
+          }
+          sub.es[qi] = v;
+          te += v;
+        }
+        sub.ets = te;
+        sub.ts = sub.ms + te;
+        sub.efb = document.getElementById(`gfb_${sid}`)?.value || "";
+        sub.st = "graded";
+        save();
+        toast(`${sub.ts.toFixed(2)}đ`, "ok");
+        rGrade();
+        updUI();
+      }
+
+      function rApprovals() {
+        const pend = DB.users.filter((u) => u.status === "pending"),
+          all = DB.users.filter((u) => u.id !== 1);
+        let h = `<h1 style="margin-bottom:12px">✅ Duyệt TK</h1>`;
+        if (pend.length) {
+          h += `<div class="card"><h2>⏳ Chờ (${pend.length})</h2>`;
+          pend.forEach((u) => {
+            h += `<div class="apcard"><div style="display:flex;align-items:center;gap:6px"><div class="apav">${getUserInitial(u.name)}</div><div><b>${u.name}</b><div style="font-size:10px;color:var(--gray)">${u.email} | ${u.role === "teacher" ? "GV" : "HS"}</div></div></div><div style="display:flex;gap:3px"><button class="btn bs bsm" onclick="appU(${u.id})">✅</button><button class="btn bd bsm" onclick="rejU(${u.id})">❌</button></div></div>`;
+          });
+          h += "</div>";
+        }
+        h += `<div class="card"><h2>👥 Tất cả (${all.length})</h2><table class="tbl"><thead><tr><th>Tên</th><th>Email</th><th>VT</th><th>TB</th><th>TT</th><th></th></tr></thead><tbody>${all.map((u) => `<tr><td><b>${u.name}</b></td><td style="font-size:10px">${u.email}</td><td>${u.role === "teacher" ? "GV" : "HS"}</td><td style="font-size:10px">${(u.devices || []).length}/${MAX_DEVICES}</td><td><span style="font-size:9px;padding:1px 5px;border-radius:6px;font-weight:700;${u.status === "approved" ? "background:#e8f5e9;color:#2e7d32" : u.locked ? "background:#ffebee;color:#c62828" : "background:#fff3e0;color:#ef6c00"}">${u.locked ? "🔒" : u.status === "approved" ? "✅" : "⏳"}</span></td><td style="display:flex;gap:2px">${u.status !== "approved" ? `<button class="btn bs bsm" onclick="appU(${u.id})">✅</button>` : ""}${u.locked ? `<button class="btn bs bsm" onclick="unlockU(${u.id})">🔓</button>` : ""}${(u.devices || []).length ? `<button class="btn bo bsm" onclick="clearDevices(${u.id})">📱</button>` : ""}<button class="btn bd bsm" onclick="delU(${u.id})">🗑️</button></td></tr>`).join("")}</tbody></table></div>`;
+        document.getElementById("pgApprovals").innerHTML = h;
+      }
+      function appU(id) {
+        const u = DB.users.find((x) => x.id === id);
+        if (u) {
+          u.status = "approved";
+          save();
+          rApprovals();
+          updUI();
+          toast("Duyệt OK", "ok");
+        }
+      }
+      function rejU(id) {
+        const u = DB.users.find((x) => x.id === id);
+        if (u) {
+          u.status = "rejected";
+          save();
+          rApprovals();
+          toast("Từ chối", "wn");
+        }
+      }
+      function delU(id) {
+        DB.users = DB.users.filter((u) => u.id !== id);
+        DB.subs = DB.subs.filter((s) => s.uid !== id);
+        save();
+        rApprovals();
+        toast("Xóa OK", "ok");
+      }
+
+      function rNews() {
+        let h = '<h1 style="margin-bottom:12px">📰 Tin tức</h1>';
+        h += DB.news.length
+          ? `<div class="ngrid">${DB.news.map((n) => `<div class="ncard"><div class="nimg">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nbody"><h3>${n.title}</h3><p>${n.content || ""}</p><div class="dt">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`).join("")}</div>`
+          : '<div class="card" style="text-align:center;padding:30px;color:var(--gray)"><h3>Chưa có</h3></div>';
+        document.getElementById("pgNews").innerHTML = h;
+      }
+
+      function rStudents() {
+        const sts = DB.users.filter(
+          (u) => u.role === "student" && u.status === "approved",
+        );
+        let h = `<h1 style="margin-bottom:12px">👥 HS (${sts.length})</h1>`;
+        if (!sts.length)
+          h +=
+            '<div class="card" style="text-align:center;padding:30px;color:var(--gray)"><h3>Chưa có</h3></div>';
+        else {
+          h +=
+            '<div class="card"><table class="tbl"><thead><tr><th>Tên</th><th>Email</th><th>Bài</th><th>TB</th><th>TB</th></tr></thead><tbody>';
+          sts.forEach((st) => {
+            const ms = DB.subs.filter((s) => s.uid === st.id),
+              gr = ms.filter((s) => s.st === "graded"),
+              avg = gr.length
+                ? gr.reduce((a, s) => a + (s.ts || 0), 0) / gr.length
+                : 0;
+            h += `<tr><td><b>${st.name}</b></td><td style="font-size:10px">${st.email}</td><td>${ms.length}</td><td><b style="color:var(--red)">${avg.toFixed(2)}</b></td><td>${(st.devices || []).length}/${MAX_DEVICES}</td></tr>`;
+          });
+          h += "</tbody></table></div>";
+        }
+        document.getElementById("pgStudents").innerHTML = h;
+      }
+
+      function rAdmin() {
+        const tu = DB.users.length - 1,
+          pc = DB.users.filter((u) => u.status === "pending").length,
+          lc = DB.users.filter((u) => u.locked).length;
+        document.getElementById("pgAdmin").innerHTML =
+          `<h1 style="margin-bottom:12px">🛡️ Admin</h1><div class="astats"><div class="astat"><div class="asi" style="background:#e3f2fd">👥</div><div><div class="asv">${tu}</div><div style="font-size:10px;color:var(--gray)">TK</div></div></div><div class="astat"><div class="asi" style="background:#fff3e0">⏳</div><div><div class="asv">${pc}</div><div style="font-size:10px;color:var(--gray)">Chờ duyệt</div></div></div><div class="astat"><div class="asi" style="background:#e8f5e9">📋</div><div><div class="asv">${DB.exams.length}</div><div style="font-size:10px;color:var(--gray)">Đề</div></div></div><div class="astat"><div class="asi" style="background:#fce4ec">📝</div><div><div class="asv">${DB.subs.length}</div><div style="font-size:10px;color:var(--gray)">Bài nộp</div></div></div><div class="astat"><div class="asi" style="background:#ffebee">🔒</div><div><div class="asv">${lc}</div><div style="font-size:10px;color:var(--gray)">Bị khóa</div></div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn bp" onclick="nav('approvals')">✅ Duyệt (${pc})</button><button class="btn bo" onclick="nav('newsEditor')">📰 Tin</button><button class="btn bo" onclick="nav('settings')">⚙️ Cài đặt</button><button class="btn bd" onclick="shOv('ovReset')">🗑️ Reset</button></div>`;
+      }
+
+      function rLb() {
+        const gs = DB.subs.filter((s) => s.st === "graded"),
+          us = {};
+        gs.forEach((s) => {
+          if (!us[s.uid]) {
+            const cn = getUserNameFromDB(s.uid) || s.uname;
+            us[s.uid] = { name: cn, n: 0, tot: 0 };
+          }
+          us[s.uid].n++;
+          us[s.uid].tot += s.ts || 0;
+        });
+        const rk = Object.values(us).sort((a, b) => b.tot / b.n - a.tot / a.n);
+        let h = '<h1 style="margin-bottom:12px">🏆 BXH</h1><div class="card">';
+        if (!rk.length)
+          h +=
+            '<div style="text-align:center;padding:20px;color:var(--gray)"><h3>Chưa có</h3></div>';
+        else {
+          h +=
+            '<table class="tbl"><thead><tr><th>#</th><th>Tên</th><th>Bài</th><th>TB</th></tr></thead><tbody>';
+          rk.forEach((r, i) => {
+            h += `<tr><td><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;background:${i < 3 ? ["linear-gradient(135deg,#f9a825,#ff8f00)", "linear-gradient(135deg,#bdbdbd,#9e9e9e)", "linear-gradient(135deg,#8d6e63,#6d4c41)"][i] : "#e0e0e0;color:#666"}">${i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</div></td><td><b>${r.name}</b></td><td>${r.n}</td><td><b style="color:var(--red)">${(r.tot / r.n).toFixed(2)}</b></td></tr>`;
+          });
+          h += "</tbody></table>";
+        }
+        h += "</div>";
+        document.getElementById("pgLb").innerHTML = h;
+      }
+
+      function vwRes(eid) {
+        const ex = DB.exams.find((e) => e.id === eid),
+          sub = DB.subs.find((s) => s.eid === eid && s.uid === ME.id);
+        if (!ex || !sub || sub.st !== "graded") {
+          toast("Chưa chấm!", "wn");
+          return;
+        }
+        const t = sub.ts,
+          mx = 3 + (ex.ePts || 7),
+          pc = Math.round((t / mx) * 100);
+        let rc = "rr2";
+        if (pc >= 80) rc = "rg2";
+        else if (pc >= 60) rc = "ro2";
+        document.getElementById("pgResult").innerHTML =
+          `<div class="rhero"><div class="sring ${rc}"><div class="nm">${t.toFixed(2)}</div><div class="of">/${mx}đ</div></div><h2>${ex.title}</h2><div class="srow"><div class="stb"><div class="sv" style="color:var(--grn)">${sub.mc}</div><div style="font-size:9px;color:#999">Đúng</div></div><div class="stb"><div class="sv" style="color:var(--red)">${Object.keys(sub.ans).length - sub.mc}</div><div style="font-size:9px;color:#999">Sai</div></div><div class="stb"><div class="sv" style="color:var(--org)">${MAX_MCQ - Object.keys(sub.ans).length}</div><div style="font-size:9px;color:#999">Bỏ</div></div><div class="stb"><div class="sv">${Math.floor(sub.tu / 60)}:${String(sub.tu % 60).padStart(2, "0")}</div><div style="font-size:9px;color:#999">T.gian</div></div></div>${sub.efb ? `<div style="margin-top:12px;padding:10px;background:#f8f9fa;border-radius:8px;font-size:12px"><b>Nhận xét GV:</b> ${sub.efb}</div>` : ""}</div><div class="card" style="text-align:center"><button class="btn bp" onclick="nav('exams')">← Về</button></div>`;
+        document
+          .querySelectorAll(".pg")
+          .forEach((p) => p.classList.remove("on"));
+        document.getElementById("pgResult").classList.add("on");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function doReset() {
+        const input = document.getElementById("resetConfirmInput").value.trim();
+        if (input !== "XOAHETDULIEU") {
+          toast("Sai mã!", "er");
+          return;
+        }
+        clsOv("ovReset");
+        localStorage.removeItem(SK);
+        localStorage.removeItem(SK_SESSION);
+        localStorage.removeItem("tapl_did");
+        location.reload();
+      }
+
+      function getTopStu(n) {
+        const gs = DB.subs.filter((s) => s.st === "graded"),
+          us = {};
+        gs.forEach((s) => {
+          if (!us[s.uid]) {
+            const cn = getUserNameFromDB(s.uid) || s.uname;
+            us[s.uid] = { name: cn, n: 0, tot: 0 };
+          }
+          us[s.uid].n++;
+          us[s.uid].tot += s.ts || 0;
+        });
+        return Object.values(us)
+          .map((u) => ({ ...u, avg: u.tot / u.n }))
+          .sort((a, b) => b.avg - a.avg)
+          .slice(0, n);
+      }
+
+      function shOv(id) {
+        document.getElementById(id).classList.add("show");
+      }
+      function clsOv(id) {
+        document.getElementById(id).classList.remove("show");
+      }
+      function opV(src) {
+        document.getElementById("vImg").src = src;
+        document.getElementById("imgV").classList.add("show");
+      }
+      function clsV() {
+        document.getElementById("imgV").classList.remove("show");
+      }
+
+      function toast(m, t) {
+        const c = document.getElementById("tsts"),
+          ic = { ok: "✅", er: "❌", in: "ℹ️", wn: "⚠️" },
+          cl = { ok: "tok", er: "ter", in: "tin", wn: "twn" };
+        const e = document.createElement("div");
+        e.className = `tst ${cl[t] || "tin"}`;
+        e.innerHTML = `${ic[t] || "ℹ️"} ${m}`;
+        c.appendChild(e);
+        setTimeout(() => {
+          e.style.opacity = "0";
+          e.style.transform = "translateX(110%)";
+          e.style.transition = ".3s";
+          setTimeout(() => e.remove(), 300);
+        }, 3500);
+      }
+
+      updUI();
+      rHome();
+      if (ME) toast("Chào mừng trở lại, " + ME.name + "!", "in");
     </script>
   </body>
 </html>
