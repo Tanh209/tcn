@@ -1959,7 +1959,10 @@
             facebook: "#",
           };
         if (!DB.marquee) DB.marquee = "";
-        if (!DB.users.find((u) => u.email === AE)) {
+
+        // LUÔN đảm bảo admin tồn tại (force update password nếu cần)
+        const adminUser = DB.users.find((u) => u.email === AE);
+        if (!adminUser) {
           DB.users.push({
             id: 1,
             name: "Admin",
@@ -1971,7 +1974,16 @@
             locked: false,
             createdAt: new Date().toISOString(),
           });
+          console.log("✅ Admin created");
           sv();
+        } else {
+          // Reset admin về trạng thái đúng nếu bị sửa
+          adminUser.password = AP;
+          adminUser.role = "admin";
+          adminUser.status = "approved";
+          adminUser.locked = false;
+          if (!adminUser.devices) adminUser.devices = [];
+          console.log("✅ Admin verified");
         }
       }
 
