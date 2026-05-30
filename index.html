@@ -21,7 +21,6 @@
         --r2: #e53935;
         --rl: #ffebee;
         --bg: #f5f5f5;
-        --c: #fff;
         --t: #1a1a2e;
         --g: #888;
         --gn: #27ae60;
@@ -33,9 +32,6 @@
         padding: 0;
         box-sizing: border-box;
       }
-      html {
-        font-size: 16px;
-      }
       body {
         font-family: "Segoe UI", sans-serif;
         background: var(--bg);
@@ -43,8 +39,6 @@
         min-height: 100vh;
         overflow-x: hidden;
       }
-
-      /* Marquee */
       .mq {
         background: var(--r);
         color: #fff;
@@ -53,12 +47,11 @@
         white-space: nowrap;
         font-size: 13px;
         font-weight: 600;
-        position: relative;
         z-index: 101;
       }
       .mq .mc {
         display: inline-block;
-        animation: mqa 30s linear infinite;
+        animation: mqa 25s linear infinite;
         padding-left: 100%;
       }
       .mq:hover .mc {
@@ -75,8 +68,6 @@
           transform: translateX(-100%);
         }
       }
-
-      /* Auth */
       .am {
         display: none;
         position: fixed;
@@ -139,6 +130,7 @@
         font-size: 13px;
         cursor: pointer;
         color: #888;
+        transition: 0.3s;
       }
       .at.on {
         background: var(--r);
@@ -195,6 +187,9 @@
         cursor: pointer;
         margin-top: 4px;
       }
+      .abtn:hover {
+        box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+      }
       .asw {
         text-align: center;
         margin-top: 10px;
@@ -239,8 +234,6 @@
         color: var(--r);
         font-weight: 600;
       }
-
-      /* Header */
       .hdr {
         background: #fff;
         border-bottom: 2px solid var(--r);
@@ -393,8 +386,6 @@
       .umnu button.dg {
         color: var(--r);
       }
-
-      /* Layout */
       .lay {
         display: flex;
         max-width: 1400px;
@@ -408,8 +399,8 @@
         border-right: 1px solid #fcc;
         flex-shrink: 0;
         position: sticky;
-        top: 80px;
-        height: calc(100vh - 80px);
+        top: 48px;
+        height: calc(100vh - 48px);
         overflow-y: auto;
       }
       .sbs {
@@ -449,7 +440,6 @@
         width: 18px;
         text-align: center;
       }
-
       .mn {
         flex: 1;
         padding: clamp(12px, 3vw, 20px);
@@ -462,8 +452,6 @@
       .pg.on {
         display: block;
       }
-
-      /* Components */
       .btn {
         padding: 8px 16px;
         border: none;
@@ -474,6 +462,7 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        transition: 0.2s;
       }
       .bp {
         background: var(--r);
@@ -486,6 +475,9 @@
         background: #fff;
         color: var(--r);
         border: 2px solid var(--r);
+      }
+      .bo:hover {
+        background: var(--rl);
       }
       .bs {
         background: var(--gn);
@@ -521,8 +513,6 @@
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 14px;
       }
-
-      /* Hero */
       .hero {
         background: linear-gradient(135deg, var(--r), #d32f2f);
         color: #fff;
@@ -554,8 +544,6 @@
         font-weight: 700;
         cursor: pointer;
       }
-
-      /* Honor */
       .hon {
         background: #fff;
         border-radius: 14px;
@@ -589,17 +577,6 @@
         font-size: 18px;
         margin: 0 auto 6px;
       }
-      .hitm .hn {
-        font-size: 12px;
-        font-weight: 700;
-      }
-      .hitm .hs {
-        font-size: 11px;
-        color: var(--r);
-        font-weight: 600;
-      }
-
-      /* News */
       .ngr {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
@@ -610,7 +587,6 @@
         border-radius: 14px;
         overflow: hidden;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
-        cursor: pointer;
         transition: 0.3s;
       }
       .nc:hover {
@@ -645,8 +621,6 @@
         color: var(--g);
         line-height: 1.4;
       }
-
-      /* Contact */
       .cgr {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
@@ -666,8 +640,6 @@
         font-size: 13px;
         color: #555;
       }
-
-      /* Profile */
       .phd {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
@@ -683,22 +655,6 @@
       }
       .phd > div:last-child {
         border: none;
-      }
-      .pu2 {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .pu2 .pav {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: 2px solid #eee;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: var(--g);
       }
       .hmcd {
         background: #fff;
@@ -758,8 +714,6 @@
       .ehi:last-child {
         border: none;
       }
-
-      /* Exam */
       .egr {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
@@ -824,8 +778,6 @@
         justify-content: center;
         min-width: 0;
       }
-
-      /* Exam Fullscreen */
       .efs {
         position: fixed;
         inset: 0;
@@ -919,7 +871,6 @@
       .efsw h2 {
         font-size: clamp(20px, 5vw, 28px);
       }
-
       .ptb {
         display: flex;
         background: #fff;
@@ -937,6 +888,10 @@
         cursor: pointer;
         color: #999;
         border-bottom: 3px solid transparent;
+        transition: 0.3s;
+      }
+      .ptb div:hover {
+        background: var(--rl);
       }
       .ptb div.on {
         color: var(--r);
@@ -985,6 +940,7 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: clamp(11px, 2vw, 12px);
+        transition: 0.2s;
       }
       .cho:hover {
         border-color: var(--r);
@@ -1000,6 +956,7 @@
         border: 2px solid #ccc;
         border-radius: 50%;
         flex-shrink: 0;
+        transition: 0.2s;
       }
       .cho.sel .chd {
         border-color: var(--r);
@@ -1013,6 +970,7 @@
         margin: 4px 0 4px 8px;
         cursor: pointer;
         text-align: center;
+        transition: 0.3s;
       }
       .eu:hover {
         border-color: var(--bl);
@@ -1039,6 +997,7 @@
         height: 60px;
         object-fit: cover;
         display: block;
+        cursor: pointer;
       }
       .euth .edl {
         position: absolute;
@@ -1086,6 +1045,10 @@
         cursor: pointer;
         color: #555;
         background: #fff;
+        transition: 0.2s;
+      }
+      .qnb:hover {
+        border-color: var(--r);
       }
       .qnb.dn {
         background: var(--gn);
@@ -1106,8 +1069,6 @@
         border-radius: 2px;
         transition: width 0.4s;
       }
-
-      /* Grade */
       .sc {
         background: #fff;
         border-radius: 14px;
@@ -1179,8 +1140,9 @@
         font-size: 11px;
         outline: none;
       }
-
-      /* Schedule */
+      .fbi:focus {
+        border-color: var(--r);
+      }
       .ttb {
         overflow-x: auto;
       }
@@ -1227,8 +1189,6 @@
         border-left-color: var(--or);
         background: #fff3e0;
       }
-
-      /* Admin */
       .ast {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
@@ -1278,7 +1238,6 @@
         font-size: 12px;
         flex-shrink: 0;
       }
-
       .tbl {
         width: 100%;
         border-collapse: collapse;
@@ -1302,8 +1261,6 @@
       .tbl tr:hover td {
         background: #fafafa;
       }
-
-      /* Result */
       .rh {
         background: #fff;
         border-radius: 18px;
@@ -1372,8 +1329,6 @@
         font-size: clamp(14px, 3vw, 18px);
         font-weight: 800;
       }
-
-      /* File upload */
       .fdr {
         border: 3px dashed #d0d0d0;
         border-radius: 14px;
@@ -1381,6 +1336,7 @@
         text-align: center;
         cursor: pointer;
         background: #fafafa;
+        transition: 0.3s;
       }
       .fdr:hover {
         border-color: var(--r);
@@ -1399,7 +1355,6 @@
         max-height: 300px;
         overflow-y: auto;
       }
-
       .ne2 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -1417,6 +1372,7 @@
         text-align: center;
         cursor: pointer;
         margin-bottom: 8px;
+        transition: 0.3s;
       }
       .iua:hover {
         border-color: var(--r);
@@ -1432,8 +1388,6 @@
         border-radius: 8px;
         margin-top: 6px;
       }
-
-      /* Modals */
       .ov {
         display: none;
         position: fixed;
@@ -1487,8 +1441,6 @@
         justify-content: center;
         flex-wrap: wrap;
       }
-
-      /* Slot modal */
       .slm {
         display: none;
         position: fixed;
@@ -1507,10 +1459,7 @@
         border-radius: 16px;
         padding: 24px;
         width: min(400px, 95%);
-        max-height: 80vh;
-        overflow-y: auto;
       }
-
       .iv {
         display: none;
         position: fixed;
@@ -1580,7 +1529,6 @@
       .twn {
         background: var(--or);
       }
-
       .hid {
         display: none !important;
       }
@@ -1603,12 +1551,11 @@
       .sbo.show {
         display: block;
       }
-
       @media (max-width: 768px) {
         .sb {
           position: fixed;
           left: -240px;
-          top: 80px;
+          top: 48px;
           z-index: 100;
           width: 220px;
           transition: left 0.3s;
@@ -1635,11 +1582,8 @@
     <div class="iv" id="iv" onclick="clsV()">
       <button class="ivc">✕</button><img id="vI" />
     </div>
-
-    <!-- Marquee -->
     <div class="mq" id="mqB"><div class="mc" id="mqT"></div></div>
 
-    <!-- Auth Modal -->
     <div class="am" id="aM">
       <div class="ab">
         <button class="cls" onclick="clsA()">✕</button>
@@ -1673,11 +1617,11 @@
         <div class="af" id="fR">
           <div class="fg">
             <label>Họ tên <span class="rq">*</span></label
-            ><input class="fi" id="rN" placeholder="Nguyễn Văn A" />
+            ><input class="fi" id="rN" />
           </div>
           <div class="fg">
             <label>Email <span class="rq">*</span></label
-            ><input class="fi" id="rE" type="email" placeholder="email" />
+            ><input class="fi" id="rE" type="email" />
           </div>
           <div class="fg">
             <label>Mật khẩu <span class="rq">*</span></label
@@ -1695,37 +1639,13 @@
           <div class="asw">Đã có TK? <a onclick="swA('l')">Đăng nhập</a></div>
         </div>
         <div class="af" id="fP">
-          <div class="pmsg">
-            ⏳ Chờ duyệt
-            <p
-              style="
-                font-size: 12px;
-                color: #666;
-                font-weight: 400;
-                margin-top: 4px;
-              "
-            >
-              Liên hệ GV/Admin.
-            </p>
-          </div>
+          <div class="pmsg">⏳ Chờ duyệt</div>
           <button class="abtn" style="margin-top: 8px" onclick="swA('l')">
             ← Quay lại
           </button>
         </div>
         <div class="af" id="fLk">
-          <div class="lmsg">
-            🔒 TK bị khóa
-            <p
-              style="
-                font-size: 12px;
-                color: #666;
-                font-weight: 400;
-                margin-top: 4px;
-              "
-            >
-              Quá 2 thiết bị. Liên hệ Admin.
-            </p>
-          </div>
+          <div class="lmsg">🔒 TK bị khóa (quá 2 thiết bị)</div>
           <button class="abtn" style="margin-top: 8px" onclick="swA('l')">
             ← Quay lại
           </button>
@@ -1733,7 +1653,6 @@
       </div>
     </div>
 
-    <!-- Header -->
     <header class="hdr">
       <div class="hdr-in">
         <div style="display: flex; align-items: center; gap: 6px">
@@ -1769,7 +1688,6 @@
       </main>
     </div>
 
-    <!-- Exam Fullscreen -->
     <div class="efs" id="efs">
       <div class="efsh">
         <h2 id="efTt"></h2>
@@ -1819,7 +1737,6 @@
       </button>
     </div>
 
-    <!-- Slot modal -->
     <div class="slm" id="slM">
       <div class="slb">
         <h3 style="margin-bottom: 12px">📅 Thêm lịch</h3>
@@ -1833,10 +1750,6 @@
             <option value="exam">📝 Thi</option>
           </select>
         </div>
-        <div class="fg">
-          <label>Ghi chú</label
-          ><input class="fi" id="slNt" placeholder="Phòng..." />
-        </div>
         <input type="hidden" id="slD" /><input type="hidden" id="slTi" />
         <div style="display: flex; gap: 6px; margin-top: 10px">
           <button class="btn bgg" onclick="clsSl()">Hủy</button
@@ -1845,7 +1758,6 @@
       </div>
     </div>
 
-    <!-- Modals -->
     <div class="ov" id="ovSb">
       <div class="mdl">
         <div class="mi">📋</div>
@@ -1881,10 +1793,14 @@
         appId: "1:224259528337:web:6358fcb1e783dcf6c69130",
       });
       const fb = firebase.database();
+      console.log("🔥 Firebase OK");
 
+      // ===== CONSTANTS =====
       const AE = "admin@tapl.com",
         AP = "admin2024",
         DI = "d_" + Math.random().toString(36).substr(2, 9);
+
+      // ===== DATABASE =====
       let DB = {
         users: [],
         exams: [],
@@ -1897,54 +1813,19 @@
           address: "Hà Nội",
           facebook: "#",
         },
-        marquee: "🎯 Chào mừng TAPL!",
+        marquee: "🎯 Chào mừng TAPL - Phòng Luyện Đề Thi!",
         schedule: {},
       };
       let ME = null,
         EX = null,
         pQ = null,
-        stm = null,
-        iLoad = true,
+        _st = null,
+        iLD = true,
         niD = null,
         hiD = null;
 
-      // Save/Load
-      function sv() {
-        clearTimeout(stm);
-        stm = setTimeout(() => {
-          try {
-            localStorage.setItem("tapl5", JSON.stringify(DB));
-          } catch (e) {}
-          fb.ref("tapl")
-            .set(DB)
-            .catch((e) => console.error(e));
-        }, 300);
-      }
-
-      function ld(cb) {
-        fb.ref("tapl")
-          .once("value")
-          .then((s) => {
-            const d = s.val();
-            if (d) Object.assign(DB, d);
-            init();
-            try {
-              localStorage.setItem("tapl5", JSON.stringify(DB));
-            } catch (e) {}
-            if (cb) cb();
-          })
-          .catch(() => {
-            try {
-              const d = localStorage.getItem("tapl5");
-              if (d) Object.assign(DB, JSON.parse(d));
-            } catch (e) {}
-            init();
-            ts("⚠️ Offline", "wn");
-            if (cb) cb();
-          });
-      }
-
-      function init() {
+      // ===== ENSURE ADMIN EXISTS =====
+      function ensureAdmin() {
         if (!DB.users) DB.users = [];
         if (!DB.exams) DB.exams = [];
         if (!DB.subs) DB.subs = [];
@@ -1958,12 +1839,12 @@
             address: "Hà Nội",
             facebook: "#",
           };
-        if (!DB.marquee) DB.marquee = "";
+        if (!DB.marquee && DB.marquee !== "") DB.marquee = "🎯 Chào mừng TAPL!";
 
-        // LUÔN đảm bảo admin tồn tại (force update password nếu cần)
-        const adminUser = DB.users.find((u) => u.email === AE);
-        if (!adminUser) {
-          DB.users.push({
+        // Find or create admin
+        let adm = DB.users.find((u) => u.email === AE);
+        if (!adm) {
+          adm = {
             id: 1,
             name: "Admin",
             email: AE,
@@ -1973,70 +1854,123 @@
             devices: [],
             locked: false,
             createdAt: new Date().toISOString(),
-          });
+          };
+          DB.users.unshift(adm);
           console.log("✅ Admin created");
-          sv();
         } else {
-          // Reset admin về trạng thái đúng nếu bị sửa
-          adminUser.password = AP;
-          adminUser.role = "admin";
-          adminUser.status = "approved";
-          adminUser.locked = false;
-          if (!adminUser.devices) adminUser.devices = [];
+          // Always ensure admin has correct credentials
+          adm.password = AP;
+          adm.role = "admin";
+          adm.status = "approved";
+          adm.locked = false;
+          if (!adm.devices) adm.devices = [];
           console.log("✅ Admin verified");
         }
       }
 
+      // ===== SAVE/LOAD =====
+      function sv() {
+        clearTimeout(_st);
+        _st = setTimeout(() => {
+          try {
+            localStorage.setItem("tapl6", JSON.stringify(DB));
+          } catch (e) {}
+          fb.ref("tapl")
+            .set(DB)
+            .then(() => console.log("☁️ Saved"))
+            .catch((e) => console.error("Save err:", e));
+        }, 300);
+      }
+
+      function loadData(cb) {
+        console.log("📡 Loading from Firebase...");
+        fb.ref("tapl")
+          .once("value")
+          .then((snap) => {
+            const d = snap.val();
+            if (d) {
+              DB = Object.assign({}, DB, d);
+              console.log(
+                "✅ Firebase loaded:",
+                DB.users?.length || 0,
+                "users",
+              );
+            } else {
+              console.log("ℹ️ Firebase empty, using defaults");
+            }
+            ensureAdmin();
+            try {
+              localStorage.setItem("tapl6", JSON.stringify(DB));
+            } catch (e) {}
+            sv(); // Save admin back to Firebase
+            if (cb) cb();
+          })
+          .catch((e) => {
+            console.error("❌ Firebase err:", e);
+            // Fallback to localStorage
+            try {
+              const d = localStorage.getItem("tapl6");
+              if (d) DB = Object.assign({}, DB, JSON.parse(d));
+            } catch (e2) {}
+            ensureAdmin();
+            tt("⚠️ Offline mode", "wn");
+            if (cb) cb();
+          });
+      }
+
       function rtSync() {
-        fb.ref("tapl").on("value", (s) => {
-          if (iLoad) {
-            iLoad = false;
+        fb.ref("tapl").on("value", (snap) => {
+          if (iLD) {
+            iLD = false;
             return;
           }
-          const d = s.val();
+          const d = snap.val();
           if (!d) return;
-          const ou = DB.users.length,
-            oe = DB.exams.length,
-            os = DB.subs.length;
-          Object.assign(DB, d);
-          init();
+          const ou = DB.users?.length || 0,
+            oe = DB.exams?.length || 0,
+            os = DB.subs?.length || 0;
+          DB = Object.assign({}, DB, d);
+          ensureAdmin();
           if (ME) {
-            if (DB.users.length > ou && ME.role === "admin")
-              ts("🆕 TK mới!", "in");
-            if (DB.exams.length > oe && ME.role === "student")
-              ts("🆕 Đề mới!", "in");
-            if (DB.subs.length > os && ME.role !== "student")
-              ts("🆕 Bài nộp!", "in");
+            if ((DB.users?.length || 0) > ou && ME.role === "admin")
+              tt("🆕 TK mới!", "in");
+            if ((DB.exams?.length || 0) > oe && ME.role === "student")
+              tt("🆕 Đề mới!", "in");
+            if ((DB.subs?.length || 0) > os && ME.role !== "student")
+              tt("🆕 Bài nộp!", "in");
           }
           try {
-            localStorage.setItem("tapl5", JSON.stringify(DB));
+            localStorage.setItem("tapl6", JSON.stringify(DB));
           } catch (e) {}
-          const ap = document.querySelector(".pg.on");
-          if (ap) {
-            const m = {
-              pgHome: rH,
-              pgExams: rEx,
-              pgGrade: rGr,
-              pgStudents: rSt,
-              pgNews: rNw,
-              pgAdmin: rAd,
-              pgApprovals: rAp,
-              pgNewsEd: rNE,
-              pgLb: rLb,
-              pgSettings: rSe,
-              pgSchedule: rSch,
-              pgHonor: rHn,
-              pgProfile: rPr,
-            };
-            const f = m[ap.id];
-            if (f) f();
-          }
+          refreshCurrentPage();
           uUI();
           uMq();
         });
       }
 
-      // Auth
+      function refreshCurrentPage() {
+        const ap = document.querySelector(".pg.on");
+        if (!ap) return;
+        const m = {
+          pgHome: rH,
+          pgExams: rEx,
+          pgGrade: rGr,
+          pgStudents: rSt,
+          pgNews: rNw,
+          pgAdmin: rAd,
+          pgApprovals: rAp,
+          pgNewsEd: rNE,
+          pgLb: rLb,
+          pgSettings: rSe,
+          pgSchedule: rSch,
+          pgHonor: rHn,
+          pgProfile: rPr,
+        };
+        const f = m[ap.id];
+        if (f) f();
+      }
+
+      // ===== AUTH =====
       function shA() {
         document.getElementById("aM").classList.add("show");
         swA("l");
@@ -2051,70 +1985,95 @@
         ["fL", "fR", "fP", "fLk"].forEach((id) =>
           document.getElementById(id).classList.remove("on"),
         );
-        document
-          .getElementById({ l: "fL", r: "fR", p: "fP", k: "fLk" }[t] || "fL")
-          .classList.add("on");
+        const map = { l: "fL", r: "fR", p: "fP", k: "fLk" };
+        document.getElementById(map[t] || "fL").classList.add("on");
+        ["lEr", "rEr", "lOk"].forEach((id) => {
+          const e = document.getElementById(id);
+          if (e) e.style.display = "none";
+        });
       }
 
       function doLg() {
-        const e = document.getElementById("lE").value.trim(),
-          p = document.getElementById("lP").value;
-        if (!e || !p) {
+        const email = document.getElementById("lE").value.trim();
+        const pass = document.getElementById("lP").value;
+        if (!email || !pass) {
           sErr("lEr", "Nhập đầy đủ!");
           return;
         }
-        const u = DB.users.find((x) => x.email === e && x.password === p);
+
+        console.log("🔑 Login attempt:", email);
+        console.log("📊 Users in DB:", DB.users?.length || 0);
+
+        // Debug: show all users
+        if (DB.users)
+          DB.users.forEach((u) =>
+            console.log("  User:", u.email, u.password, u.status),
+          );
+
+        const u = DB.users?.find(
+          (x) => x.email === email && x.password === pass,
+        );
         if (!u) {
-          sErr("lEr", "Sai email/MK!");
+          sErr("lEr", "Sai email hoặc mật khẩu!");
           return;
         }
         if (u.status === "pending") {
           swA("p");
           return;
         }
+        if (u.status === "rejected") {
+          sErr("lEr", "TK bị từ chối!");
+          return;
+        }
         if (u.locked) {
           swA("k");
           return;
         }
+
+        // Device check (skip for admin)
         if (!u.devices) u.devices = [];
-        if (!u.devices.includes(DI)) {
-          if (u.devices.length >= 2 && u.role !== "admin") {
-            u.locked = true;
+        if (u.role !== "admin") {
+          if (!u.devices.includes(DI)) {
+            if (u.devices.length >= 2) {
+              u.locked = true;
+              sv();
+              swA("k");
+              return;
+            }
+            u.devices.push(DI);
             sv();
-            swA("k");
-            return;
           }
-          u.devices.push(DI);
-          sv();
         }
+
         ME = u;
         clsA();
         uUI();
         nv("home");
-        ts("Chào " + ME.name + "!", "in");
+        tt("Chào " + ME.name + "! 👋", "in");
       }
 
       function doRg() {
-        const n = document.getElementById("rN").value.trim(),
-          e = document.getElementById("rE").value.trim(),
-          p = document.getElementById("rP").value,
-          r = document.getElementById("rRl").value;
+        const n = document.getElementById("rN").value.trim();
+        const e = document.getElementById("rE").value.trim();
+        const p = document.getElementById("rP").value;
+        const r = document.getElementById("rRl").value;
         if (!n || !e || !p) {
           sErr("rEr", "Nhập đầy đủ!");
           return;
         }
         if (!e.includes("@")) {
-          sErr("rEr", "Email sai!");
+          sErr("rEr", "Email không hợp lệ!");
           return;
         }
         if (p.length < 6) {
-          sErr("rEr", "MK ≥6!");
+          sErr("rEr", "Mật khẩu ≥ 6 ký tự!");
           return;
         }
-        if (DB.users.find((x) => x.email === e)) {
-          sErr("rEr", "Email tồn tại!");
+        if (DB.users?.find((x) => x.email === e)) {
+          sErr("rEr", "Email đã tồn tại!");
           return;
         }
+
         DB.users.push({
           id: Date.now(),
           name: n,
@@ -2127,17 +2086,20 @@
           createdAt: new Date().toISOString(),
         });
         sv();
+
+        // Switch to login with success
         swA("l");
         document.getElementById("lE").value = e;
+        document.getElementById("lP").value = "";
         const ok = document.getElementById("lOk");
-        ok.textContent = "✅ Đăng ký OK! Chờ duyệt.";
+        ok.textContent = "✅ Đăng ký thành công! Chờ Admin/GV duyệt.";
         ok.style.display = "block";
         setTimeout(() => (ok.style.display = "none"), 6000);
       }
 
       function doLo() {
         if (ME) {
-          const u = DB.users.find((x) => x.id === ME.id);
+          const u = DB.users?.find((x) => x.id === ME.id);
           if (u?.devices) {
             u.devices = u.devices.filter((d) => d !== DI);
             sv();
@@ -2148,18 +2110,22 @@
         uUI();
         nv("home");
       }
+
       function sErr(id, m) {
         const e = document.getElementById(id);
+        if (!e) return;
         e.textContent = m;
         e.style.display = "block";
         setTimeout(() => (e.style.display = "none"), 4000);
       }
 
-      // UI
+      // ===== UI =====
       function uUI() {
         const L = !!ME,
           T = L && (ME.role === "teacher" || ME.role === "admin"),
           A = L && ME.role === "admin";
+
+        // Header nav
         let nh =
           '<button class="on" onclick="nv(\'home\')" id="hn_home">🏠</button>';
         nh += '<button onclick="rqA(\'exams\')" id="hn_exams">📋</button>';
@@ -2170,16 +2136,22 @@
           nh +=
             '<button onclick="nv(\'create\')" id="hn_create">➕</button><button onclick="nv(\'grade\')" id="hn_grade">📝</button><button onclick="nv(\'honor\')" id="hn_honor">🌟</button>';
         if (A) {
-          const pc = DB.users.filter((u) => u.status === "pending").length;
+          const pc =
+            DB.users?.filter((u) => u.status === "pending").length || 0;
           nh += `<button onclick="nv('approvals')" id="hn_approvals">✅${pc ? `<span class="bdg">${pc}</span>` : ""}</button>`;
         }
         document.getElementById("hNv").innerHTML = nh;
-        if (L)
+
+        // Header right
+        if (L) {
           document.getElementById("hRt").innerHTML =
             `<div class="husr" onclick="tgUM()"><span class="un">${ME.name}</span><div class="ua">${ME.name.split(" ").pop()[0]}</div><div class="umnu" id="um"><a onclick="nv('profile')">👤 Hồ sơ</a>${A ? "<a onclick=\"nv('settings')\">⚙️ Cài đặt</a>" : ""}<div class="dv"></div><button class="dg" onclick="doLo()">🚪 Đăng xuất</button></div></div>`;
-        else
+        } else {
           document.getElementById("hRt").innerHTML =
             '<button class="lbtn" onclick="shA()">🔑 Đăng nhập</button>';
+        }
+
+        // Sidebar
         let sb =
           '<div class="sbs"><div class="si on" onclick="nv(\'home\')"><span class="ic">🏠</span>Trang chủ</div><div class="si" onclick="rqA(\'exams\')"><span class="ic">📋</span>Phòng luyện</div><div class="si" onclick="nv(\'news\')"><span class="ic">📰</span>Tin tức</div><div class="si" onclick="rqA(\'schedule\')"><span class="ic">📅</span>Lịch học</div><div class="si" onclick="rqA(\'lb\')"><span class="ic">🏆</span>BXH</div></div>';
         if (T)
@@ -2189,9 +2161,10 @@
           sb +=
             '<div class="sbs"><h4>Admin</h4><div class="si" onclick="nv(\'admin\')"><span class="ic">🛡️</span>Quản trị</div><div class="si" onclick="nv(\'approvals\')"><span class="ic">✅</span>Duyệt TK</div><div class="si" onclick="nv(\'newsEditor\')"><span class="ic">📰</span>QL tin</div><div class="si" onclick="nv(\'settings\')"><span class="ic">⚙️</span>Cài đặt</div></div>';
         sb +=
-          '<div class="sbs"><h4>Liên kết</h4><div class="si" onclick="window.open(DB.contact.facebook||\'#\')"><span class="ic">📘</span>Facebook</div></div>';
+          '<div class="sbs"><h4>Liên kết</h4><div class="si" onclick="window.open(DB.contact?.facebook||\'#\')"><span class="ic">📘</span>Facebook</div></div>';
         document.getElementById("sb").innerHTML = sb;
       }
+
       function rqA(pg) {
         if (!ME) {
           shA();
@@ -2200,11 +2173,14 @@
         nv(pg);
       }
       function tgUM() {
-        document.getElementById("um")?.classList.toggle("show");
+        const u = document.getElementById("um");
+        if (u) u.classList.toggle("show");
       }
       document.addEventListener("click", (e) => {
-        if (!e.target.closest(".husr"))
-          document.getElementById("um")?.classList.remove("show");
+        if (!e.target.closest(".husr")) {
+          const u = document.getElementById("um");
+          if (u) u.classList.remove("show");
+        }
       });
       function tgSB() {
         document.getElementById("sb").classList.toggle("open");
@@ -2213,13 +2189,13 @@
       function uMq() {
         const el = document.getElementById("mqB"),
           tx = document.getElementById("mqT");
-        if (DB.marquee?.trim()) {
+        if (DB.marquee && DB.marquee.trim()) {
           el.classList.remove("hide");
           tx.textContent = DB.marquee;
         } else el.classList.add("hide");
       }
 
-      // Navigation
+      // ===== NAVIGATION =====
       function nv(pg) {
         const pr = [
           "exams",
@@ -2243,16 +2219,17 @@
           ["create", "grade", "students", "honor"].includes(pg) &&
           ME?.role === "student"
         ) {
-          ts("Không quyền!", "er");
+          tt("Không quyền!", "er");
           return;
         }
         if (
           ["admin", "approvals", "newsEditor", "settings"].includes(pg) &&
           ME?.role !== "admin"
         ) {
-          ts("Admin!", "er");
+          tt("Admin only!", "er");
           return;
         }
+
         document
           .querySelectorAll(".pg")
           .forEach((p) => p.classList.remove("on"));
@@ -2262,6 +2239,7 @@
         document
           .querySelectorAll(".hnav button")
           .forEach((b) => b.classList.remove("on"));
+
         const m = {
           home: "pgHome",
           exams: "pgExams",
@@ -2284,6 +2262,7 @@
         if (hn) hn.classList.add("on");
         document.getElementById("sb").classList.remove("open");
         document.getElementById("sbO").classList.remove("show");
+
         const f = {
           home: rH,
           exams: rEx,
@@ -2307,32 +2286,32 @@
         }, 300);
       }
 
-      // ===== PAGES =====
-      // HOME
+      // ===== HOME =====
       function rH() {
-        const c = DB.contact,
-          hrs = DB.honors.slice(0, 8);
+        const c = DB.contact || {},
+          hrs = (DB.honors || []).slice(0, 8);
         let h = `<div class="hero"><h1>🎯 TAPL - Phòng Luyện Đề</h1><p>Luyện đề thi trực tuyến, giám sát toàn màn hình, chấm điểm bởi giáo viên.</p>${ME ? '<button class="hb" onclick="nv(\'exams\')">📋 Vào luyện</button>' : '<button class="hb" onclick="shA()">🔑 Đăng nhập</button>'}</div>`;
         if (hrs.length)
-          h += `<div class="hon"><h2>🏆 Vinh danh</h2><div class="hlst">${hrs.map((r) => `<div class="hitm">${r.image ? `<img src="${r.image}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;margin:0 auto 6px;border:3px solid var(--r);display:block">` : `<div class="hav" style="background:linear-gradient(135deg,#f9a825,#ff8f00)">${r.userName.split(" ").pop()[0]}</div>`}<div class="hn">${r.userName}</div>${r.score ? `<div class="hs">${r.score.toFixed(1)}đ</div>` : ""}<div style="font-size:10px;color:#666;font-style:italic">"${(r.message || "").substring(0, 30)}"</div></div>`).join("")}</div></div>`;
+          h += `<div class="hon"><h2>🏆 Vinh danh</h2><div class="hlst">${hrs.map((r) => `<div class="hitm">${r.image ? `<img src="${r.image}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;margin:0 auto 6px;border:3px solid var(--r);display:block">` : `<div class="hav" style="background:linear-gradient(135deg,#f9a825,#ff8f00)">${(r.userName || "?").split(" ").pop()[0]}</div>`}<div style="font-size:12px;font-weight:700">${r.userName || "?"}</div>${r.score ? `<div style="font-size:11px;color:var(--r);font-weight:600">${r.score.toFixed(1)}đ</div>` : ""}<div style="font-size:10px;color:#666;font-style:italic">"${(r.message || "").substring(0, 30)}"</div></div>`).join("")}</div></div>`;
         h += '<h2 style="margin-bottom:10px">📰 Tin tức</h2>';
-        h += DB.news.length
-          ? `<div class="ngr">${DB.news
+        const news = DB.news || [];
+        h += news.length
+          ? `<div class="ngr">${news
               .slice(0, 6)
               .map(
                 (n) =>
-                  `<div class="nc"><div class="ni">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nb"><h3>${n.title}</h3><p>${(n.content || "").substring(0, 80)}...</p><div style="font-size:10px;color:#bbb;margin-top:4px">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`,
+                  `<div class="nc"><div class="ni">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nb"><h3>${n.title || ""}</h3><p>${(n.content || "").substring(0, 80)}...</p><div style="font-size:10px;color:#bbb;margin-top:4px">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`,
               )
               .join("")}</div>`
           : '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có tin</h3></div>';
-        h += `<h2 style="margin:16px 0 10px">📞 Liên hệ</h2><div class="cgr"><div class="cc"><h3>Thông tin</h3><div class="ci2"><span style="font-size:16px;width:20px;text-align:center">📧</span>${c.email}</div><div class="ci2"><span style="font-size:16px;width:20px;text-align:center">📱</span>${c.phone}</div><div class="ci2"><span style="font-size:16px;width:20px;text-align:center">📍</span>${c.address}</div></div><div class="cc"><h3>Mạng xã hội</h3><div style="display:flex;gap:10px;margin-top:10px"><div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;background:#1877f2;cursor:pointer" onclick="window.open('${c.facebook || "#"}')">f</div></div></div></div>`;
+        h += `<h2 style="margin:16px 0 10px">📞 Liên hệ</h2><div class="cgr"><div class="cc"><h3>Thông tin</h3><div class="ci2">📧 ${c.email || ""}</div><div class="ci2">📱 ${c.phone || ""}</div><div class="ci2">📍 ${c.address || ""}</div></div><div class="cc"><h3>Mạng xã hội</h3><div style="display:flex;gap:10px;margin-top:10px"><div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;background:#1877f2;cursor:pointer" onclick="window.open('${c.facebook || "#"}')">f</div></div></div></div>`;
         document.getElementById("pgHome").innerHTML = h;
       }
 
-      // PROFILE
+      // ===== PROFILE =====
       function rPr() {
         if (!ME) return;
-        const ms = DB.subs.filter((s) => s.uid === ME.id),
+        const ms = (DB.subs || []).filter((s) => s.uid === ME.id),
           gr = ms.filter((s) => s.st === "graded"),
           wk = ms.filter(
             (s) => (new Date() - new Date(s.at)) / 864e5 <= 7,
@@ -2341,7 +2320,7 @@
         if (ME.role === "teacher") rt = "GIÁO VIÊN";
         if (ME.role === "admin") rt = "ADMIN";
         const y = new Date().getFullYear();
-        let h = `<div class="phd"><div class="pu2"><div class="pav">👤</div><div><div style="font-size:11px;color:var(--g)">Xin chào,</div><div style="font-size:16px;font-weight:700">${ME.name}</div><div style="font-size:11px;color:var(--g)">${ME.email}</div></div></div><div><div style="font-size:32px;font-weight:800">${ms.length}</div><div style="font-size:12px;color:var(--g)">Tổng lượt</div></div><div><div style="font-size:32px;font-weight:800">${wk}</div><div style="font-size:12px;color:var(--g)">Trong tuần</div></div><div><div style="font-size:12px;color:var(--g)">Vai trò</div><div style="font-size:18px;font-weight:800;color:var(--r)">${rt}</div></div></div>`;
+        let h = `<div class="phd"><div class="pu2"><div class="pav">👤</div><div><div style="font-size:11px;color:var(--g)">Xin chào,</div><div style="font-size:16px;font-weight:700">${ME.name}</div><div style="font-size:11px;color:var(--g)">${ME.email}</div></div></div><div><div style="font-size:32px;font-weight:800">${ms.length}</div><div style="font-size:12px;color:var(--g)">Tổng</div></div><div><div style="font-size:32px;font-weight:800">${wk}</div><div style="font-size:12px;color:var(--g)">Tuần này</div></div><div><div style="font-size:12px;color:var(--g)">Vai trò</div><div style="font-size:18px;font-weight:800;color:var(--r)">${rt}</div></div></div>`;
         h += `<div class="hmcd"><h2 style="font-size:16px">Thống kê (${y})</h2><div class="hmgr">${Array.from(
           { length: 12 },
           (_, m) => {
@@ -2357,15 +2336,15 @@
             .slice(-5)
             .reverse()
             .map((s) => {
-              const ex = DB.exams.find((e) => e.id === s.eid);
-              return `<div class="ehi"><div><h4 style="font-size:13px">${ex ? ex.title : "?"}</h4><p style="font-size:11px;color:var(--g)">${new Date(s.at).toLocaleString("vi-VN")}</p></div><div style="font-size:18px;font-weight:800;color:${s.ts !== null ? (s.ts >= 7 ? "var(--gn)" : "var(--r)") : "var(--or)"}">${s.ts !== null ? s.ts.toFixed(1) : "?"}<span style="display:block;font-size:10px;color:var(--g);font-weight:400">điểm</span></div></div>`;
+              const ex = (DB.exams || []).find((e) => e.id === s.eid);
+              return `<div class="ehi"><div><h4 style="font-size:13px">${ex ? ex.title : "?"}</h4><p style="font-size:11px;color:var(--g)">${new Date(s.at).toLocaleString("vi-VN")}</p></div><div style="font-size:18px;font-weight:800;color:${s.ts != null ? (s.ts >= 7 ? "var(--gn)" : "var(--r)") : "var(--or)"}">${s.ts != null ? s.ts.toFixed(1) : "?"}<span style="display:block;font-size:10px;color:var(--g);font-weight:400">điểm</span></div></div>`;
             })
             .join("") || '<p style="color:var(--g)">Chưa có</p>'
         }</div><div class="cd"><h2 style="font-size:14px">Thống kê</h2><div class="ci2">📊 Tổng: ${ms.length}</div><div class="ci2">✅ Đã chấm: ${gr.length}</div><div class="ci2">📈 TB: ${gr.length ? (gr.reduce((a, s) => a + (s.ts || 0), 0) / gr.length).toFixed(2) : "0"}đ</div></div></div>`;
         document.getElementById("pgProfile").innerHTML = h;
       }
 
-      // EXAMS
+      // ===== EXAMS =====
       function rEx() {
         if (!ME || ME.status !== "approved") {
           document.getElementById("pgExams").innerHTML =
@@ -2373,33 +2352,28 @@
           return;
         }
         const nw = new Date(),
-          iT = ME.role === "teacher" || ME.role === "admin";
-        let exs = DB.exams.map((ex) => {
+          iT = ME.role === "teacher" || ME.role === "admin",
+          exams = DB.exams || [];
+        let exs = exams.map((ex) => {
           let ts = "open";
-          if (
-            ex.openAt &&
-            ex.openAt.trim() &&
-            !isNaN(new Date(ex.openAt)) &&
-            nw < new Date(ex.openAt)
-          )
-            ts = "scheduled";
-          if (
-            ex.closeAt &&
-            ex.closeAt.trim() &&
-            !isNaN(new Date(ex.closeAt)) &&
-            nw > new Date(ex.closeAt)
-          )
-            ts = "closed";
+          if (ex.openAt && ex.openAt.trim && ex.openAt.trim() !== "") {
+            const od = new Date(ex.openAt);
+            if (!isNaN(od) && nw < od) ts = "scheduled";
+          }
+          if (ex.closeAt && ex.closeAt.trim && ex.closeAt.trim() !== "") {
+            const cd = new Date(ex.closeAt);
+            if (!isNaN(cd) && nw > cd) ts = "closed";
+          }
           return { ...ex, ts };
         });
         let h = '<h1 style="margin-bottom:12px">📋 Phòng Luyện</h1>';
         if (!exs.length)
           h +=
-            '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có đề</h3></div>';
+            '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có đề thi</h3><p>Giáo viên chưa tải đề lên.</p></div>';
         else
           h += `<div class="egr">${exs
             .map((ex) => {
-              const sub = DB.subs.find(
+              const sub = (DB.subs || []).find(
                 (s) => s.eid === ex.id && s.uid === ME.id,
               );
               let bg = "";
@@ -2419,32 +2393,32 @@
                 bg =
                   '<div class="est" style="background:#e8f5e9;color:var(--gn)">🟢 Mở</div>';
               let ti = "";
-              if (ex.openAt && ex.openAt.trim())
-                ti += `<div style="font-size:10px;color:var(--g);margin-bottom:2px">📅 Mở: ${new Date(ex.openAt).toLocaleString("vi-VN")}</div>`;
-              if (ex.closeAt && ex.closeAt.trim())
-                ti += `<div style="font-size:10px;color:var(--g);margin-bottom:2px">🔚 Đóng: ${new Date(ex.closeAt).toLocaleString("vi-VN")}</div>`;
+              if (ex.openAt && ex.openAt.trim && ex.openAt.trim())
+                ti += `<div style="font-size:10px;color:var(--g)">📅 Mở: ${new Date(ex.openAt).toLocaleString("vi-VN")}</div>`;
+              if (ex.closeAt && ex.closeAt.trim && ex.closeAt.trim())
+                ti += `<div style="font-size:10px;color:var(--g)">🔚 Đóng: ${new Date(ex.closeAt).toLocaleString("vi-VN")}</div>`;
               if (!ex.openAt && !ex.closeAt)
                 ti =
-                  '<div style="font-size:10px;color:var(--gn);margin-bottom:2px">♾️ Mở vĩnh viễn</div>';
+                  '<div style="font-size:10px;color:var(--gn)">♾️ Mở vĩnh viễn</div>';
               const cs = !sub && ex.ts === "open" && !iT;
-              return `<div class="ec">${bg}<h3>${ex.title}</h3><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;background:#fff8e1;color:#f9a825">${ex.type || "Toán"}</span>${ti}<div class="emt"><div class="em2"><div class="eml">Thời gian</div><div class="emv">${ex.dur}'</div></div><div class="em2"><div class="eml">TN</div><div class="emv">3đ</div></div><div class="em2"><div class="eml">TL</div><div class="emv">${ex.ePts || 7}đ</div></div></div><div class="eac">${sub?.st === "graded" ? `<button class="btn bo bsm" onclick="vwR(${ex.id})">👁️</button>` : '<button class="btn bo bsm" disabled>👁️</button>'}${cs ? `<button class="btn bp bsm" onclick="stEFS(${ex.id})">▶️ Thi</button>` : sub ? '<button class="btn bgg bsm" disabled>✔</button>' : ex.ts === "scheduled" ? '<button class="btn bgg bsm" disabled>🕐</button>' : '<button class="btn bgg bsm" disabled>—</button>'}${iT ? `<button class="btn bd bsm" onclick="dlEx(${ex.id})">🗑️</button>` : ""}</div></div>`;
+              return `<div class="ec">${bg}<h3>${ex.title || ""}</h3><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;background:#fff8e1;color:#f9a825">${ex.type || "Toán"}</span>${ti}<div class="emt"><div class="em2"><div class="eml">Thời gian</div><div class="emv">${ex.dur || 0}'</div></div><div class="em2"><div class="eml">TN</div><div class="emv">3đ</div></div><div class="em2"><div class="eml">TL</div><div class="emv">${ex.ePts || 7}đ</div></div></div><div class="eac">${sub?.st === "graded" ? `<button class="btn bo bsm" onclick="vwR(${ex.id})">👁️</button>` : '<button class="btn bo bsm" disabled>👁️</button>'}${cs ? `<button class="btn bp bsm" onclick="stEFS(${ex.id})">▶️ Thi</button>` : sub ? '<button class="btn bgg bsm" disabled>✔ Đã nộp</button>' : ex.ts === "scheduled" ? '<button class="btn bgg bsm" disabled>🕐 Chưa mở</button>' : ex.ts === "closed" ? '<button class="btn bgg bsm" disabled>🔒 Đã đóng</button>' : '<button class="btn bgg bsm" disabled>—</button>'}${iT ? `<button class="btn bd bsm" onclick="dlEx(${ex.id})">🗑️</button>` : ""}</div></div>`;
             })
             .join("")}</div>`;
         document.getElementById("pgExams").innerHTML = h;
       }
       function dlEx(id) {
-        if (!confirm("Xóa?")) return;
-        DB.exams = DB.exams.filter((e) => e.id !== id);
-        DB.subs = DB.subs.filter((s) => s.eid !== id);
+        if (!confirm("Xóa đề này?")) return;
+        DB.exams = (DB.exams || []).filter((e) => e.id !== id);
+        DB.subs = (DB.subs || []).filter((s) => s.eid !== id);
         sv();
         rEx();
-        ts("Xóa OK", "ok");
+        tt("Xóa OK", "ok");
       }
 
-      // CREATE
+      // ===== CREATE =====
       function rCr() {
         document.getElementById("pgCreate").innerHTML =
-          `<h1 style="margin-bottom:12px">➕ Tạo đề</h1><div class="cd"><h2>📋 Thông tin</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:10px"><div class="fg"><label>Tên *</label><input class="fi" id="cTt"></div><div class="fg"><label>Loại *</label><input class="fi" id="cTy" value="Toán 9"></div><div class="fg"><label>Phút *</label><input class="fi" id="cDr" type="number" value="150"></div><div class="fg"><label>Điểm TL</label><input class="fi" id="cEp" type="number" value="7" step="0.5"></div><div class="fg"><label>Mở</label><input class="fi" id="cOp" type="datetime-local"></div><div class="fg"><label>Đóng</label><input class="fi" id="cCl" type="datetime-local"></div></div></div><div class="cd"><h2>📄 Upload đề (.txt)</h2><div style="background:#fff3e0;padding:10px;border-radius:8px;margin-bottom:10px;font-size:11px;color:#666;border-left:3px solid var(--or)"><b>Format:</b> [TRẮC NGHIỆM] → Câu X: ... A. B. C. D. Đáp án: A → [TỰ LUẬN] → Câu X (Yđ): a) b)...</div><div class="fdr" id="fdr" onclick="document.getElementById('fIn').click()"><div style="font-size:48px">📄</div><h4>Nhấn hoặc kéo file</h4><p>Tự nhận diện câu hỏi + đáp án</p></div><input type="file" id="fIn" class="hid" accept=".txt" onchange="onF(event)"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn bo bsm" onclick="dlTpl()">📥 File mẫu</button></div><div id="ppv2"></div></div><div style="display:flex;gap:6px;justify-content:flex-end"><button class="btn bgg blg" onclick="nv('exams')">Hủy</button><button class="btn bp blg" onclick="pubE()">📤 Xuất bản</button></div>`;
+          `<h1 style="margin-bottom:12px">➕ Tạo đề</h1><div class="cd"><h2>📋 Thông tin</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:10px"><div class="fg"><label>Tên *</label><input class="fi" id="cTt"></div><div class="fg"><label>Loại *</label><input class="fi" id="cTy" value="Toán 9"></div><div class="fg"><label>Phút *</label><input class="fi" id="cDr" type="number" value="150"></div><div class="fg"><label>Điểm TL</label><input class="fi" id="cEp" type="number" value="7" step="0.5"></div><div class="fg"><label>Mở lúc</label><input class="fi" id="cOp" type="datetime-local"></div><div class="fg"><label>Đóng lúc</label><input class="fi" id="cCl" type="datetime-local"></div></div></div><div class="cd"><h2>📄 Upload đề (.txt)</h2><div style="background:#fff3e0;padding:10px;border-radius:8px;margin-bottom:10px;font-size:11px;border-left:3px solid var(--or)"><b>Format:</b> [TRẮC NGHIỆM] Câu X: ... A. B. C. D. Đáp án: A [TỰ LUẬN] Câu X (Yđ): a) b)...</div><div class="fdr" id="fdr" onclick="document.getElementById('fIn').click()"><div style="font-size:48px">📄</div><h4>Nhấn hoặc kéo file</h4><p>Tự nhận câu hỏi + đáp án</p></div><input type="file" id="fIn" class="hid" accept=".txt" onchange="onF(event)"><div style="display:flex;gap:6px;margin-top:8px"><button class="btn bo bsm" onclick="dlTpl()">📥 File mẫu</button></div><div id="ppv2"></div></div><div style="display:flex;gap:6px;justify-content:flex-end"><button class="btn bgg blg" onclick="nv('exams')">Hủy</button><button class="btn bp blg" onclick="pubE()">📤 Xuất bản</button></div>`;
         const dr = document.getElementById("fdr");
         dr.addEventListener("dragover", (e) => {
           e.preventDefault();
@@ -2470,16 +2444,16 @@
             `<div style="font-size:48px">✅</div><h4>${f.name}</h4><p>${pQ.mcqs.length} TN + ${pQ.essays.length} TL</p>`;
           let pv = '<div class="ppv"><b style="color:var(--r)">📝 TN:</b>';
           pQ.mcqs.forEach((q) => {
-            pv += `<div style="padding:6px;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between"><b>C${q.id}</b><span style="background:var(--gn);color:#fff;padding:1px 6px;border-radius:8px;font-size:9px">ĐA: ${q.cor}</span></div><div style="font-size:11px;margin:2px 0">${q.text.substring(0, 80)}...</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;font-size:10px;color:#666">${q.opts.map((o) => `<div style="${o.l === q.cor ? "color:var(--gn);font-weight:700" : ""}">${o.l}. ${o.t.substring(0, 30)}</div>`).join("")}</div></div>`;
+            pv += `<div style="padding:6px;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between"><b>C${q.id}</b><span style="background:var(--gn);color:#fff;padding:1px 6px;border-radius:8px;font-size:9px">ĐA: ${q.cor}</span></div><div style="font-size:11px">${(q.text || "").substring(0, 80)}...</div></div>`;
           });
           pv +=
             '<b style="color:var(--bl);margin-top:8px;display:block">✍️ TL:</b>';
           pQ.essays.forEach((q) => {
-            pv += `<div style="padding:4px;border-bottom:1px solid #eee;font-size:11px"><b>C${q.id}</b> (${q.pts}đ) ${q.text.substring(0, 60)}...</div>`;
+            pv += `<div style="padding:4px;border-bottom:1px solid #eee;font-size:11px"><b>${q.text?.substring(0, 60) || ""}...</b> (${q.pts}đ)</div>`;
           });
           pv += "</div>";
           document.getElementById("ppv2").innerHTML = pv;
-          ts(pQ.mcqs.length + " TN + " + pQ.essays.length + " TL", "ok");
+          tt(pQ.mcqs.length + " TN + " + pQ.essays.length + " TL", "ok");
           setTimeout(() => {
             if (window.MathJax) MathJax.typesetPromise();
           }, 200);
@@ -2520,7 +2494,7 @@
                 qm[1] +
                 (qm[2] ? " (" + qm[2] + "đ)" : "") +
                 ": " +
-                qm[3],
+                (qm[3] || ""),
               opts: [],
               subs: [],
               cor: null,
@@ -2597,21 +2571,22 @@
       }
 
       function pubE() {
-        const tt = document.getElementById("cTt").value.trim(),
+        const t2 = document.getElementById("cTt").value.trim(),
           ty = document.getElementById("cTy").value.trim(),
           dr = parseInt(document.getElementById("cDr").value),
           ep = parseFloat(document.getElementById("cEp").value) || 7;
-        if (!tt || !ty || !dr) {
-          ts("Nhập đầy đủ!", "er");
+        if (!t2 || !ty || !dr) {
+          tt("Nhập đầy đủ!", "er");
           return;
         }
         if (!pQ) {
-          ts("Upload đề!", "er");
+          tt("Upload file đề!", "er");
           return;
         }
+        if (!DB.exams) DB.exams = [];
         DB.exams.push({
           id: Date.now(),
-          title: tt,
+          title: t2,
           type: ty,
           dur: dr,
           ePts: ep,
@@ -2624,12 +2599,12 @@
         });
         sv();
         pQ = null;
-        ts("Xuất bản OK!", "ok");
+        tt("Xuất bản OK!", "ok");
         nv("exams");
       }
 
       function dlTpl() {
-        const t = `[TRẮC NGHIỆM]\n\nCâu 1: Rút gọn $A = \\sqrt{12} + \\sqrt{27} - \\sqrt{75}$\nA. $\\sqrt{3}$\nB. $2\\sqrt{3}$\nC. $-\\sqrt{3}$\nD. $3\\sqrt{3}$\nĐáp án: A\n\nCâu 2: Nghiệm $x^2-5x+6=0$:\nA. x=2;x=3\nB. x=-2;x=-3\nC. x=1;x=6\nD. x=-1;x=-6\nĐáp án: A\n\nCâu 3: $\\sin 60°$:\nA. $\\frac{\\sqrt{3}}{2}$\nB. $\\frac{1}{2}$\nC. $\\frac{\\sqrt{2}}{2}$\nD. $1$\nĐáp án: A\n\nCâu 4: $(x^3-3x+1)'=$\nA. $3x^2-3$\nB. $x^2-3$\nC. $3x^2+3$\nD. $3x-3$\nĐáp án: A\n\nCâu 5: $\\log_2 8=$\nA. 3\nB. 2\nC. 4\nD. 8\nĐáp án: A\n\nCâu 6: S tròn r:\nA. $\\pi r^2$\nB. $2\\pi r$\nC. $\\pi r$\nD. $\\pi r^2/2$\nĐáp án: A\n\nCâu 7: V cầu R:\nA. $\\frac{4}{3}\\pi R^3$\nB. $4\\pi R^2$\nC. $\\pi R^3$\nD. $\\frac{4}{3}R^3$\nĐáp án: A\n\nCâu 8: $|3+4i|=$\nA. 5\nB. 7\nC. 25\nD. 1\nĐáp án: A\n\nCâu 9: $\\lim \\frac{2n+1}{n+3}=$\nA. 2\nB. 1\nC. 3\nD. $\\infty$\nĐáp án: A\n\nCâu 10: $C_5^2=$\nA. 10\nB. 20\nC. 5\nD. 25\nĐáp án: A\n\nCâu 11: P(sấp) xu:\nA. 1/2\nB. 1/3\nC. 1/4\nD. 1\nĐáp án: A\n\nCâu 12: $2x+3=7$:\nA. x=2\nB. x=3\nC. x=1\nD. x=4\nĐáp án: A\n\n[TỰ LUẬN]\n\nCâu 1 (1.5 điểm):\na) Rút gọn $A=\\sqrt{12}+\\sqrt{27}-\\sqrt{75}$\nb) Giải hệ $\\begin{cases}2x-y=5\\\\x+y=4\\end{cases}$\n\nCâu 2 (1.0 điểm): Parabol $y=x^2$ và $y=2x+m-1$\na) Giao điểm khi m=2\nb) Tìm m cắt 2 điểm\n\nCâu 3 (1.5 điểm):\na) Thuyền 30km, về chậm 5km/h lâu 1h. Tính v.\n\nCâu 4 (1.0 điểm): 5 đỏ 3 xanh\na) Số cách lấy 2\nb) P(2 đỏ)\n\nCâu 5 (1.5 điểm): Đường tròn (O) ĐK AB\na) CM AOCM nội tiếp\nb) CM MN//AB\n\nCâu 6 (0.5 điểm): x,y>0, x+y≤2\na) Min $P=\\frac{1}{x^2+y^2}+\\frac{2}{xy}$`;
+        const t = `[TRẮC NGHIỆM]\n\nCâu 1: Rút gọn $A = \\sqrt{12} + \\sqrt{27} - \\sqrt{75}$\nA. $\\sqrt{3}$\nB. $2\\sqrt{3}$\nC. $-\\sqrt{3}$\nD. $3\\sqrt{3}$\nĐáp án: A\n\nCâu 2: Nghiệm $x^2-5x+6=0$:\nA. x=2; x=3\nB. x=-2; x=-3\nC. x=1; x=6\nD. x=-1; x=-6\nĐáp án: A\n\nCâu 3: $\\sin 60°$=\nA. $\\frac{\\sqrt{3}}{2}$\nB. $\\frac{1}{2}$\nC. $\\frac{\\sqrt{2}}{2}$\nD. 1\nĐáp án: A\n\nCâu 4: $(x^3-3x+1)'=$\nA. $3x^2-3$\nB. $x^2-3$\nC. $3x^2+3$\nD. $3x-3$\nĐáp án: A\n\nCâu 5: $\\log_2 8=$\nA. 3\nB. 2\nC. 4\nD. 8\nĐáp án: A\n\nCâu 6: Diện tích tròn r:\nA. $\\pi r^2$\nB. $2\\pi r$\nC. $\\pi r$\nD. $\\pi r^2/2$\nĐáp án: A\n\nCâu 7: Thể tích cầu R:\nA. $\\frac{4}{3}\\pi R^3$\nB. $4\\pi R^2$\nC. $\\pi R^3$\nD. $\\frac{4}{3}R^3$\nĐáp án: A\n\nCâu 8: $|3+4i|=$\nA. 5\nB. 7\nC. 25\nD. 1\nĐáp án: A\n\nCâu 9: $\\lim \\frac{2n+1}{n+3}=$\nA. 2\nB. 1\nC. 3\nD. $\\infty$\nĐáp án: A\n\nCâu 10: $C_5^2=$\nA. 10\nB. 20\nC. 5\nD. 25\nĐáp án: A\n\nCâu 11: P(sấp) xu:\nA. 1/2\nB. 1/3\nC. 1/4\nD. 1\nĐáp án: A\n\nCâu 12: $2x+3=7$ => x=\nA. 2\nB. 3\nC. 1\nD. 4\nĐáp án: A\n\n[TỰ LUẬN]\n\nCâu 1 (1.5 điểm):\na) Rút gọn $A=\\sqrt{12}+\\sqrt{27}-\\sqrt{75}$\nb) Giải hệ $2x-y=5; x+y=4$\n\nCâu 2 (1.0 điểm): Parabol $y=x^2$ và $y=2x+m-1$\na) Giao điểm khi m=2\nb) Tìm m cắt 2 điểm\n\nCâu 3 (1.5 điểm): Thuyền 30km\na) Tính vận tốc\n\nCâu 4 (1.0 điểm): 5 đỏ 3 xanh\na) Số cách lấy 2\nb) P(2 đỏ)\n\nCâu 5 (1.5 điểm): Đường tròn (O)\na) CM AOCM nội tiếp\nb) CM MN//AB\n\nCâu 6 (0.5 điểm): x,y>0, x+y≤2\na) Min $P=\\frac{1}{x^2+y^2}+\\frac{2}{xy}$`;
         const b = new Blob([t], { type: "text/plain;charset=utf-8" }),
           u = URL.createObjectURL(b),
           a = document.createElement("a");
@@ -2637,12 +2612,12 @@
         a.download = "TAPL_mau.txt";
         a.click();
         URL.revokeObjectURL(u);
-        ts("📥 Tải mẫu OK", "ok");
+        tt("📥 Tải mẫu OK", "ok");
       }
 
-      // EXAM FULLSCREEN
+      // ===== EXAM FULLSCREEN =====
       function stEFS(eid) {
-        const ex = DB.exams.find((e) => e.id === eid);
+        const ex = (DB.exams || []).find((e) => e.id === eid);
         if (!ex) return;
         EX = {
           exam: ex,
@@ -2652,14 +2627,14 @@
           tmr: null,
           done: false,
         };
-        ex.eqs.forEach((q, qi) => {
-          q.subs.forEach((s, si) => {
+        (ex.eqs || []).forEach((q, qi) => {
+          (q.subs || []).forEach((s, si) => {
             EX.eUp[`${qi}_${si}`] = [];
           });
           EX.eUp[`${qi}_w`] = [];
         });
         document.getElementById("efTt").textContent = ex.title;
-        document.getElementById("efIn").textContent = ex.type;
+        document.getElementById("efIn").textContent = ex.type || "";
         rMC();
         rEC();
         rQN();
@@ -2672,7 +2647,7 @@
         sTm();
         document.addEventListener("fullscreenchange", oFS);
         document.addEventListener("webkitfullscreenchange", oFS);
-        ts("Bắt đầu!", "in");
+        tt("Bắt đầu thi!", "in");
         setTimeout(() => {
           if (window.MathJax) MathJax.typesetPromise();
         }, 400);
@@ -2693,13 +2668,14 @@
         spTm();
         const ex = EX.exam;
         let mc = 0;
-        ex.mqs.forEach((q) => {
+        (ex.mqs || []).forEach((q) => {
           if (EX.ans[q.id] === q.cor) mc++;
         });
         const ed = {};
         Object.keys(EX.eUp).forEach((k) => {
           if (EX.eUp[k].length) ed[k] = [...EX.eUp[k]];
         });
+        if (!DB.subs) DB.subs = [];
         DB.subs.push({
           id: Date.now(),
           eid: ex.id,
@@ -2729,29 +2705,29 @@
         document.removeEventListener("webkitfullscreenchange", oFS);
         EX = null;
         nv("exams");
-        ts("Đã nộp tự động", "wn");
+        tt("Bài đã nộp tự động", "wn");
       }
 
       function rMC() {
-        document.getElementById("mC").innerHTML = EX.exam.mqs
+        document.getElementById("mC").innerHTML = (EX.exam.mqs || [])
           .map(
             (q) =>
-              `<div class="qc" id="eq${q.id}"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="qcn">C${q.id}</span><span style="font-size:10px;color:var(--g)">0.25đ</span></div><div style="font-size:13px;line-height:1.6;margin-bottom:6px">${q.text}</div><div class="chs">${q.opts.map((o) => `<div class="cho" id="ec${q.id}${o.l}" onclick="pk(${q.id},'${o.l}')"><div class="chd"></div><span style="font-weight:700;color:var(--r);min-width:12px">${o.l}.</span><span>${o.t}</span></div>`).join("")}</div></div>`,
+              `<div class="qc" id="eq${q.id}"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="qcn">Câu ${q.id}</span><span style="font-size:10px;color:var(--g)">0.25đ</span></div><div style="font-size:13px;line-height:1.6;margin-bottom:6px">${q.text || ""}</div><div class="chs">${(q.opts || []).map((o) => `<div class="cho" id="ec${q.id}${o.l}" onclick="pk(${q.id},'${o.l}')"><div class="chd"></div><span style="font-weight:700;color:var(--r);min-width:12px">${o.l}.</span><span>${o.t || ""}</span></div>`).join("")}</div></div>`,
           )
           .join("");
       }
 
       function rEC() {
-        document.getElementById("eC").innerHTML = EX.exam.eqs
+        document.getElementById("eC").innerHTML = (EX.exam.eqs || [])
           .map((q, qi) => {
             let h = "";
-            q.subs.forEach((s, si) => {
+            (q.subs || []).forEach((s, si) => {
               const k = `${qi}_${si}`;
-              h += `<div style="font-weight:700;color:var(--bl);font-size:11px;margin-left:8px">Ý ${s.l}) ${s.t}</div><div class="eu" id="eu${k}" onclick="document.getElementById('ef${k}').click()"><div style="font-size:20px">📷</div><h5 style="font-size:11px">Ảnh ý ${s.l}</h5></div><input type="file" id="ef${k}" class="hid" multiple accept="image/*" onchange="oEF('${k}',event)"><div class="eupv" id="ep${k}"></div>`;
+              h += `<div style="font-weight:700;color:var(--bl);font-size:11px;margin-left:8px">Ý ${s.l}) ${s.t || ""}</div><div class="eu" id="eu${k}" onclick="document.getElementById('ef${k}').click()"><div style="font-size:20px">📷</div><h5 style="font-size:11px">Ảnh ý ${s.l}</h5></div><input type="file" id="ef${k}" class="hid" multiple accept="image/*" onchange="oEF('${k}',event)"><div class="eupv" id="ep${k}"></div>`;
             });
             const wk = `${qi}_w`;
             h += `<div style="font-weight:700;color:var(--r);font-size:11px;margin-left:8px;margin-top:4px">📸 Cả câu</div><div class="eu" id="eu${wk}" onclick="document.getElementById('ef${wk}').click()"><div style="font-size:20px">📷</div><h5 style="font-size:11px">Ảnh câu ${qi + 1}</h5></div><input type="file" id="ef${wk}" class="hid" multiple accept="image/*" onchange="oEF('${wk}',event)"><div class="eupv" id="ep${wk}"></div>`;
-            return `<div class="qc" style="border-left-color:var(--bl)"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="qcn" style="background:var(--bl)">C${qi + 1} (${q.pts || 1}đ)</span></div><div style="font-size:13px;line-height:1.6;margin-bottom:8px">${q.text}</div>${h}</div>`;
+            return `<div class="qc" style="border-left-color:var(--bl)"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span class="qcn" style="background:var(--bl)">Câu ${qi + 1} (${q.pts || 1}đ)</span></div><div style="font-size:13px;line-height:1.6;margin-bottom:8px">${q.text || ""}</div>${h}</div>`;
           })
           .join("");
         setTimeout(() => {
@@ -2760,25 +2736,29 @@
       }
 
       function pk(q, l) {
-        EX.exam.mqs
+        (EX.exam.mqs || [])
           .find((x) => x.id === q)
-          .opts.forEach((o) =>
-            document.getElementById(`ec${q}${o.l}`).classList.remove("sel"),
-          );
-        document.getElementById(`ec${q}${l}`).classList.add("sel");
+          ?.opts?.forEach((o) => {
+            const el = document.getElementById(`ec${q}${o.l}`);
+            if (el) el.classList.remove("sel");
+          });
+        const el = document.getElementById(`ec${q}${l}`);
+        if (el) el.classList.add("sel");
         EX.ans[q] = l;
-        document.getElementById(`eq${q}`).classList.add("dn");
+        const qel = document.getElementById(`eq${q}`);
+        if (qel) qel.classList.add("dn");
         rQN();
         uPg();
       }
       function oEF(k, e) {
         Array.from(e.target.files).forEach((f) => {
           if (f.size > 5e6) {
-            ts("Max 5MB!", "er");
+            tt("Max 5MB!", "er");
             return;
           }
           const r = new FileReader();
           r.onload = (ev) => {
+            if (!EX.eUp[k]) EX.eUp[k] = [];
             EX.eUp[k].push(ev.target.result);
             rEP(k);
           };
@@ -2788,10 +2768,10 @@
       }
       function rEP(k) {
         const el = document.getElementById(`eu${k}`);
-        if (el) el.classList.toggle("has", EX.eUp[k].length > 0);
+        if (el) el.classList.toggle("has", (EX.eUp[k] || []).length > 0);
         const pv = document.getElementById(`ep${k}`);
         if (pv)
-          pv.innerHTML = EX.eUp[k]
+          pv.innerHTML = (EX.eUp[k] || [])
             .map(
               (u, i) =>
                 `<div class="euth"><img src="${u}" onclick="opV('${u}')"><button class="edl" onclick="rmEF('${k}',${i})">✕</button></div>`,
@@ -2799,14 +2779,14 @@
             .join("");
       }
       function rmEF(k, i) {
-        EX.eUp[k].splice(i, 1);
+        if (EX.eUp[k]) EX.eUp[k].splice(i, 1);
         rEP(k);
       }
       function rQN() {
-        document.getElementById("qN").innerHTML = EX.exam.mqs
+        document.getElementById("qN").innerHTML = (EX.exam.mqs || [])
           .map(
             (q) =>
-              `<div class="qnb ${EX.ans[q.id] ? "dn" : ""}" onclick="swE('m');document.getElementById('eq'+${q.id}).scrollIntoView({behavior:'smooth',block:'center'})">${q.id}</div>`,
+              `<div class="qnb ${EX.ans[q.id] ? "dn" : ""}" onclick="swE('m');var e=document.getElementById('eq${q.id}');if(e)e.scrollIntoView({behavior:'smooth',block:'center'})">${q.id}</div>`,
           )
           .join("");
       }
@@ -2816,10 +2796,14 @@
         document.getElementById("pT").textContent = d + "/12";
       }
       function swE(s) {
-        document.getElementById("ptM").classList.toggle("on", s === "m");
-        document.getElementById("ptE").classList.toggle("on", s === "e");
-        document.getElementById("sM").classList.toggle("on", s === "m");
-        document.getElementById("sE").classList.toggle("on", s === "e");
+        const m = document.getElementById("ptM"),
+          e = document.getElementById("ptE"),
+          sm = document.getElementById("sM"),
+          se = document.getElementById("sE");
+        if (m) m.classList.toggle("on", s === "m");
+        if (e) e.classList.toggle("on", s === "e");
+        if (sm) sm.classList.toggle("on", s === "m");
+        if (se) se.classList.toggle("on", s === "e");
       }
       function sTm() {
         spTm();
@@ -2844,8 +2828,10 @@
         }
       }
       function shSC() {
-        const d = Object.keys(EX.ans).length;
-        document.getElementById("sbMs").textContent = `TN: ${d}/12\nNộp?`;
+        const d = Object.keys(EX.ans).length,
+          he = Object.values(EX.eUp).some((a) => a?.length > 0);
+        document.getElementById("sbMs").textContent =
+          `TN: ${d}/12\n${he ? "📷 Có ảnh TL" : "⚠️ Chưa có ảnh TL"}\nNộp bài?`;
         shO("ovSb");
       }
       function doSE() {
@@ -2855,13 +2841,14 @@
         EX.done = true;
         const ex = EX.exam;
         let mc = 0;
-        ex.mqs.forEach((q) => {
+        (ex.mqs || []).forEach((q) => {
           if (EX.ans[q.id] === q.cor) mc++;
         });
         const ed = {};
         Object.keys(EX.eUp).forEach((k) => {
-          if (EX.eUp[k].length) ed[k] = [...EX.eUp[k]];
+          if (EX.eUp[k]?.length) ed[k] = [...EX.eUp[k]];
         });
+        if (!DB.subs) DB.subs = [];
         DB.subs.push({
           id: Date.now(),
           eid: ex.id,
@@ -2888,28 +2875,28 @@
         document.removeEventListener("webkitfullscreenchange", oFS);
         document.getElementById("efs").classList.remove("show");
         EX = null;
-        ts("Nộp OK! ⏳", "ok");
+        tt("Nộp OK! ⏳ Chờ chấm.", "ok");
         nv("exams");
       }
 
-      // GRADE
+      // ===== GRADE =====
       function rGr() {
-        const ss = DB.subs;
+        const ss = DB.subs || [];
         let h = '<h1 style="margin-bottom:12px">📝 Chấm bài</h1>';
         if (!ss.length) {
-          h +=
-            '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có</h3></div>';
-          document.getElementById("pgGrade").innerHTML = h;
+          document.getElementById("pgGrade").innerHTML =
+            h +
+            '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có bài nộp</h3></div>';
           return;
         }
         h += ss
           .map((sub) => {
-            const ex = DB.exams.find((e) => e.id === sub.eid);
+            const ex = (DB.exams || []).find((e) => e.id === sub.eid);
             if (!ex) return "";
             let eH = "";
-            ex.eqs.forEach((q, qi) => {
+            (ex.eqs || []).forEach((q, qi) => {
               let im = "";
-              q.subs.forEach((s, si) => {
+              (q.subs || []).forEach((s, si) => {
                 const k = `${qi}_${si}`;
                 if (sub.ed?.[k]?.length)
                   im += `<div style="margin-bottom:3px"><span style="font-size:10px;color:var(--bl);font-weight:700">Ý ${s.l}:</span><div class="sim">${sub.ed[k].map((i) => `<img src="${i}" onclick="opV('${i}')">`).join("")}</div></div>`;
@@ -2917,73 +2904,77 @@
               const wk = `${qi}_w`;
               if (sub.ed?.[wk]?.length)
                 im += `<div><span style="font-size:10px;color:var(--r)">Cả câu:</span><div class="sim">${sub.ed[wk].map((i) => `<img src="${i}" onclick="opV('${i}')">`).join("")}</div></div>`;
-              eH += `<div class="ess"><h5 style="font-size:11px;color:var(--bl)">C${qi + 1} (${q.pts || 1}đ)</h5>${im || '<p style="color:#999;font-size:10px">Không ảnh</p>'}${sub.st === "submitted" ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px"><label style="font-size:10px;font-weight:700">Điểm:</label><input type="number" class="ginp" id="gs${sub.id}_${qi}" min="0" max="${q.pts || 1}" step="0.25" placeholder="0"><span style="font-size:10px;color:#888">/${q.pts || 1}</span></div>` : `<div style="font-size:10px;color:var(--gn);font-weight:600">✅ ${sub.es[qi] || 0}/${q.pts || 1}đ</div>`}</div>`;
+              eH += `<div class="ess"><h5 style="font-size:11px;color:var(--bl)">Câu ${qi + 1} (${q.pts || 1}đ)</h5>${im || '<p style="color:#999;font-size:10px">Không ảnh</p>'}${sub.st === "submitted" ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px"><label style="font-size:10px;font-weight:700">Điểm:</label><input type="number" class="ginp" id="gs${sub.id}_${qi}" min="0" max="${q.pts || 1}" step="0.25" placeholder="0"><span style="font-size:10px;color:#888">/${q.pts || 1}</span></div>` : `<div style="font-size:10px;color:var(--gn);font-weight:600">✅ ${sub.es?.[qi] || 0}/${q.pts || 1}đ</div>`}</div>`;
             });
-            return `<div class="sc"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px"><div style="display:flex;align-items:center;gap:6px"><div class="sav">${sub.uinit}</div><div><div style="font-weight:700;font-size:12px">${sub.uname}</div><div style="font-size:10px;color:#999">📅 ${new Date(sub.at).toLocaleString("vi-VN")} | ${ex.title} | TN:${sub.ms.toFixed(2)}/3${sub.auto ? " | 🚨" : ""}</div></div></div><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;${sub.st === "graded" ? "background:#c8e6c9;color:#2e7d32" : "background:#fff3e0;color:#ef6c00"}">${sub.st === "graded" ? "✅" : "⏳"}</span></div>${eH}${sub.st === "submitted" ? `<div class="grw"><label style="font-weight:700;font-size:11px">Nhận xét:</label><input type="text" class="fbi" id="gf${sub.id}" placeholder="(tùy chọn)"><button class="btn bs bsm" onclick="doG(${sub.id})">✅</button></div>` : `<div class="grw"><span style="color:var(--gn);font-weight:600;font-size:11px">✅ ${sub.ts?.toFixed(2) || "?"}/${3 + (ex.ePts || 7)}</span></div>`}</div>`;
+            return `<div class="sc"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px"><div style="display:flex;align-items:center;gap:6px"><div class="sav">${sub.uinit || "?"}</div><div><div style="font-weight:700;font-size:12px">${sub.uname || "?"}</div><div style="font-size:10px;color:#999">📅 ${new Date(sub.at).toLocaleString("vi-VN")} | ${ex.title} | TN:${(sub.ms || 0).toFixed(2)}/3${sub.auto ? " | 🚨 Auto" : ""}</div></div></div><span style="padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;${sub.st === "graded" ? "background:#c8e6c9;color:#2e7d32" : "background:#fff3e0;color:#ef6c00"}">${sub.st === "graded" ? "✅ Đã chấm" : "⏳ Chờ chấm"}</span></div>${eH}${sub.st === "submitted" ? `<div class="grw"><label style="font-weight:700;font-size:11px">Nhận xét:</label><input type="text" class="fbi" id="gf${sub.id}" placeholder="(tùy chọn)"><button class="btn bs bsm" onclick="doG(${sub.id})">✅ Chấm</button></div>` : `<div class="grw"><span style="color:var(--gn);font-weight:600;font-size:11px">✅ Tổng: ${sub.ts != null ? sub.ts.toFixed(2) : "?"}/${3 + (ex.ePts || 7)}</span></div>`}</div>`;
           })
           .join("");
         document.getElementById("pgGrade").innerHTML = h;
       }
 
       function doG(sid) {
-        const sub = DB.subs.find((s) => s.id === sid),
-          ex = DB.exams.find((e) => e.id === sub.eid);
+        const sub = (DB.subs || []).find((s) => s.id === sid);
+        const ex = (DB.exams || []).find((e) => e.id === sub?.eid);
         if (!sub || !ex) return;
         let te = 0;
-        for (const [qi, q] of ex.eqs.entries()) {
-          const el = document.getElementById(`gs${sid}_${qi}`),
-            v = parseFloat(el?.value || 0);
+        for (const [qi, q] of (ex.eqs || []).entries()) {
+          const el = document.getElementById(`gs${sid}_${qi}`);
+          const v = parseFloat(el?.value || 0);
           if (isNaN(v) || v < 0 || v > (q.pts || 1)) {
-            ts(`C${qi + 1}: 0-${q.pts || 1}!`, "er");
+            tt(`Câu ${qi + 1}: 0-${q.pts || 1}!`, "er");
             return;
           }
+          if (!sub.es) sub.es = {};
           sub.es[qi] = v;
           te += v;
         }
         sub.ets = te;
-        sub.ts = sub.ms + te;
+        sub.ts = (sub.ms || 0) + te;
         sub.efb = document.getElementById(`gf${sid}`)?.value || "";
         sub.st = "graded";
         // Auto honor ≥9
-        if (sub.ts >= 9 && !DB.honors.find((h) => h.subId === sub.id)) {
-          DB.honors.unshift({
-            id: Date.now(),
-            userId: sub.uid,
-            userName: sub.uname,
-            subId: sub.id,
-            examTitle: ex.title,
-            score: sub.ts,
-            maxScore: 3 + (ex.ePts || 7),
-            message: `🌟 Xuất sắc ${sub.ts.toFixed(2)}đ "${ex.title}"!`,
-            image: null,
-            auto: true,
-            createdAt: new Date().toISOString(),
-          });
-          ts(`🏆 Vinh danh ${sub.uname}!`, "ok");
+        if (sub.ts >= 9) {
+          if (!DB.honors) DB.honors = [];
+          if (!DB.honors.find((h2) => h2.subId === sub.id)) {
+            DB.honors.unshift({
+              id: Date.now(),
+              userId: sub.uid,
+              userName: sub.uname,
+              subId: sub.id,
+              examTitle: ex.title,
+              score: sub.ts,
+              maxScore: 3 + (ex.ePts || 7),
+              message: `🌟 Xuất sắc ${sub.ts.toFixed(2)}đ "${ex.title}"!`,
+              image: null,
+              auto: true,
+              createdAt: new Date().toISOString(),
+            });
+            tt(`🏆 Vinh danh ${sub.uname}!`, "ok");
+          }
         }
         sv();
-        ts(`${sub.ts.toFixed(2)}đ`, "ok");
+        tt(`Chấm xong! ${sub.ts.toFixed(2)}đ`, "ok");
         rGr();
         uUI();
       }
 
-      // HONOR
+      // ===== HONOR =====
       function rHn() {
         if (ME?.role === "student") {
           document.getElementById("pgHonor").innerHTML =
-            '<div class="cd"><h2>🔒</h2></div>';
+            '<div class="cd"><h2>🔒 Không quyền</h2></div>';
           return;
         }
-        const sts = DB.users.filter(
+        const sts = (DB.users || []).filter(
           (u) => u.role === "student" && u.status === "approved",
         );
-        let h = `<h1 style="margin-bottom:12px">🌟 Quản lý Vinh danh</h1><div class="ne2"><div class="cd"><h3>➕ Thêm</h3>
+        let h = `<h1 style="margin-bottom:12px">🌟 Vinh danh</h1><div class="ne2"><div class="cd"><h3>➕ Thêm</h3>
 <div class="fg"><label>Học sinh *</label><select class="fsel" id="hrSt"><option value="">-- Chọn --</option>${sts.map((s) => `<option value="${s.id}">${s.name}</option>`).join("")}</select></div>
 <div class="fg"><label>Lời khen *</label><textarea class="fi" id="hrMs" rows="2" style="resize:vertical;font-family:inherit"></textarea></div>
-<div class="fg"><label>Điểm (tùy chọn)</label><input class="fi" id="hrSc" type="number" step="0.1"></div>
+<div class="fg"><label>Điểm</label><input class="fi" id="hrSc" type="number" step="0.1"></div>
 <div class="fg"><label>Ảnh</label><div class="iua" id="hrIA" onclick="document.getElementById('hrII').click()">📷 Tải ảnh</div><input type="file" id="hrII" class="hid" accept="image/*" onchange="oHI(event)"></div>
 <button class="btn bp" onclick="addHr()">🏆 Thêm</button></div>
-<div class="cd"><h3>📋 Đã đăng (${DB.honors.length})</h3><div style="max-height:400px;overflow-y:auto">${DB.honors.map((r) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f5f5;gap:6px"><div style="display:flex;align-items:center;gap:6px;flex:1">${r.image ? `<img src="${r.image}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--r)">` : `<div class="apv" style="background:linear-gradient(135deg,#f9a825,#ff8f00);color:#fff">${r.userName.split(" ").pop()[0]}</div>`}<div style="flex:1"><b>${r.userName}</b>${r.auto ? ' <span style="background:var(--gn);color:#fff;font-size:8px;padding:1px 4px;border-radius:4px">AUTO</span>' : ' <span style="background:var(--bl);color:#fff;font-size:8px;padding:1px 4px;border-radius:4px">MANUAL</span>'}<div style="font-size:10px;color:var(--g)">${r.score ? r.score.toFixed(1) + "đ | " : ""}${new Date(r.createdAt).toLocaleDateString("vi-VN")}</div></div></div><button class="btn bd bsm" onclick="dlHr(${r.id})">🗑️</button></div>`).join("") || '<p style="color:var(--g);text-align:center;padding:20px">Chưa có</p>'}</div></div></div>`;
+<div class="cd"><h3>📋 Đã đăng (${(DB.honors || []).length})</h3><div style="max-height:400px;overflow-y:auto">${(DB.honors || []).map((r) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f5f5;gap:6px"><div style="display:flex;align-items:center;gap:6px;flex:1">${r.image ? `<img src="${r.image}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--r)">` : `<div class="apv" style="background:linear-gradient(135deg,#f9a825,#ff8f00);color:#fff">${(r.userName || "?").split(" ").pop()[0]}</div>`}<div style="flex:1"><b>${r.userName || "?"}</b>${r.auto ? ' <span style="background:var(--gn);color:#fff;font-size:8px;padding:1px 4px;border-radius:4px">AUTO</span>' : ' <span style="background:var(--bl);color:#fff;font-size:8px;padding:1px 4px;border-radius:4px">MANUAL</span>'}<div style="font-size:10px;color:var(--g)">${r.score ? r.score.toFixed(1) + "đ | " : ""}${new Date(r.createdAt).toLocaleDateString("vi-VN")}</div></div></div><button class="btn bd bsm" onclick="dlHr(${r.id})">🗑️</button></div>`).join("") || '<p style="color:var(--g);text-align:center;padding:20px">Chưa có</p>'}</div></div></div>`;
         document.getElementById("pgHonor").innerHTML = h;
         hiD = null;
       }
@@ -2992,15 +2983,17 @@
         const f = e.target.files[0];
         if (!f) return;
         if (f.size > 2e6) {
-          ts("Max 2MB!", "er");
+          tt("Max 2MB!", "er");
           return;
         }
         const r = new FileReader();
         r.onload = (ev) => {
           hiD = ev.target.result;
           const a = document.getElementById("hrIA");
-          a.classList.add("has");
-          a.innerHTML = `📷 OK<img src="${hiD}">`;
+          if (a) {
+            a.classList.add("has");
+            a.innerHTML = `📷 OK<img src="${hiD}">`;
+          }
         };
         r.readAsDataURL(f);
       }
@@ -3009,15 +3002,16 @@
           ms = document.getElementById("hrMs").value.trim(),
           sc = parseFloat(document.getElementById("hrSc").value) || null;
         if (!sid) {
-          ts("Chọn HS!", "er");
+          tt("Chọn HS!", "er");
           return;
         }
         if (!ms) {
-          ts("Nhập lời khen!", "er");
+          tt("Nhập lời khen!", "er");
           return;
         }
-        const st = DB.users.find((u) => u.id === sid);
+        const st = (DB.users || []).find((u) => u.id === sid);
         if (!st) return;
+        if (!DB.honors) DB.honors = [];
         DB.honors.unshift({
           id: Date.now(),
           userId: sid,
@@ -3031,38 +3025,38 @@
           createdAt: new Date().toISOString(),
         });
         sv();
-        ts(`🏆 Vinh danh ${st.name}!`, "ok");
+        tt(`🏆 Vinh danh ${st.name}!`, "ok");
         rHn();
       }
       function dlHr(id) {
         if (!confirm("Xóa?")) return;
-        DB.honors = DB.honors.filter((h) => h.id !== id);
+        DB.honors = (DB.honors || []).filter((h2) => h2.id !== id);
         sv();
         rHn();
-        ts("Xóa OK", "ok");
+        tt("Xóa OK", "ok");
       }
 
-      // LEADERBOARD (by exam score)
+      // ===== LEADERBOARD =====
       function rLb() {
-        const gs = DB.subs
-          .filter((s) => s.st === "graded" && s.ts !== null)
+        const gs = (DB.subs || [])
+          .filter((s) => s.st === "graded" && s.ts != null)
           .sort((a, b) => (b.ts !== a.ts ? b.ts - a.ts : a.tu - b.tu));
         let h = '<h1 style="margin-bottom:12px">🏆 BXH</h1><div class="cd">';
         if (!gs.length)
           h +=
-            '<div style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có</h3></div>';
+            '<div style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có dữ liệu</h3></div>';
         else {
           const eids = [...new Set(gs.map((s) => s.eid))];
           h += `<select class="fsel" id="lbF" onchange="flLb()" style="max-width:300px;margin-bottom:10px"><option value="">📊 Tất cả</option>${eids
             .map((id) => {
-              const ex = DB.exams.find((e) => e.id === id);
+              const ex = (DB.exams || []).find((e) => e.id === id);
               return ex ? `<option value="${id}">${ex.title}</option>` : "";
             })
             .join("")}</select>`;
           h +=
-            '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th style="width:50px">Hạng</th><th>Thí sinh</th><th>Đề</th><th>Điểm</th><th>T.gian</th><th>Ngày</th></tr></thead><tbody id="lbTb">';
+            '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th style="width:50px">Hạng</th><th>Thí sinh</th><th>Đề</th><th>Điểm</th><th>T.gian</th></tr></thead><tbody id="lbTb">';
           gs.forEach((s, i) => {
-            const ex = DB.exams.find((e) => e.id === s.eid),
+            const ex = (DB.exams || []).find((e) => e.id === s.eid),
               mx = ex ? 3 + (ex.ePts || 7) : 10,
               pc = (s.ts / mx) * 100;
             let bg =
@@ -3073,7 +3067,7 @@
                     "linear-gradient(135deg,#8d6e63,#6d4c41)",
                   ][i]
                 : "#e0e0e0";
-            h += `<tr data-e="${s.eid}"><td><div style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:${i < 3 ? "#fff" : "#666"};background:${bg}">${i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</div></td><td><b>${s.uname}</b></td><td style="font-size:11px">${ex ? ex.title : "?"}</td><td><b style="color:${pc >= 80 ? "var(--gn)" : pc >= 60 ? "var(--or)" : "var(--r)"};font-size:14px">${s.ts.toFixed(2)}</b><span style="font-size:10px;color:var(--g)">/${mx}</span></td><td style="font-size:11px;color:var(--g)">${Math.floor(s.tu / 60)}p${s.tu % 60}s</td><td style="font-size:11px;color:var(--g)">${new Date(s.at).toLocaleDateString("vi-VN")}</td></tr>`;
+            h += `<tr data-e="${s.eid}"><td><div style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:${i < 3 ? "#fff" : "#666"};background:${bg}">${i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</div></td><td><b>${s.uname || "?"}</b></td><td style="font-size:11px">${ex ? ex.title : "?"}</td><td><b style="color:${pc >= 80 ? "var(--gn)" : pc >= 60 ? "var(--or)" : "var(--r)"};font-size:14px">${s.ts.toFixed(2)}</b>/${mx}</td><td style="font-size:11px;color:var(--g)">${Math.floor((s.tu || 0) / 60)}p${(s.tu || 0) % 60}s</td></tr>`;
           });
           h += "</tbody></table></div>";
         }
@@ -3081,55 +3075,57 @@
         document.getElementById("pgLb").innerHTML = h;
       }
       function flLb() {
-        const v = document.getElementById("lbF").value;
+        const v = document.getElementById("lbF")?.value || "";
         document.querySelectorAll("#lbTb tr").forEach((r) => {
           r.style.display = !v || r.dataset.e === v ? "" : "none";
         });
       }
 
-      // APPROVALS
+      // ===== APPROVALS =====
       function rAp() {
-        const pn = DB.users.filter((u) => u.status === "pending"),
-          al = DB.users.filter((u) => u.id !== 1);
+        const pn = (DB.users || []).filter((u) => u.status === "pending"),
+          al = (DB.users || []).filter((u) => u.id !== 1);
         let h = `<h1 style="margin-bottom:12px">✅ Duyệt TK</h1>`;
         if (pn.length) {
           h += `<div class="cd"><h2>⏳ Chờ (${pn.length})</h2>`;
           pn.forEach((u) => {
-            h += `<div class="apc"><div style="display:flex;align-items:center;gap:6px"><div class="apv">${u.name.split(" ").pop()[0]}</div><div><b>${u.name}</b><div style="font-size:10px;color:var(--g)">${u.email} | ${u.role === "teacher" ? "GV" : "HS"}</div></div></div><div style="display:flex;gap:3px"><button class="btn bs bsm" onclick="apU(${u.id})">✅</button><button class="btn bd bsm" onclick="rjU(${u.id})">❌</button></div></div>`;
+            h += `<div class="apc"><div style="display:flex;align-items:center;gap:6px"><div class="apv">${(u.name || "?").split(" ").pop()[0]}</div><div><b>${u.name}</b><div style="font-size:10px;color:var(--g)">${u.email} | ${u.role === "teacher" ? "GV" : "HS"}</div></div></div><div style="display:flex;gap:3px"><button class="btn bs bsm" onclick="apU(${u.id})">✅</button><button class="btn bd bsm" onclick="rjU(${u.id})">❌</button></div></div>`;
           });
           h += "</div>";
-        }
-        h += `<div class="cd"><h2>👥 Tất cả (${al.length})</h2><table class="tbl"><thead><tr><th>Tên</th><th>Email</th><th>TT</th><th></th></tr></thead><tbody>${al.map((u) => `<tr><td><b>${u.name}</b></td><td style="font-size:10px">${u.email}</td><td><span style="font-size:9px;padding:1px 5px;border-radius:6px;font-weight:700;${u.locked ? "background:#ffebee;color:var(--r)" : u.status === "approved" ? "background:#e8f5e9;color:#2e7d32" : "background:#fff3e0;color:#ef6c00"}">${u.locked ? "🔒" : u.status === "approved" ? "✅" : "⏳"}</span></td><td style="display:flex;gap:2px">${u.status !== "approved" ? `<button class="btn bs bsm" onclick="apU(${u.id})">✅</button>` : ""}${u.locked ? `<button class="btn bs bsm" onclick="ulU(${u.id})">🔓</button>` : ""}<button class="btn bd bsm" onclick="dlU(${u.id})">🗑️</button></td></tr>`).join("")}</tbody></table></div>`;
+        } else
+          h +=
+            '<div class="cd" style="text-align:center;padding:20px;color:var(--g)"><h3>✅ Không có TK chờ</h3></div>';
+        h += `<div class="cd"><h2>👥 Tất cả (${al.length})</h2><table class="tbl"><thead><tr><th>Tên</th><th>Email</th><th>TT</th><th></th></tr></thead><tbody>${al.map((u) => `<tr><td><b>${u.name}</b></td><td style="font-size:10px">${u.email}</td><td><span style="font-size:9px;padding:1px 5px;border-radius:6px;font-weight:700;${u.locked ? "background:#ffebee;color:var(--r)" : u.status === "approved" ? "background:#e8f5e9;color:#2e7d32" : "background:#fff3e0;color:#ef6c00"}">${u.locked ? "🔒" : u.status === "approved" ? "✅" : "⏳"}</span></td><td style="white-space:nowrap">${u.status !== "approved" ? `<button class="btn bs bsm" onclick="apU(${u.id})">✅</button> ` : ""} ${u.locked ? `<button class="btn bs bsm" onclick="ulU(${u.id})">🔓</button> ` : ""}<button class="btn bd bsm" onclick="dlU(${u.id})">🗑️</button></td></tr>`).join("")}</tbody></table></div>`;
         document.getElementById("pgApprovals").innerHTML = h;
       }
       function apU(id) {
-        const u = DB.users.find((x) => x.id === id);
+        const u = (DB.users || []).find((x) => x.id === id);
         if (u) {
           u.status = "approved";
           sv();
           rAp();
           uUI();
-          ts("Duyệt OK", "ok");
+          tt("Duyệt OK: " + u.name, "ok");
         }
       }
       function rjU(id) {
-        const u = DB.users.find((x) => x.id === id);
+        const u = (DB.users || []).find((x) => x.id === id);
         if (u) {
           u.status = "rejected";
           sv();
           rAp();
-          ts("Từ chối", "wn");
+          tt("Từ chối: " + u.name, "wn");
         }
       }
       function dlU(id) {
-        DB.users = DB.users.filter((u) => u.id !== id);
-        DB.subs = DB.subs.filter((s) => s.uid !== id);
+        DB.users = (DB.users || []).filter((u) => u.id !== id);
+        DB.subs = (DB.subs || []).filter((s) => s.uid !== id);
         sv();
         rAp();
-        ts("Xóa OK", "ok");
+        tt("Xóa OK", "ok");
       }
 
-      // NEWS EDITOR
+      // ===== NEWS EDITOR =====
       function rNE() {
         let h = `<h1 style="margin-bottom:12px">📰 QL tin</h1><div class="ne2"><div class="cd"><h3>➕ Thêm tin</h3>
 <div class="fg"><label>Tiêu đề *</label><input class="fi" id="nTt"></div>
@@ -3137,7 +3133,7 @@
 <div class="fg"><label>Ảnh</label><div class="iua" id="nIA" onclick="document.getElementById('nII').click()">📷 Tải ảnh</div><input type="file" id="nII" class="hid" accept="image/*" onchange="oNI(event)"></div>
 <div class="fg"><label>Emoji</label><input class="fi" id="nEm" value="📢" style="width:50px"></div>
 <button class="btn bp" onclick="addN()">📤 Đăng</button></div>
-<div class="cd"><h3>📋 Đã đăng (${DB.news.length})</h3>${DB.news.map((n) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f5f5f5"><div style="display:flex;align-items:center;gap:6px">${n.image ? `<img src="${n.image}" style="width:36px;height:36px;border-radius:6px;object-fit:cover">` : `<span style="font-size:18px">${n.emoji || "📄"}</span>`}<div><b>${n.title}</b><div style="font-size:9px;color:var(--g)">${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div><button class="btn bd bsm" onclick="dlN(${n.id})">🗑️</button></div>`).join("") || '<p style="color:var(--g)">Chưa có</p>'}</div></div>`;
+<div class="cd"><h3>📋 Đã đăng (${(DB.news || []).length})</h3>${(DB.news || []).map((n) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f5f5f5"><div style="display:flex;align-items:center;gap:6px">${n.image ? `<img src="${n.image}" style="width:36px;height:36px;border-radius:6px;object-fit:cover">` : `<span style="font-size:18px">${n.emoji || "📄"}</span>`}<div><b>${n.title}</b><div style="font-size:9px;color:var(--g)">${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div><button class="btn bd bsm" onclick="dlN(${n.id})">🗑️</button></div>`).join("") || '<p style="color:var(--g)">Chưa có</p>'}</div></div>`;
         document.getElementById("pgNewsEd").innerHTML = h;
         niD = null;
       }
@@ -3145,29 +3141,32 @@
         const f = e.target.files[0];
         if (!f) return;
         if (f.size > 2e6) {
-          ts("Max 2MB!", "er");
+          tt("Max 2MB!", "er");
           return;
         }
         const r = new FileReader();
         r.onload = (ev) => {
           niD = ev.target.result;
           const a = document.getElementById("nIA");
-          a.classList.add("has");
-          a.innerHTML = `📷 OK<img src="${niD}">`;
+          if (a) {
+            a.classList.add("has");
+            a.innerHTML = `📷 OK<img src="${niD}">`;
+          }
         };
         r.readAsDataURL(f);
       }
       function addN() {
-        const t = document.getElementById("nTt").value.trim(),
-          c = document.getElementById("nCt").value,
-          em = document.getElementById("nEm").value;
-        if (!t) {
-          ts("Nhập tiêu đề!", "er");
+        const t2 = document.getElementById("nTt").value.trim(),
+          c = document.getElementById("nCt")?.value || "",
+          em = document.getElementById("nEm")?.value || "📢";
+        if (!t2) {
+          tt("Nhập tiêu đề!", "er");
           return;
         }
+        if (!DB.news) DB.news = [];
         DB.news.unshift({
           id: Date.now(),
-          title: t,
+          title: t2,
           content: c,
           emoji: em,
           image: niD,
@@ -3175,16 +3174,16 @@
         });
         sv();
         rNE();
-        ts("Đăng OK", "ok");
+        tt("Đăng OK", "ok");
       }
       function dlN(id) {
-        DB.news = DB.news.filter((n) => n.id !== id);
+        DB.news = (DB.news || []).filter((n) => n.id !== id);
         sv();
         rNE();
-        ts("Xóa", "ok");
+        tt("Xóa", "ok");
       }
 
-      // SCHEDULE
+      // ===== SCHEDULE =====
       function rSch() {
         const ds = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
           ts2 = [
@@ -3204,10 +3203,10 @@
           h += `<tr><td class="tc">${t}</td>`;
           ds.forEach((d) => {
             const k = `${d}_${t}`,
-              sl = DB.schedule[k] || [];
+              sl = (DB.schedule || {})[k] || [];
             h += "<td>";
             sl.forEach((s, i) => {
-              h += `<div class="slot ${s.type === "exam" ? "se" : ""}">${s.title}${cE ? ` <span style="cursor:pointer;font-size:8px;color:var(--r)" onclick="rmSl('${k}',${i})">✕</span>` : ""}</div>`;
+              h += `<div class="slot ${s.type === "exam" ? "se" : ""}">${s.title || ""}${cE ? ` <span style="cursor:pointer;font-size:8px;color:var(--r)" onclick="rmSl('${k}',${i})">✕</span>` : ""}</div>`;
             });
             if (cE)
               h += `<div style="font-size:9px;color:var(--bl);cursor:pointer;font-weight:600" onclick="opSl('${d}','${t}')">+</div>`;
@@ -3230,84 +3229,88 @@
       function addSl() {
         const d = document.getElementById("slD").value,
           t = document.getElementById("slTi").value,
-          tt = document.getElementById("slTt").value.trim(),
+          t2 = document.getElementById("slTt").value.trim(),
           ty = document.getElementById("slTy").value;
-        if (!tt) {
-          ts("Nhập tiêu đề!", "er");
+        if (!t2) {
+          tt("Nhập tiêu đề!", "er");
           return;
         }
         const k = `${d}_${t}`;
+        if (!DB.schedule) DB.schedule = {};
         if (!DB.schedule[k]) DB.schedule[k] = [];
-        DB.schedule[k].push({ title: tt, type: ty });
+        DB.schedule[k].push({ title: t2, type: ty });
         sv();
         clsSl();
         rSch();
-        ts("Thêm OK", "ok");
+        tt("Thêm OK", "ok");
       }
       function rmSl(k, i) {
-        if (DB.schedule[k]) {
+        if (DB.schedule?.[k]) {
           DB.schedule[k].splice(i, 1);
           if (!DB.schedule[k].length) delete DB.schedule[k];
           sv();
           rSch();
-          ts("Xóa OK", "ok");
+          tt("Xóa OK", "ok");
         }
       }
 
-      // SETTINGS
+      // ===== SETTINGS =====
       function rSe() {
         if (ME?.role !== "admin") return;
-        const c = DB.contact;
+        const c = DB.contact || {};
         document.getElementById("pgSettings").innerHTML =
           `<h1 style="margin-bottom:12px">⚙️ Cài đặt</h1><div class="sgr">
 <div class="cd"><h2>📢 Dòng thông báo</h2><div class="fg"><label>Nội dung</label><textarea class="fi" id="sMq" rows="2" style="resize:vertical;font-family:inherit">${DB.marquee || ""}</textarea></div><button class="btn bp" onclick="svMq()">💾 Lưu</button></div>
-<div class="cd"><h2>📞 Liên hệ</h2><div class="fg"><label>Email</label><input class="fi" id="sEm" value="${c.email}"></div><div class="fg"><label>SĐT</label><input class="fi" id="sPh" value="${c.phone}"></div><div class="fg"><label>Địa chỉ</label><input class="fi" id="sAd" value="${c.address}"></div><div class="fg"><label>Facebook</label><input class="fi" id="sFb" value="${c.facebook || ""}"></div><button class="btn bp" onclick="svCt()">💾 Lưu</button></div>
+<div class="cd"><h2>📞 Liên hệ</h2><div class="fg"><label>Email</label><input class="fi" id="sEm" value="${c.email || ""}"></div><div class="fg"><label>SĐT</label><input class="fi" id="sPh" value="${c.phone || ""}"></div><div class="fg"><label>Địa chỉ</label><input class="fi" id="sAd" value="${c.address || ""}"></div><div class="fg"><label>Facebook</label><input class="fi" id="sFb" value="${c.facebook || ""}"></div><button class="btn bp" onclick="svCt()">💾 Lưu</button></div>
 <div class="cd"><h2>🔒 TK bị khóa</h2>${
-            DB.users
+            (DB.users || [])
               .filter((u) => u.locked)
               .map(
                 (u) =>
-                  `<div class="apc"><div style="display:flex;align-items:center;gap:6px"><div class="apv">${u.name.split(" ").pop()[0]}</div><b>${u.name}</b></div><button class="btn bs bsm" onclick="ulU(${u.id})">🔓</button></div>`,
+                  `<div class="apc"><div style="display:flex;align-items:center;gap:6px"><div class="apv">${(u.name || "?").split(" ").pop()[0]}</div><b>${u.name}</b></div><button class="btn bs bsm" onclick="ulU(${u.id})">🔓</button></div>`,
               )
               .join("") || '<p style="color:var(--g)">Không có</p>'
           }</div></div>`;
       }
       function svMq() {
-        DB.marquee = document.getElementById("sMq").value;
+        DB.marquee = document.getElementById("sMq")?.value || "";
         sv();
         uMq();
-        ts("Lưu OK", "ok");
+        tt("Lưu OK", "ok");
       }
       function svCt() {
-        DB.contact.email = document.getElementById("sEm").value;
-        DB.contact.phone = document.getElementById("sPh").value;
-        DB.contact.address = document.getElementById("sAd").value;
-        DB.contact.facebook = document.getElementById("sFb").value;
+        if (!DB.contact) DB.contact = {};
+        DB.contact.email = document.getElementById("sEm")?.value || "";
+        DB.contact.phone = document.getElementById("sPh")?.value || "";
+        DB.contact.address = document.getElementById("sAd")?.value || "";
+        DB.contact.facebook = document.getElementById("sFb")?.value || "";
         sv();
-        ts("Lưu OK", "ok");
+        tt("Lưu OK", "ok");
         uUI();
       }
       function ulU(id) {
-        const u = DB.users.find((x) => x.id === id);
+        const u = (DB.users || []).find((x) => x.id === id);
         if (u) {
           u.locked = false;
           u.devices = [];
           sv();
           rSe();
-          ts("Mở khóa " + u.name, "ok");
+          tt("Mở khóa " + u.name, "ok");
         }
       }
 
-      // OTHER
+      // ===== OTHER PAGES =====
       function rNw() {
         let h = '<h1 style="margin-bottom:12px">📰 Tin tức</h1>';
-        h += DB.news.length
-          ? `<div class="ngr">${DB.news.map((n) => `<div class="nc"><div class="ni">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nb"><h3>${n.title}</h3><p>${n.content || ""}</p><div style="font-size:10px;color:#bbb;margin-top:4px">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`).join("")}</div>`
+        const news = DB.news || [];
+        h += news.length
+          ? `<div class="ngr">${news.map((n) => `<div class="nc"><div class="ni">${n.image ? `<img src="${n.image}">` : n.emoji || "📄"}</div><div class="nb"><h3>${n.title || ""}</h3><p>${n.content || ""}</p><div style="font-size:10px;color:#bbb;margin-top:4px">📅 ${new Date(n.createdAt).toLocaleDateString("vi-VN")}</div></div></div>`).join("")}</div>`
           : '<div class="cd" style="text-align:center;padding:30px;color:var(--g)"><h3>Chưa có</h3></div>';
         document.getElementById("pgNews").innerHTML = h;
       }
+
       function rSt() {
-        const ss = DB.users.filter(
+        const ss = (DB.users || []).filter(
           (u) => u.role === "student" && u.status === "approved",
         );
         let h = `<h1 style="margin-bottom:12px">👥 HS (${ss.length})</h1>`;
@@ -3318,7 +3321,7 @@
           h +=
             '<div class="cd"><table class="tbl"><thead><tr><th>Tên</th><th>Email</th><th>Bài</th><th>TB</th></tr></thead><tbody>';
           ss.forEach((s) => {
-            const ms = DB.subs.filter((x) => x.uid === s.id),
+            const ms = (DB.subs || []).filter((x) => x.uid === s.id),
               gr = ms.filter((x) => x.st === "graded"),
               av = gr.length
                 ? gr.reduce((a, x) => a + (x.ts || 0), 0) / gr.length
@@ -3329,17 +3332,19 @@
         }
         document.getElementById("pgStudents").innerHTML = h;
       }
+
       function rAd() {
-        const tu = DB.users.length - 1,
-          pc = DB.users.filter((u) => u.status === "pending").length;
+        const tu = (DB.users || []).length - 1,
+          pc = (DB.users || []).filter((u) => u.status === "pending").length;
         document.getElementById("pgAdmin").innerHTML =
-          `<h1 style="margin-bottom:12px">🛡️ Admin</h1><div class="ast"><div class="as2"><div class="ai" style="background:#e3f2fd">👥</div><div><div style="font-size:24px;font-weight:800">${tu}</div><div style="font-size:10px;color:var(--g)">TK</div></div></div><div class="as2"><div class="ai" style="background:#fff3e0">⏳</div><div><div style="font-size:24px;font-weight:800">${pc}</div><div style="font-size:10px;color:var(--g)">Chờ</div></div></div><div class="as2"><div class="ai" style="background:#e8f5e9">📋</div><div><div style="font-size:24px;font-weight:800">${DB.exams.length}</div><div style="font-size:10px;color:var(--g)">Đề</div></div></div><div class="as2"><div class="ai" style="background:#fce4ec">📝</div><div><div style="font-size:24px;font-weight:800">${DB.subs.length}</div><div style="font-size:10px;color:var(--g)">Nộp</div></div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn bp" onclick="nv('approvals')">✅ Duyệt (${pc})</button><button class="btn bo" onclick="nv('newsEditor')">📰</button><button class="btn bo" onclick="nv('settings')">⚙️</button><button class="btn bd" onclick="if(confirm('Reset ALL?')){localStorage.removeItem('tapl5');fb.ref('tapl').remove();location.reload()}">🗑️ Reset</button></div>`;
+          `<h1 style="margin-bottom:12px">🛡️ Admin</h1><div class="ast"><div class="as2"><div class="ai" style="background:#e3f2fd">👥</div><div><div style="font-size:24px;font-weight:800">${tu}</div><div style="font-size:10px;color:var(--g)">TK</div></div></div><div class="as2"><div class="ai" style="background:#fff3e0">⏳</div><div><div style="font-size:24px;font-weight:800">${pc}</div><div style="font-size:10px;color:var(--g)">Chờ</div></div></div><div class="as2"><div class="ai" style="background:#e8f5e9">📋</div><div><div style="font-size:24px;font-weight:800">${(DB.exams || []).length}</div><div style="font-size:10px;color:var(--g)">Đề</div></div></div><div class="as2"><div class="ai" style="background:#fce4ec">📝</div><div><div style="font-size:24px;font-weight:800">${(DB.subs || []).length}</div><div style="font-size:10px;color:var(--g)">Nộp</div></div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn bp" onclick="nv('approvals')">✅ Duyệt (${pc})</button><button class="btn bo" onclick="nv('newsEditor')">📰</button><button class="btn bo" onclick="nv('settings')">⚙️</button><button class="btn bd" onclick="if(confirm('Reset ALL?')){fb.ref('tapl').remove();localStorage.removeItem('tapl6');location.reload()}">🗑️ Reset</button></div>`;
       }
+
       function vwR(eid) {
-        const ex = DB.exams.find((e) => e.id === eid),
-          sub = DB.subs.find((s) => s.eid === eid && s.uid === ME.id);
+        const ex = (DB.exams || []).find((e) => e.id === eid),
+          sub = (DB.subs || []).find((s) => s.eid === eid && s.uid === ME.id);
         if (!ex || !sub || sub.st !== "graded") {
-          ts("Chưa chấm!", "wn");
+          tt("Chưa chấm!", "wn");
           return;
         }
         const t = sub.ts,
@@ -3349,27 +3354,31 @@
         if (pc >= 80) rc = "rg2";
         else if (pc >= 60) rc = "ro2";
         document.getElementById("pgResult").innerHTML =
-          `<div class="rh"><div class="srg ${rc}"><div class="nm">${t.toFixed(2)}</div><div class="of">/${mx}đ</div></div><h2>${ex.title}</h2><div class="srw"><div class="stb"><div class="sv" style="color:var(--gn)">${sub.mc}</div><div style="font-size:9px;color:#999">Đúng</div></div><div class="stb"><div class="sv" style="color:var(--r)">${Object.keys(sub.ans).length - sub.mc}</div><div style="font-size:9px;color:#999">Sai</div></div><div class="stb"><div class="sv" style="color:var(--or)">${12 - Object.keys(sub.ans).length}</div><div style="font-size:9px;color:#999">Bỏ</div></div><div class="stb"><div class="sv">${Math.floor(sub.tu / 60)}:${String(sub.tu % 60).padStart(2, "0")}</div><div style="font-size:9px;color:#999">T.gian</div></div></div></div><div class="cd" style="text-align:center"><button class="btn bp" onclick="nv('exams')">← Về</button></div>`;
+          `<div class="rh"><div class="srg ${rc}"><div class="nm">${t.toFixed(2)}</div><div class="of">/${mx}đ</div></div><h2>${ex.title}</h2><div class="srw"><div class="stb"><div class="sv" style="color:var(--gn)">${sub.mc || 0}</div><div style="font-size:9px;color:#999">Đúng</div></div><div class="stb"><div class="sv" style="color:var(--r)">${Object.keys(sub.ans || {}).length - (sub.mc || 0)}</div><div style="font-size:9px;color:#999">Sai</div></div><div class="stb"><div class="sv" style="color:var(--or)">${12 - Object.keys(sub.ans || {}).length}</div><div style="font-size:9px;color:#999">Bỏ</div></div><div class="stb"><div class="sv">${Math.floor((sub.tu || 0) / 60)}:${String((sub.tu || 0) % 60).padStart(2, "0")}</div><div style="font-size:9px;color:#999">T.gian</div></div></div></div><div class="cd" style="text-align:center"><button class="btn bp" onclick="nv('exams')">← Về danh sách</button></div>`;
         nv("result");
       }
 
-      // UTILS
+      // ===== UTILS =====
       function shO(id) {
-        document.getElementById(id).classList.add("show");
+        const e = document.getElementById(id);
+        if (e) e.classList.add("show");
       }
       function clsO(id) {
-        document.getElementById(id).classList.remove("show");
+        const e = document.getElementById(id);
+        if (e) e.classList.remove("show");
       }
       function opV(src) {
-        document.getElementById("vI").src = src;
-        document.getElementById("iv").classList.add("show");
+        const img = document.getElementById("vI");
+        if (img) img.src = src;
+        document.getElementById("iv")?.classList.add("show");
       }
       function clsV() {
-        document.getElementById("iv").classList.remove("show");
+        document.getElementById("iv")?.classList.remove("show");
       }
-      function ts(m, t) {
-        const c = document.getElementById("tss"),
-          ic = { ok: "✅", er: "❌", in: "ℹ️", wn: "⚠️" },
+      function tt(m, t) {
+        const c = document.getElementById("tss");
+        if (!c) return;
+        const ic = { ok: "✅", er: "❌", in: "ℹ️", wn: "⚠️" },
           cl = { ok: "tok", er: "ter", in: "tin", wn: "twn" };
         const e = document.createElement("div");
         e.className = `ts ${cl[t] || "tin"}`;
@@ -3383,19 +3392,28 @@
         }, 3500);
       }
 
-      // INIT
-      // Hiện UI ngay lập tức (chưa đăng nhập)
+      // ===== INIT =====
+      // Step 1: Render UI immediately with defaults (no waiting for Firebase)
+      ensureAdmin();
       uMq();
       uUI();
       rH();
+      console.log("🏠 Home rendered");
 
-      // Sau đó load Firebase và sync
-      ld(() => {
+      // Step 2: Load from Firebase and update
+      loadData(() => {
         uMq();
         uUI();
-        rH();
+        rH(); // Re-render with Firebase data
         rtSync();
-        console.log("✅ TAPL ready");
+        console.log("✅ TAPL fully ready!");
+        console.log(
+          "📊 DB:",
+          DB.users?.length || 0,
+          "users,",
+          DB.exams?.length || 0,
+          "exams",
+        );
       });
     </script>
   </body>
